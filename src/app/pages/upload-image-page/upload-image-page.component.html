@@ -1,0 +1,34 @@
+<app-header></app-header>
+<main class="main">
+    <section class="upload-image">
+        <article class="upload-header">
+            @if(fromCrear){
+                <h1 class="title">Crear Producto</h1>
+                <p><b>¡Ya casi esta todo listo!</b> Solo falta agregar las imagenes de las versiones</p>
+            }@else {
+                <h1 class="title">Actualizar Producto</h1>
+                <p>Aquí podras actualizar las imagenes de las versiones</p>
+            }
+        </article>
+        <article class="upload-body">
+            <h2>Versiones de '{{producto.nombre}}'</h2>
+            @for (ver of producto.versiones; track ver.id) {
+                <div class="version">
+                    <div class="version-header cursor">
+                        {{ver.nombre}}
+                        <fa-icon [icon]="iconChevron"></fa-icon>
+                    </div>
+                    <div class="version-body">
+                        @if (ver.imagen || selectedImages[ver.id]) {
+                            <img [src]="selectedImages[ver.id] || imgUrl + '/' + ver.imagen" [alt]="'imagen de ' + ver.nombre">
+                        }
+                        <div>
+                            <input type="file" (change)="onFileSelected($event, ver)">
+                        </div>
+                        
+                    </div>
+                </div>
+            }
+        </article>
+    </section>
+</main>

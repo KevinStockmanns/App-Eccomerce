@@ -1,0 +1,54 @@
+.user-nav:not(.hidden){
+    position: fixed;
+    bottom: .5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem 1rem;
+    width: calc(100% - 2rem);
+    max-width: 400px;
+    min-height: var(--headerHeight);
+    box-shadow: 0 0 5px 0 var(--textAlphaColor);
+    background-color: var(--bgCardColor);
+    border-radius: var(--borderrMid);
+}
+.nav-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    color: var(--textColor);
+}
+.nav-item.active{
+    font-weight: bold;
+    color: var(--mainColor);
+}
+.nav-item-icon{
+    position: relative;
+}
+.nav-item > span:not(.nav-item-icon){
+    font-size: .8rem;
+    text-align: center;
+    transition: var(--transitionFast);
+}
+.nav-item.active > span:not(.nav-item-icon){
+    font-size: 1rem;
+}
+.totalUnidades{
+    position: absolute;
+    top: -.4rem;
+    left: 90%;
+    display: grid;
+    place-items: center;
+    padding: 0 .2rem;
+    min-width: .9rem;
+    height: .9rem;
+    font-size: .6rem;
+    font-weight: bold;
+    border-radius: var(--borderrHigh);
+    background-color: var(--mainColor);
+    color: var(--bgCardColor);
+}

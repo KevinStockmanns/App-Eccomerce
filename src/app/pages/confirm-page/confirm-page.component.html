@@ -1,0 +1,53 @@
+<app-header></app-header>
+<main class="main content">
+    <section class="confirm-content">
+        <h1 class="title">Confirmar Pedido</h1>
+        <div class="confirm-header">
+            <p>El pedido con id {{pedido.id}} será confirmado con las siguientes ordenes. Aquí puede revisar el precio que tiene las ordenes y puedes realizar las siguientes acciones</p>
+            <ul>
+                <li>Confirmar el pedido sin cambiar los precios.</li>
+                <li>Confirmar el pedido cambiando a un precio actual (en caso de que la orden se haya realizado hace tiempo).</li>
+                <li>Confirmar el pedido aplicando precio de reventa si lo desea (el precio actual).</li>
+            </ul>
+        </div>
+        <div class="confirm-body">
+            <h2>Ordenes</h2>
+            <div class="line-separator"></div>
+            @for (orden of pedido.ordenes; track orden.id) {
+                <div class="orden" [class.cambio]="ordenInJson(orden.id)">
+                    <p><b>Producto: </b>{{orden.producto.nombreProducto + ' ' + orden.producto.nombreVersion | titlecase}} 
+                    @if (ordenInJson(orden.id) && ordenInJson(orden.id).aplicarPrecioActual) {
+                        <span class="span-cambio">Se aplicará el precio actual.</span>
+                    }
+                    @if (ordenInJson(orden.id) && ordenInJson(orden.id).aplicarDescuento){
+                        <span class="span-cambio">Se aplicará el precio de reventa.</span>
+                    }
+                </p>
+                    <p><b>Cantidad:</b> {{orden.cantidad}}</p>
+                    <p><b>Precio Unitario:</b> {{orden.precioUnitario | currency}} ARS</p>
+                    <div class="actions">
+                        @if (!ordenInJson(orden.id) || !ordenInJson(orden.id).aplicarPrecioActual) {
+                            <button class="btn btn-simple cursor" (click)="applyNewPrecio(orden.id)">APLICAR PRECIO NUEVO</button>
+                        }
+                        @if(!ordenInJson(orden.id) || !ordenInJson(orden.id).aplicarDescuento){
+                            <button class="btn btn-simple cursor" (click)="applyPrecioReventa(orden.id)">APLICAR PRECIO REVENTA</button>
+                        }
+                        @if(ordenInJson(orden.id)){
+                            <button class="btn btn-simple neutro cursor" (click)="eliminarCambios(orden.id)">REESTABLECER</button>
+                        }
+                    </div>
+                </div>
+                <div class="line-separator"></div>
+            }
+            
+        </div>
+        <div class="confirm-footer">
+            @if (!loadingResponse) {
+                <button class="btn btn-simple red cursor" (click)="cancelar()">CANCELAR</button>
+                <button class="btn btn-simple cursor" (click)="onConfirm()">CONFIRMAR</button>
+            }@else {
+                <app-loader></app-loader>
+            }
+        </div>
+    </section>
+</main>

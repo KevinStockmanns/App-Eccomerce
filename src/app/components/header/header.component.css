@@ -1,0 +1,32 @@
+header{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bgCardColor);
+    z-index: 1000;
+}
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--headerHeight);
+    font-size: 1.3rem;
+}
+.logo{
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+.header-nav{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--textColor);
+}
+.header-nav a{
+    color: inherit;
+}
+.header-content a.btn{
+    color: var(--bgCardColor);
+}

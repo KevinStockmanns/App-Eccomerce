@@ -1,0 +1,31 @@
+<nav class="user-nav" [class.hidden]="hidden">
+    <a class="nav-item cursor" routerLink="/productos" routerLinkActive="active">
+        <fa-icon [icon]="iconShop"></fa-icon>
+        <span>Tienda</span>
+    </a>
+    <a class="nav-item cursor" routerLink="/cart" routerLinkActive="active">
+        <span class="nav-item-icon">
+            <fa-icon [icon]="iconPedidos"></fa-icon>
+            @if(totalUnidades>0){
+                <span class="totalUnidades">{{totalUnidades >= 100 ? '+99' : totalUnidades}}</span>
+            }
+        </span>
+        <span>{{usuario()?.rol == 'USUARIO' ? "Mis Pedidos" : "Pedidos"}}</span>
+    </a>
+    @if(usuario()?.rol === 'SUPERADMIN' || usuario()?.rol === 'ADMIN'){
+        <a class="nav-item cursor">
+            <fa-icon [icon]="iconDashboard"></fa-icon>
+            <span>Tablero</span>
+        </a>
+    }
+    @if(usuario()?.rol === 'SUPERADMIN'){
+        <a class="nav-item cursor">
+            <fa-icon [icon]="iconMetrics"></fa-icon>
+            <span>Estadisticas</span>
+        </a>
+    }
+    <a class="nav-item cursor">
+        <fa-icon [icon]="iconConfig"></fa-icon>
+        <span>Ajustes</span>
+    </a>
+</nav>

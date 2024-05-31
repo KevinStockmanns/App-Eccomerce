@@ -1,0 +1,49 @@
+<back-btn></back-btn>
+<main class="main content">
+    <section class="usuario-beneficios-content box-shadow">
+        <usuario-beneficios></usuario-beneficios>
+    </section>
+    <section class="login-content box-shadow" style="view-transition-name: login-signup-view;">
+        <section class="login-section">
+            <h1>¡Inicia Sesión Ahora!</h1>
+            <form class="form" [formGroup]="loginForm" (submit)="onSubmit()">
+                <div class="form-div">
+                    <div class="form-div-input" [class.withValue]="hasValue('correo')"
+                    [class.error]="hasErrors('correo', 'required') || hasErrors('correo', 'email')">
+                        <input id="username" type="email" formControlName="correo">
+                        <label for="username">Correo</label>
+                    </div>
+                    @if(hasErrors('correo', 'required')){
+                        <p class="form-div-error">El correo es requerido</p>
+                    }
+                    @if(hasErrors('correo', 'email')){
+                        <p class="form-div-error">El correo no es válido</p>
+                    }
+                </div>
+                <div class="form-div">
+                    <div class="form-div-input" [class.withValue]="hasValue('clave')"
+                    [class.error]="hasErrors('clave', 'required') || hasErrors('clave', 'pattern')">
+                        <input id="clave" type="password" formControlName="clave">
+                        <label for="clave">Clave</label>
+                    </div>
+                    @if(hasErrors('clave', 'required')){
+                        <p class="form-div-error">La clave es requerida</p>
+                    }
+                    @if(hasErrors('clave', 'pattern')){
+                        <p class="form-div-error">La clave es acepta letras, números y caracteres especiales ('-', '_'). Debe tener entre 8 y 20 caracteres</p>
+                    }
+                </div>
+                <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary cursor">
+                    @if(isLoading){
+                        <div class="loader"></div>
+                    }@else {
+                        Iniciar Sesión
+                    }
+                </button>
+                @for (err of error; track $index) {
+                    <p class="form-div-error" style="text-align: center;">{{err.error}}</p>
+                }
+            </form>
+        </section>
+    </section>
+</main>

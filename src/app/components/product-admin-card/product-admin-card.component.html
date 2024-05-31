@@ -1,0 +1,24 @@
+<section class="product-card">
+    <p class="product-title">{{producto?.nombre | titlecase}}</p>
+    <p><b>Estado:</b> {{producto?.estado ? 'Público' : 'Privado'}}</p>
+    <div class="product-versions">
+        <p class="version-title">Versiones</p>
+        <div class="versions-container">
+            @for (ver of producto?.versiones; track ver.id) {
+                <div class="product-version" [class.noDisp]="!ver.estado">
+                    <p class="version-name">{{ver.nombre | titlecase}} {{!ver.estado ? '(No disponible)' : ''}}</p>
+                    <p><b>Fecha de publicación:</b> {{ver.fecha | dateFormat}}</p>
+                    <p><b>En Stock:</b> {{ver.stock}}</p>
+                    <p><b>Precio:</b> {{ver.precio | currency}} ARS</p>
+                    <p><b>Precio Reventa:</b> {{ver.precioDescuento | currency}} ARS</p>
+                    <p class="version-disp"><b>Estado:</b> {{ver.estado ? 'Público' : 'Privado'}}</p>
+                    <p><b>Tiene imagen:</b> {{ver.imagen ? 'SI' : 'NO'}}</p>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="product-actions">
+        @if (producto?.estado) { <button class="btn btn-simple red cursor">DESACTIVAR PRODUCTO</button> }
+        <button class="btn btn-simple cursor" (click)="actualizar()" routerLink="update">ACTUALIZAR PRODUCTO</button>
+    </div>
+</section>

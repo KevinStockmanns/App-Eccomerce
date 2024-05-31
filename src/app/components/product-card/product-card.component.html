@@ -1,0 +1,32 @@
+<div class="product-card box-shadow">
+    <div class="card-header">
+        @if(versionActual?.imagen != null){
+            <img src="{{imgUrl + '/' + versionActual?.imagen}}" [alt]="producto?.nombre + ' ' + versionActual?.nombre">
+        }@else {
+            <img src="assets/images/no-img.jpg" alt="versión sin imagen">
+        }
+        @if(hasMoreVersion()){
+            <p class="prev-ver cursor" (click)="changeVersion(-1)" [class.disabled]="iVersion == 0"><fa-icon [icon]="iconChevron"></fa-icon></p>
+            <p class="next-ver cursor" (click)="changeVersion(1)" [class.disabled]="iVersion == (getLength(producto?.versiones))-1"><fa-icon [icon]="iconChevron"></fa-icon></p>
+            <div class="count-ver">
+                @for (item of producto?.versiones; track item.id; let i = $index) {
+                    <span [class.active]="i == iVersion"></span>
+                }
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <p class="product-name">{{producto?.nombre + ' ' + versionActual?.nombre | titlecase}}</p>
+        <p class="product-description">{{versionActual?.descripcion}}</p>
+        @if (isLogin) {
+            <p class="product-precio">{{versionActual?.precio | currency}} ARS</p>
+        }@else {
+            <p class="product-precio" title="El precio se podrá ver si inicias sesión">$****,**</p>
+        }
+        <div class="card-buttons">
+            <button class="btn">Ver Detalles</button>
+            <button class="btn btn-primary" (click)="addToCart(versionActual?.id)">Agregar al carrito</button>
+        </div>
+        
+    </div>
+</div>

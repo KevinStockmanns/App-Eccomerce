@@ -1,0 +1,26 @@
+.back-btn-section{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.back-btn-content{
+    display: flex;
+    align-items: center;
+    height: var(--headerHeight);
+    font-weight: bold;
+}
+.back-btn-content > div{
+    display: flex;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    border-radius: var(--borderrHigh);
+}
+.back-btn-content > div:hover{
+    background-color: var(--greyAlphaLightColor);
+}
+.back-btn-content > div:active{
+    background-color: var(--mainAlphaColorBack);
+}
+.back-btn-content span{
+    pointer-events: none;
+}

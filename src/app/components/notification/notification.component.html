@@ -1,0 +1,23 @@
+<div class="notification-container" [class.open]="notifications.length > 0">
+    @for (noti of notifications; track $index) {
+        <div class="notification no-close-others" [class.active]="noti!==null" [class.error]="noti.error">
+            <span class="close cursor" (click)="close()"[class.hidden]="noti?.time !== 0"><fa-icon [icon]="iconClose"></fa-icon></span>
+            <p class="message">{{noti?.message}}</p>
+        </div>
+    }
+</div>
+
+
+<div class="modal-container no-close-others" [class.open]="modal!=null">
+    <div class="modal">
+        <span class="modal-close cursor" (click)="cancelModal()"><fa-icon [icon]="iconClose"></fa-icon></span>
+        <div class="modal-body">
+            <p class="modal-title">{{modal?.title}}</p>
+            <p class="modal-desc">{{modal?.desc}}</p>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-simple cursor" [class.red]="modal?.motivate" (click)="cancelModal()">CANCELAR</button>
+            <button class="btn btn-simple cursor" [class.neutro]="modal?.motivate==false" (click)="confirmModal()">CONFIRMAR</button>
+        </div>
+    </div>
+</div>

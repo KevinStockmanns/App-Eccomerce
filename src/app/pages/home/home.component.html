@@ -1,0 +1,17 @@
+<app-header></app-header>
+<main class="main content">
+    @if(usuario()){
+        <h2>Información de usuario</h2>
+        <p>Nombre comleto: {{usuario()?.apellido + ' ' + usuario()?.nombre}}</p>
+        <p>Correo: {{usuario()?.correo}}</p>
+        <p>Telefono: {{usuario()?.telefono}}</p>
+        <p>Fecha de nacimiento: {{usuario()?.fechaNacimiento}}</p>
+        <p>Rol: {{usuario()?.rol}}</p>
+        <p>País: {{usuario()?.ubicacion?.pais}}</p>
+        <p>Provincia: {{usuario()?.ubicacion?.provincia}}</p>
+        <p>Localidad: {{usuario()?.ubicacion?.localidad}}</p>
+        <p>Barrio: {{usuario()?.ubicacion?.barrio}}</p>
+        <p>Dirección: {{usuario()?.ubicacion?.direccion}}</p>
+    }
+
+</main>

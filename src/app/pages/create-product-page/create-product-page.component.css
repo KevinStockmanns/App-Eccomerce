@@ -1,0 +1,106 @@
+.main{
+    width: 100%;
+    height: calc(100vh - var(--headerHeight) - 2rem);
+}
+.create{
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--borderrHigh);
+    background-color: var(--bgCardColor);
+    overflow-y: auto;
+}
+.title{
+    justify-self: center;
+}
+
+.versiones{
+    padding: 1rem .5rem;
+    border-radius: var(--borderrHigh);
+    background-color: var(--bgSecondColor);
+    overflow: auto;
+    transition: var(--transitionFast);
+}
+.versiones.delete{
+    background-color: var(--errorAlphaLowColor);
+}
+.versiones-actions{
+    display: flex;
+    justify-content: flex-start;
+    font-size: .8rem;
+}
+.delete-version{
+    opacity: 1;
+    transition: var(--transitionFast);
+}
+.versiones > p{
+    font-weight: bold;
+}
+.versiones-container{
+    padding: .5rem 0;
+    display: flex;
+    gap: .5rem;
+}
+.version{
+    position: relative;
+    flex-shrink: 0;
+    display: grid;
+    gap: .8rem;
+    padding: .5rem;
+    width: 100%;
+    max-width: 350px;
+    font-size: .9rem;
+    border-radius: var(--borderrHigh);
+    background-color: var(--bgColor);
+    overflow: hidden;
+    transition: var(--transitionFast);
+    --bgCardColor: var(--bgColor);
+}
+.versiones.delete .version{
+    /* transform: scale(.9); */
+    padding: 1.5rem;
+}
+.delete-mood{
+    position: absolute;
+    inset: 0;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    transform: scale(0);
+    transform-origin: center;
+    background-color: var(--greyAlphaColor);
+    transition: var(--transitionMid);
+    z-index: 100;
+}
+.delete-mood > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: 1rem;
+    font-weight: bold;
+    border-radius: inherit;
+    color: var(--errorColor);
+    background-color: var(--bgCardAlphaColor);
+    backdrop-filter: blur(2px);
+
+}
+.delete-mood > div > fa-icon{
+    font-size: 3rem;
+}
+.delete-mood.active{
+    border-radius: inherit;
+    transform: scale(1);
+}
+.version textarea{
+    height: 4rem;
+}
+.create-footer{
+    justify-content: center;
+}

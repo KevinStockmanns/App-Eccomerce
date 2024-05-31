@@ -1,0 +1,67 @@
+<app-header></app-header>
+<main class="main content paddbot">
+    <h1 class="title">{{isAdmin() ? 'Pedidos' : 'Mis Pedidos'}}</h1>
+    @if(!cartEmpty){ 
+        <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y comprados</p>
+     }
+    <div class="line-separator"></div>
+    @if(cartHasItem && !loading){
+        <section class="mis-pedidos">
+            <h2>Pedido Actual</h2>
+            <app-cart></app-cart>
+            <div class="line-separator"></div>
+        </section>
+    }
+    @if (loading) {
+        <app-loader size="3.5rem"></app-loader>
+    }
+    @if(pedidoPendiente.length > 0){
+        <section class="pedidos-pendientes">
+            <h2>Pedidos Pendientes</h2>
+            <p>Estos son los pedidos que aún no han sido confirmados{{!isAdmin() ? ' por el vendedor' : ''}} y estan en la espera de su confirmación</p>
+            <div class="pedidos">
+                @for (pedido of pedidoPendiente; track pedido.id) {
+                    <pedido-item [pedido]="pedido" (cambioEstado)="onCambioEstado($event)"></pedido-item>
+                }
+            </div>
+        </section>
+        <div class="line-separator"></div>
+    }
+    @if(pedidoVendido.length > 0){
+        <section class="pedidos-comprados">
+            <h2>Pedidos {{isAdmin() ? 'Vendidos' : 'Comprados'}}</h2>
+            @if (!isAdmin()) { <p>Estos son los pedidos que haz comprado</p> }
+        </section>
+        <div class="line-separator"></div>
+    }
+    @if(pedidoConfirmado.length>0){
+        <section class="pedidos-confirmados">
+            <h2>Pedidos Confirmados</h2>
+            <p>Estos son los pedidos que estan confirmados, proximos a realizarse.  
+                @if(!isAdmin()){ <span>Tienes hasta 24 horas para cancelar una vez que fue confirmado.</span> }
+            </p>
+            <div class="pedidos">
+                @for (pedido of pedidoConfirmado; track pedido.id) {
+                    <pedido-item [pedido]="pedido" (cambioEstado)="onCambioEstado($event)"></pedido-item>
+                }
+            </div>
+        </section>
+        <div class="line-separator"></div>
+    }
+    @if(pedidoCancelado.length>0){
+        <section class="pedidos-cancelados">
+            <h2>Pedidos Cancelados</h2>
+            <p>Estos son los pedidos que han sido cancelados.</p>
+            <div class="pedidos">
+                @for (pedido of pedidoCancelado; track pedido.id) {
+                    <pedido-item [pedido]="pedido" (cambioEstado)="onCambioEstado($event)"></pedido-item>
+                }
+            </div>
+        </section>
+        <div class="line-separator"></div>
+    }
+
+    @if(cartEmpty && !loading){
+        <p class="cart-empty">Aún no se han registrado pedidos. <a routerLink="/productos">Ir a la tienda</a></p>
+    }
+</main>

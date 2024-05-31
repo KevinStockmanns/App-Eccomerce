@@ -1,0 +1,204 @@
+.pedido-content{
+    width: 100%;
+    border-radius: var(--borderrLow);
+    overflow: hidden;
+    max-width: calc(100vw - 2rem);
+
+    --mainColorBack: var(--mainColor);
+}
+.pedido-content.cancelado{
+    --mainColorBack: #e23f3f;
+    --mainMidAlphaColor: #e23f3f55;
+    --mainLowAlphaColor: #e23f3f22;
+}
+.pedido-content.confirmado{
+    --mainColorBack: #34c274;
+    --mainMidAlphaColor: #34c27455;
+    --mainLowAlphaColor: #34c27422;
+}
+.pedido-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    width: 100%;
+    font-size: 1.3rem;
+    height: var(--headerHeight);
+    background-color: var(--mainColorBack);
+    color: var(--bgCardColor);
+}
+
+.pedido-header-left{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.pedido-chevron-icon{
+    display: inline-block;
+    transform: rotate(0);
+    transition: var(--transitionFast);
+}
+.pedido-chevron-icon.open{
+    transform: rotate(180deg);
+}
+.pedido-body{
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    height: 0;
+    width: 100%;
+    max-width: inherit;
+    transition: var(--transitionFast);
+    background-color: var(--bgCardColor);
+    overflow: hidden;
+}
+.pedido-content.open .pedido-body{
+    height: 300px;
+    padding: 1rem;
+    overflow: auto;
+}
+.pedido-content.open .pedido-body::after{
+    content: '';
+    position: fixed;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background: linear-gradient(180deg, transparent, var(--bgCardColor));
+}
+.pedido-info-cliente{
+    display: grid;
+    gap: .5rem;
+    max-width: 850px;
+    font-size: 1.2rem;
+}
+.register-by{
+    text-align: center;
+    font-weight: bold;
+    font-size: .9rem;
+}
+.register-by.user{
+    color: var(--mainColor);
+}
+.pedido-details{
+    border-radius: var(--borderrLow);
+    border: 1px solid var(--textAlphaColor);
+    transition: var(--transitionUltraFast);
+}
+.pedido-details header{
+    position: relative;
+    justify-self: center;
+    padding: .5rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.pedido-details header::after{
+    content: '';
+    position: absolute;
+    left: 3rem;
+    bottom: .2rem;
+    width: calc(100% - 6rem);
+    height: 1px;
+    background-color: var(--textAlphaColor);
+    transform: scaleX(0);
+    transition: var(--transitionUltraFast);
+}
+.pedido-details.open header::after{
+    transform: scaleX(1);
+    transition: var(--transitionFast) var(--transitionUltraFast);
+}
+.pedido-details header .icon{
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    transition: var(--transitionUltraFast);
+}
+.pedido-details.open header .icon{
+    transform: rotate(180deg);
+}
+.pedido-details-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: inherit;
+    transform-origin: top;
+    transform: scaleY(0);
+    max-height: 0;
+}
+.pedido-details.open .pedido-details-body{
+    padding: .5rem;
+    max-height: 100px;
+    transform: scaleY(1);
+}
+
+.pedido-details-user{
+    font-weight: bold;
+}
+.pedido-details-user.user{
+    color: var(--mainColor);
+}
+.table-container{
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    overflow: auto;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+table thead{
+    font-size: 1.3rem;
+    background-color: var(--mainMidAlphaColor);
+    color: var(--textColor);
+    overflow: auto;
+}
+table tbody{
+    font-size: 1.1rem;
+}
+table tbody tr:nth-child(even){
+    background-color: var(--mainLowAlphaColor);
+}
+table td, table th{
+    border: 2px solid var(--greyAlphaLightColor);
+    text-align: center;
+    padding: .3rem .5rem;
+}
+table td:first-child{
+    text-align: start;
+}
+.tr-total{
+    font-weight: bold;
+}
+.tr-total td:first-child{
+    text-align: right;
+}
+.tr-total td:last-child{
+    text-align: center;
+}
+.pedido-actions{
+    display: grid;
+    gap: .5rem;
+    width: 100%;
+    max-width: inherit;
+    transition: var(--transitionFast);
+}
+.pedido-actions.hasLoader{
+    justify-content: center;
+}
+
+
+@media screen and (min-width: 500px) {
+    .pedido-actions{
+        display: flex;
+        justify-content: flex-end;
+        gap: 0;
+    }
+}
+@media screen and (min-width: 700px) {
+    .pedido-info-cliente{
+        grid-template-columns: 1fr 1fr;
+        margin: 0 auto;
+    }
+}

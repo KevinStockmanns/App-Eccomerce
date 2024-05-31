@@ -1,0 +1,16 @@
+<section class="usuario-beneficios" style="view-transition-name: usuario-beneficios;">
+    <img src="assets/images/login-register.svg" [alt]="isInRegister ? 'Registrarse' : 'Iniciar Sesión'">
+    <h2>{{isInRegister ? '¿Ya tienes una cuenta?' : '¿Aún no tienes cuenta?'}}</h2>
+    <h3>{{isInRegister ? '¡Inicia Sesión' : '¡Regístrate'}} y Disfruta de Estos Beneficios!</h3>
+    <ul>
+        <li>Ver precios de productos directamente.</li>
+        <li>Realizar pedidos de forma rápida y sin tiempo de espera.</li>
+        <li>Gestionar fácilmente tus pedidos: actualizar, cancelar y ver historial.</li>
+    </ul>
+    <!-- <p>¡No esperes más! Regístrate ahora para aprovechar estas ventajas.</p> -->
+    @if(!isInRegister){
+        <button class="btn cursor" routerLink="/signup">Registrarse</button>
+    }@else {
+        <button class="btn cursor" routerLink="/login">Iniciar Sesión</button>
+    }
+</section>

@@ -1,0 +1,136 @@
+main{
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - (var(--headerHeight) * 2));
+    padding-bottom: 1rem;
+}
+main > section{
+    padding: 1rem .5rem;
+}
+.signup-content{
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    border-radius: var(--borderrHigh) var(--borderrHigh) 0 0;
+    background-color: var(--bgCardColor);
+}
+.beneficios-usuarios-content{
+    border-radius: 0 0 var(--borderrHigh) var(--borderrHigh);
+    background-color: var(--mainColorBack);
+}
+.signup-content h1{
+    text-align: center;
+}
+form{
+    display: grid;
+    gap: 1rem;
+}
+.form-div-input{
+    position: relative;
+    padding: .3rem .5rem;
+    border: 2px solid var(--mainColor);
+    border-radius: var(--borderrLow);
+    transition: var(--transitionFast) ease;
+}
+
+.form-div-input input,
+.form-div-input select{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: inherit;
+}
+.form-div-input label{
+    position: absolute;
+    top: .4rem;
+    left: .5rem;
+    font-weight: bold;
+    pointer-events: none;
+    color: var(--textAlphaColor);
+    transition: var(--transitionFast);
+}
+.form-div-input input:focus ~ label,
+.form-div-input.withText label{
+    font-size: .8rem;
+    top: -.6rem;
+    padding: 0 .3rem;
+    background-color: var(--bgCardColor);
+    border-radius: var(--borderrLow);
+}
+.form-div-input:not(.error) input:focus ~ label,
+.form-div-input.withText:not(.error) label{
+    color: var(--mainColor);
+}
+.form-div-input.error{
+    border-color: var(--errorColor);
+}
+.form-div-input.error label{
+    color: var(--errorColor);
+}
+.form-div-error{
+    font-size: .8rem;
+    font-weight: bold;
+    color: var(--errorColor);
+}
+.form-submit{
+    display: flex;
+    flex-direction: column;
+}
+.form-submit button{
+    display: grid;
+    place-items: center;
+    min-width: 200px;
+    align-self: center;
+}
+.form-submit button:disabled{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.loader{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--bgCardColor);
+    animation: rotate 1s ease-in-out infinite;
+}
+@keyframes rotate {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+@media screen and (min-width: 600px) {
+    main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    main > section{
+        border-radius: var(--borderrHigh);
+    }
+
+    .beneficios-usuarios-content{
+        display: grid;
+        place-items: center;
+    }
+}
+@media screen and (min-width:800px) {
+    main{
+        grid-template-columns: 2fr 1fr;
+    }
+    form{
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: min-content;
+    }
+    form .col-2{
+        grid-column: 1 / 3;
+    }
+}

@@ -1,0 +1,42 @@
+.orden-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transitionUltraFast);
+}
+.orden-item.empty{
+    padding: .5rem;
+    border-radius: var(--borderrLow);
+    background-color: var(--errorAlphaLowColor);
+}
+.orden-left, .orden-right{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.orden-empty{
+    font-size: .8rem;
+    color: var(--errorColor);
+}
+.orden-right{
+    gap: 1rem;
+    font-size: 1.2rem;
+    user-select: none;
+}
+.precio-unitario-input{
+    border: none;
+    background-color: transparent;
+    text-align: end;
+    color: inherit;
+    outline: none;
+    width: 100px;
+    border: 1px solid var(--textAlphaColor);
+    border-radius: var(--borderrMid);
+}
+.orden-right .icon-left{
+    display: inline-block;
+    transform: rotate(180deg);
+}
+.orden-right .cursor:hover{
+    color: var(--textColor);
+}

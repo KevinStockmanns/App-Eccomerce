@@ -1,0 +1,19 @@
+.usuario-beneficios{
+    display: grid;
+    gap: .5rem;
+}
+img{
+    justify-self: center;
+    max-width: 300px;
+}
+h2{
+    text-align: center;
+}
+button{
+    outline: none;
+    border: none;
+    justify-self: center;
+}
+button{
+    min-width: 200px;
+}

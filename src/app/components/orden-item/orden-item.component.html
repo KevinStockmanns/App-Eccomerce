@@ -1,0 +1,21 @@
+<section class="orden-item" [class.empty]="orden?.cantidad === 0">
+    <div class="orden-left">
+        <span>{{orden?.producto?.nombreProducto + ' ' + orden?.producto?.nombreVersion | titlecase}}</span>
+        @if(orden?.cantidad === 0){
+            <span class="orden-empty">Se eliminará de la orden.</span>
+        }
+    </div>
+    <div class="orden-right">
+        @if (isAdmin()) {
+            <div>
+                <input type="number" class="precio-unitario-input" [value]="orden?.precioUnitario" (blur)="cambiarPrecio($event)"> ARS
+            </div>
+        }@else {
+            <span class="precio-unitario">{{orden?.precioUnitario | currency}} ARS</span>
+        }
+        <span class="icon-left cursor" (click)="modificarCantidad(-1)"><fa-icon [icon]="iconChevron"></fa-icon></span>
+        <span>{{orden?.cantidad}}</span>
+        <span class="cursor" (click)="modificarCantidad(1)"><fa-icon [icon]="iconChevron"></fa-icon></span>
+        <span class="cursor"><fa-icon [icon]="iconTrash" (click)="delete()"></fa-icon></span>
+    </div>
+</section>

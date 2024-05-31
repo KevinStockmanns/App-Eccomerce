@@ -1,0 +1,91 @@
+<section #pedidoItem class="pedido-content box-shadow" [class.open]="open" [class.confirmado]="pedido?.estado === 'CONFIRMADO'" [class.cancelado]="pedido?.estado == 'CANCELADO'">
+    <article class="pedido-header cursor" (click)="togglePedido()">
+        <div class="pedido-header-left">
+            <span><fa-icon [icon]="iconPedido"></fa-icon></span>
+            <span>Pedido</span>
+            <!-- <span [class.hidden]="!open">{{pedido?.id}}</span> -->
+            <span>{{pedido?.fechaRegistro | dateFormat}}</span>
+        </div>
+        <div class="pedido-header-right">
+            <span class="pedido-chevron-icon" [class.open]="open"><fa-icon [icon]="iconChevron"></fa-icon></span>
+        </div>
+    </article>
+    <article class="pedido-body">
+        <div class="pedido-info-cliente">
+            <p class="nombre-cliente"><b>Cliente:</b> {{pedido?.apellido + ', ' + pedido?.nombre | titlecase}}</p>
+            <p><b>Correo:</b> {{pedido?.correo}}</p>
+            <p><b>Telefono:</b> {{pedido?.telefono}}</p>
+            @if(usuario()?.rol == 'SUPERADMIN' || usuario()?.rol == 'ADMIN'){
+                <p><b>Fecha:</b> {{pedido?.fecha | datetimeformat}}</p>
+            }@else {
+                <p><b>Fecha:</b> {{pedido?.fecha | dateFormat}}</p>
+            }
+            <p><b>Ubicación:</b> {{pedido?.ubicacion?.pais | titlecase}} - {{pedido?.ubicacion?.provincia | titlecase}}, {{pedido?.ubicacion?.localidad | titlecase}}</p>
+            <p><b>Dirección:</b> Barrio {{pedido?.ubicacion?.barrio | titlecase}}, {{pedido?.ubicacion?.direccion | titlecase}}</p>
+        </div>
+        @if (isAdmin()) {
+            <div class="pedido-details" [class.open]="detailsOpen">
+                <header (click)="toggleOpenDetails()" class="cursor">
+                    <span>DETALLES</span>
+                    <span class="icon"><fa-icon [icon]="iconChevron"></fa-icon></span>
+                </header>
+                <div class="pedido-details-body">
+                    @if (pedido?.idUsuario != null) {
+                        <p class="pedido-details-user user">El pedido se realizó por un usuario registrado</p>
+                    }@else {
+                        <p class="pedido-details-user">El pedido se realizó por un usuario NO registrado</p>
+                    }
+                </div>
+            </div>
+        }
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (orden of pedido?.ordenes; track orden.id) {
+                        <tr>
+                            <td>{{orden.producto.nombreProducto + ' ' + orden.producto.nombreVersion | titlecase}}</td>
+                            <td>{{orden.cantidad}}</td>
+                            <td>{{orden.precioUnitario | currency}} ARS</td>
+                            <td>{{orden.cantidad * orden.precioUnitario | currency}} ARS</td>
+                        </tr>
+                    }
+                    <tr class="tr-total">
+                        <td colspan="3">Total</td>
+                        <td>{{total | currency}} ARS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pedido-actions" [class.hasLoader]="lodaingResponse">
+            @if(lodaingResponse){
+                <app-loader></app-loader>
+            }@else {
+                @if (isAdmin()) {
+                    @if (pedido?.estado != 'CANCELADO') {
+                        <button class="btn btn-simple cursor red" (click)="cambioEstadoFn('CANCELADO')">CANCELAR PEDIDO</button>
+                    }
+                    <button class="btn btn-simple cursor" routerLink="update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
+                    @if (pedido?.estado === 'PENDIENTE' || pedido?.estado === 'CANCELADO') {
+                        <button class="btn btn-primary cursor" (click)="confirmPedido()" routerLink="confirm">CONFIRMAR</button>
+                    }
+                }@else {
+                    @if (pedido?.estado === 'PENDIENTE') {
+                        <button class="btn btn-simple cursor red" (click)="cambioEstadoFn('CANCELADO')">CANCELAR PEDIDO</button>
+                        <button class="btn btn-simple cursor" routerLink="update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
+                    }
+                    @if (pedido?.estado === 'CANCELADO') {
+                        <button class="btn btn-simple cursor" (click)="cambioEstadoFn('PENDIENTE')">REACTIVAR PEDIDO</button>
+                    }
+                }
+            }
+        </div>
+    </article>
+</section>

@@ -1,0 +1,135 @@
+<back-btn></back-btn>
+<main class="main content">
+    <section class="create">
+        <h1 class="title">{{updatePage ? 'Actualizar Producto' : 'Crear Producto'}}</h1>
+        <div class="create-body">
+            <form class="form" [formGroup]="form">
+                <div class="form-div" [class.withValue]="hasValue('nombre')" [class.error]="hasOneError('nombre')">
+                    <div class="form-div-input">
+                        <input type="text" formControlName="nombre">
+                        <label>Nombre</label>
+                    </div>
+                    @if(hasError('nombre', 'required')){
+                        <p class="form-div-error">El nombre es requerido.</p>
+                    }
+                    @if(hasError('nombre', 'minlength')){
+                        <p class="form-div-error">El nombre debe tener al menos {{getError('nombre', 'minlength').requiredLength}} caracteres.</p>
+                    }
+                    @if(hasError('nombre', 'maxlength')){
+                        <p class="form-div-error">El nombre puede tener hasta {{getError('nombre', 'maxlength').requiredLength}} caracteres.</p>
+                    }
+                    @if(hasError('nombre', 'pattern')){
+                        <p class="form-div-error">El nombre acepta letras, números y espacios en blanco.</p>
+                    }
+                </div>
+                
+                
+
+                <div class="form-divs versiones" formArrayName="versiones" [class.delete]="deleteMood">
+                    <p>Versiones {{totalVersiones >0 ? '(' + totalVersiones + ')' : ''}}</p>
+                    <div class="versiones-actions">
+                        @if (totalVersiones < 6) {
+                            <div class="add-version btn btn-simple cursor" (click)="addVersion()">
+                                <fa-icon [icon]="iconPlus"></fa-icon>
+                                <span>AGREGAR</span>
+                            </div>
+                        }
+                        @if (totalVersiones>1) {
+                            <div class="delete-version btn btn-simple red cursor" (click)="activateDeleteMood()">
+                                <fa-icon [icon]="iconTrash"></fa-icon>
+                                <span>{{deleteMood ? 'CANCELAR' : 'ELIMINAR'}}</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="versiones-container">
+                        @for (verFor of getVersionesForm(); track idUnique();) {
+                            <div class="version" [formArrayName]="$index">
+                                <div class="delete-mood" [class.active]="deleteMood">
+                                    <div (click)="delete($index)" class="cursor">
+                                        <fa-icon [icon]="iconTrash"></fa-icon>
+                                        <span>Eliminar Versión</span>
+                                    </div>
+                                </div>
+                                <div class="form-div" [class.error]="hasOneError('nombre', $index)" [class.withValue]="hasValue('nombre', $index)">
+                                    <div class="form-div-input">
+                                        <input type="text" formControlName="nombre">
+                                        <label>Nombre</label>
+                                    </div>
+                                    @if(hasError('nombre', 'required', $index)){
+                                        <p class="form-div-error">El nombre es requerido.</p>
+                                    }
+                                    @if(hasError('nombre', 'minlength', $index)){
+                                        <p class="form-div-error">El nombre debe tener al menos {{getError('nombre', 'minlength', $index).requiredLength}} caracteres.</p>
+                                    }
+                                    @if(hasError('nombre', 'maxlength', $index)){
+                                        <p class="form-div-error">El nombre puede tener hasta {{getError('nombre', 'maxlength', $index).requiredLength}} caracteres.</p>
+                                    }
+                                    @if(hasError('nombre', 'pattern', $index)){
+                                        <p class="form-div-error">El nombre acepta letras, números y espacios en blanco.</p>
+                                    }
+                                    @if(hasError('nombre', 'duplicateVersion', $index)){
+                                        <p class="form-div-error">El nombre no debe repetirse.</p>
+                                    }
+                                </div>
+                                
+                                <div class="form-div" [class.error]="hasOneError('descripcion', $index)" [class.withValue]="hasValue('descripcion', $index)">
+                                    <div class="form-div-input">
+                                        <textarea formControlName="descripcion"></textarea>
+                                        <label>Descripción</label>
+                                    </div>
+                                    @if(hasError('descripcion', 'minlength', $index)){
+                                        <p class="form-div-error">La descripción debe tener al menos {{getError('descripcion', 'minlength', $index).requiredLength}} caracteres.</p>
+                                    }
+                                    @if(hasError('descripcion', 'maxlength', $index)){
+                                        <p class="form-div-error">La descripción puede tener hasta {{getError('descripcion', 'maxlength', $index).requiredLength}} caracteres.</p>
+                                    }
+                                    @if(hasError('descripcion', 'pattern', $index)){
+                                        <p class="form-div-error">La descripción acepta letras, números y espacios en blanco.</p>
+                                    }
+                                </div>
+                                
+                                <div class="form-div" [class.error]="hasOneError('precio', $index)" [class.withValue]="hasValue('precio', $index)">
+                                    <div class="form-div-input">
+                                        <input type="number" formControlName="precio">
+                                        <label>Precio</label>
+                                    </div>
+                                    @if(hasError('precio', 'required', $index)){
+                                        <p class="form-div-error">El precio es requerido.</p>
+                                    }
+                                    @if(hasError('precio', 'min', $index)){
+                                        <p class="form-div-error">El precio debe ser positivo.</p>
+                                    }
+                                </div>
+                                <div class="form-div" [class.error]="hasOneError('precioDescuento', $index)" [class.withValue]="hasValue('precioDescuento', $index)">
+                                    <div class="form-div-input">
+                                        <input type="number" formControlName="precioDescuento">
+                                        <label>Precio Descuento</label>
+                                    </div>
+                                    @if(hasError('precioDescuento', 'min', $index)){
+                                        <p class="form-div-error">El precio debe ser positivo.</p>
+                                    }
+                                </div>
+                                <div class="form-div" [class.error]="hasOneError('stock', $index)" [class.withValue]="hasValue('stock', $index)">
+                                    <div class="form-div-input">
+                                        <input type="number" formControlName="stock">
+                                        <label>Stock</label>
+                                    </div>
+                                    @if(hasError('stock', 'min', $index)){
+                                        <p class="form-div-error">El stock debe ser positivo.</p>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="create-footer">
+            @if (loading) {
+                <app-loader></app-loader>
+            }@else {
+                <button class="btn btn-primary cursor" (click)="onSubmit()">CREAR</button>
+            }
+        </div>
+    </section>
+</main>

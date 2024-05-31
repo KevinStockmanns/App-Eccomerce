@@ -1,0 +1,12 @@
+<section class="back-btn-secion" #backBtnComponent>
+    <div class="back-btn-content content">
+        <div class="back-btn cursor" (click)="back()">
+            <fa-icon [icon]="iconBack"></fa-icon>
+            <span>Volver</span>
+        </div>
+        <div class="home-btn cursor" routerLink="/">
+            <fa-icon [icon]="iconHome"></fa-icon>
+            <span>Inicio</span>
+        </div>
+    </div>
+</section>
