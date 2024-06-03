@@ -1,4 +1,4 @@
-<section class="product-card">
+<section class="product-card" [style]="'view-transition-name: producto'+producto?.id+';'">
     <p class="product-title">{{producto?.nombre | titlecase}}</p>
     <p><b>Estado:</b> {{producto?.estado ? 'Público' : 'Privado'}}</p>
     <div class="product-versions">
@@ -19,6 +19,7 @@
     </div>
     <div class="product-actions">
         @if (producto?.estado) { <button class="btn btn-simple red cursor">DESACTIVAR PRODUCTO</button> }
+        @if(canActivate) { <button class="btn btn-simple cursor">ACTIVAR PRODUCTO</button> }
         <button class="btn btn-simple cursor" (click)="actualizar()" routerLink="update">ACTUALIZAR PRODUCTO</button>
     </div>
 </section>

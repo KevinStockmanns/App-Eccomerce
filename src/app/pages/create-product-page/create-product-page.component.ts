@@ -82,7 +82,7 @@ export class CreateProductPageComponent {
 
     if (versiones) {
       versiones.removeAt(i);
-      this.totalVersiones = versiones.length; // Actualizar la longitud después de eliminar
+      this.totalVersiones = versiones.length;
 
       console.log(i);
 
@@ -119,6 +119,7 @@ export class CreateProductPageComponent {
         precio: [10000, [Validators.required, Validators.min(1)]],
         precioDescuento: [null, Validators.min(0)],
         stock: [1, Validators.min(1)],
+        estado: [false]
       })
     );
     this.totalVersiones++;

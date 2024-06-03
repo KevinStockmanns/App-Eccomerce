@@ -31,6 +31,15 @@ export class ProductoService {
   createProducto(body:any){
     return this.http.post<ResponseWrapper<Producto>>(`${API_URL}/producto`, body);
   }
+  uploadImage(formData:FormData, idVersion:number, activar?:boolean){
+    let params = "";
+    if(activar!==undefined)
+      params = `?estado=${activar}`
+    return this.http.post(`${API_URL}/producto/version/${idVersion}/imagen`+params, formData);
+  }
+  activateProduct(id:number, query?:{all:boolean}){
+    return this.http.patch(`${API_URL}/producto/activar/${id}${this.utils.getQuerysForPath(query)}`, null);
+  }
 
 
   setProductoSelected(producto: Producto){

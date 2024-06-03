@@ -1,33 +1,71 @@
 <app-header></app-header>
-<main class="main">
+<main class="main content">
     <section class="upload-image">
         <article class="upload-header">
             @if(fromCrear){
-                <h1 class="title">Crear Producto</h1>
-                <p><b>¡Ya casi esta todo listo!</b> Solo falta agregar las imagenes de las versiones</p>
+                <h1 class="title">Subir Imágenes</h1>
+                <p><b>¡Ya casi esta todo listo!</b> Solo falta agregar las imágenes de las versiones</p>
             }@else {
                 <h1 class="title">Actualizar Producto</h1>
-                <p>Aquí podras actualizar las imagenes de las versiones</p>
+                <p>Aquí podras actualizar las imágenes de las versiones</p>
             }
         </article>
         <article class="upload-body">
+            @if (producto.versiones.length>1) {
+                <div class="uploader-indicator">
+                    @for (ver of producto.versiones; track ver.id) {
+                        <div class="item" [class.checked]="imagenCharged[ver.id]" [class.right]="$index!=producto.versiones.length-1" [class.left]="$index!=0">
+                            @if (imagenCharged[ver.id]) {
+                                <fa-icon [icon]="iconCheck"></fa-icon>
+                            }@else {
+                                <fa-icon [icon]="iconNotCheck"></fa-icon>
+                            }
+                        </div>
+                        @if(!$last){
+                            <span [class.checked]="imagenCharged[ver.id]"></span>
+                        }
+                    }
+                </div>
+            }
             <h2>Versiones de '{{producto.nombre}}'</h2>
+            
             @for (ver of producto.versiones; track ver.id) {
-                <div class="version">
-                    <div class="version-header cursor">
-                        {{ver.nombre}}
+                <div class="version" [class.uploaded]="imagenCharged[ver.id]" [class.open]="versionOpen==ver.id && !imagenCharged[ver.id]">
+                    <div class="version-header cursor" (click)="openVersion(ver.id)">
+                        <span>{{$index+1}} {{ver.nombre}}</span>
                         <fa-icon [icon]="iconChevron"></fa-icon>
                     </div>
                     <div class="version-body">
                         @if (ver.imagen || selectedImages[ver.id]) {
                             <img [src]="selectedImages[ver.id] || imgUrl + '/' + ver.imagen" [alt]="'imagen de ' + ver.nombre">
                         }
-                        <div>
+                        <div class="actions">
                             <input type="file" (change)="onFileSelected($event, ver)">
+                            @if (!loading && selectedImages[ver.id]) {
+                                @if (!ver.estado) {
+                                    <button class="btn btn-primary cursor" (click)="onSubmit(ver.id, true)">Subir Y Activar</button>
+                                }
+                                @if (ver.estado) {
+                                    <button class="btn btn-primary cursor" (click)="onSubmit(ver.id, false)">Subir Y Desactivar</button>
+                                }
+                                <button class="btn btn-primary cursor" (click)="onSubmit(ver.id, ver.estado)">Solo Subir</button>
+                            }
+                            @if (loading && versionOpen == ver.id) {
+                                <app-loader></app-loader>
+                            }
                         </div>
                         
                     </div>
                 </div>
+            }
+        </article>
+        <article class="upload-footer">
+            @if (fromCrear && !loadingResponse) {
+                <button class="btn btn-simple red" (click)="onFinish()" routerLink="/productos">Mantener Privado</button>
+                <button class="btn btn-simple" (click)="onActivar()">Publicar</button>
+            }
+            @if (loadingResponse) {
+                <app-loader></app-loader>
             }
         </article>
     </section>

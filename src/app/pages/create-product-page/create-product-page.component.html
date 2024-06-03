@@ -71,7 +71,12 @@
                                         <p class="form-div-error">El nombre no debe repetirse.</p>
                                     }
                                 </div>
-                                
+                                <div class="form-div cursor" (click)="toggleBtn('estado', $index)">
+                                    <div class="form-div-toggle" [class.active]="hasValue('estado', $index)">
+                                        <label>Estado</label>
+                                        <div class="toggle" [class.active]="hasValue('estado', $index)"></div>
+                                    </div>
+                                </div>
                                 <div class="form-div" [class.error]="hasOneError('descripcion', $index)" [class.withValue]="hasValue('descripcion', $index)">
                                     <div class="form-div-input">
                                         <textarea formControlName="descripcion"></textarea>
