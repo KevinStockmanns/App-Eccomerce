@@ -3,6 +3,7 @@ import { of, tap } from 'rxjs';
 import { Pedido } from '../models/pedido.model';
 import { inject } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
+import { ResponseWrapper } from '../models/response-wrapper.model';
 
 let cache = new Map<string, {response:any, timestamp:number}>();
 export const cacheInterceptor: HttpInterceptorFn = (req, next) => {
@@ -70,14 +71,14 @@ export function updateItemInCache(newItem: any, type:string){
     // console.log(key);
     
     if(key.includes(`/${type}`) && key.endsWith(token)){
-      console.log("ingreso a la url para cambiar el item");
+      // console.log("ingreso a la url para cambiar el item");
       
-      let indexItem = itemInUrl(key, newItem.id);
+      let indexItem = indexItemInUrl(key, newItem.id);
       
       if(indexItem !== -1){
-        console.log("El item se encuentra en el cache");
-        console.log(value.response.body.content[indexItem]);
-        console.log(newItem);
+        // console.log("El item se encuentra en el cache");
+        // console.log(value.response.body.content[indexItem]);
+        // console.log(newItem);
         
         let cacheItem = cache.get(key);
         if (cacheItem && cacheItem.response.body.content) {
@@ -88,7 +89,40 @@ export function updateItemInCache(newItem: any, type:string){
     }
   })
 }
-function itemInUrl(url:string, idElement:number):number{
+function indexItemInUrl(url:string, idElement:number):number{
   let itemInCache = cache.get(url);
   return (itemInCache?.response.body.content as any[]).findIndex((el: any)=> el.id == idElement);
+}
+
+
+
+
+export function reubicarItemInCache(ubication: string, ubication2:string, item:any){
+  
+  cache.forEach((val,key)=>{
+    if(key.includes(ubication)){
+      let IndexItemInCache:number = indexItemInUrl(key, item.id);
+      let itemInCache = cache.get(key);
+      if(IndexItemInCache!==-1 && itemInCache?.response.body.content){
+        itemInCache.response.body.content = itemInCache.response.body.content.filter((el:any)=>el.id !== item.id);
+        cache.set(key, itemInCache);
+        console.log("Se elimino de donde estaba");
+        
+
+        cache.forEach((val2,key2)=>{
+          if(key2.includes(ubication2)){
+            
+            let itemInCache2 = cache.get(key2);
+            if(itemInCache2 && itemInCache2.response.body.content){
+              itemInCache2.response.body.content.push(item);
+              cache.set(key2, itemInCache2);
+              console.log("Se cambio donde corresponde");
+              
+            }
+
+          }
+        })
+      }
+    }
+  })
 }

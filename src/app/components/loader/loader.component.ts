@@ -9,6 +9,8 @@ import { Component, Input } from '@angular/core';
   `,
   styles: `
     .loader{
+      justify-self:center;
+      align-self:center;
       margin: 0 auto;
       width: 2rem;
       height: 2rem;

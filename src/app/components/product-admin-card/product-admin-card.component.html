@@ -18,8 +18,12 @@
         </div>
     </div>
     <div class="product-actions">
-        @if (producto?.estado) { <button class="btn btn-simple red cursor">DESACTIVAR PRODUCTO</button> }
-        @if(canActivate) { <button class="btn btn-simple cursor">ACTIVAR PRODUCTO</button> }
-        <button class="btn btn-simple cursor" (click)="actualizar()" routerLink="update">ACTUALIZAR PRODUCTO</button>
+        @if (loading) {
+            <app-loader></app-loader>
+        }@else {
+            @if (producto?.estado) { <button class="btn btn-simple red cursor">DESACTIVAR PRODUCTO</button> }
+            @if(canActivate) { <button class="btn btn-simple cursor" (click)="onActivar()">ACTIVAR PRODUCTO</button> }
+            <button class="btn btn-simple cursor" (click)="actualizar()" routerLink="update">ACTUALIZAR PRODUCTO</button>
+        }
     </div>
 </section>

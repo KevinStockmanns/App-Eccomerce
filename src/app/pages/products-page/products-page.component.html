@@ -34,7 +34,7 @@
 
             @if (isAdmin()) {
                 @for (prod of productos; track $index) {
-                    <product-admin-card [producto]="prod"></product-admin-card>
+                    <product-admin-card (cambioProducto)="onCambioChildrenProduct($event)" [producto]="prod"></product-admin-card>
                 }
             }@else {
                 @for (prod of productos; track $index) {

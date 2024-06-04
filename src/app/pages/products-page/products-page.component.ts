@@ -1,4 +1,4 @@
-import { Component, HostListener, Signal } from '@angular/core';
+import { Component, HostListener, OnChanges, Signal, SimpleChanges } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ProductoService } from '../../core/services/producto.service';
 import { ProductClientCardComponent } from '../../components/product-card/product-card.component';
@@ -21,7 +21,7 @@ import { LoaderComponent } from '../../components/loader/loader.component';
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.css'
 })
-export class ProductsPageComponent {
+export class ProductsPageComponent{
   
   productos: Producto[]|undefined;
   productosByEstado:boolean=false;
@@ -42,14 +42,17 @@ export class ProductsPageComponent {
     this.isLogin = usuarioService.isLogin;
     this.isAdmin = usuarioService.isAdmin;
   }
-  
 
   ngOnInit(){
     this.loading = true;
     this.loadMoreProducts(true, true);
   }
 
-
+  onCambioChildrenProduct(e:any){
+    if(e.accion == 'eliminar'){
+      this.productos = this.productos?.filter(el=>el.id !== e.elemento.id);
+    }
+  }
   loadMoreProducts(estado:boolean, isFirst:boolean){
     this.page = isFirst ? 0 : this.page;
     if(isFirst)
