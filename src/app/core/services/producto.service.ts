@@ -40,12 +40,18 @@ export class ProductoService {
   activateProduct(id:number, query?:{all:boolean}){
     return this.http.patch(`${API_URL}/producto/activar/${id}${this.utils.getQuerysForPath(query)}`, null);
   }
-
-
-  setProductoSelected(producto: Producto){
-    localStorage.setItem('productoSelected', JSON.stringify(producto));
+  updateProducto(id:number, body:any){
+    return this.http.put(`${API_URL}/producto/${id}`, body);
   }
-  get productoSelected(){
+
+
+  setProductoSelected(producto: Producto|null){
+    if(producto == null)
+      localStorage.removeItem('productoSelected');
+    else
+      localStorage.setItem('productoSelected', JSON.stringify(producto));
+  }
+  get productoSelected(): Producto|null{
     return JSON.parse(localStorage.getItem('productoSelected') as string) as Producto;
   }
 }

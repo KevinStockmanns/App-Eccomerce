@@ -45,6 +45,7 @@
     padding: .5rem 0;
     display: flex;
     gap: .5rem;
+    overflow: auto;
 }
 .version{
     position: relative;
@@ -60,6 +61,21 @@
     overflow: hidden;
     transition: var(--transitionFast);
     --bgCardColor: var(--bgColor);
+}
+.version.eliminar{
+    padding: 1.5rem;
+
+    --mainColor: var(--errorAlphaColor);
+    --mainAlphaColorBack: var(--errorAlphaLowColor)
+}
+.version.eliminar::after{
+    content: 'La versión se eliminará';
+    position: absolute;
+    top: calc((1.5rem / 2) - .5rem);
+    left: 50%;
+    font-size: .8rem;
+    color: var(--errorColor);
+    transform: translateX(-50%);
 }
 .versiones.delete .version{
     /* transform: scale(.9); */

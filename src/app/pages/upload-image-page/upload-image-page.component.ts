@@ -41,7 +41,7 @@ export class UploadImagePageComponent {
     private router: Router,
     private noti: NotificationService
   ) {
-    this.producto = productoService.productoSelected;
+    this.producto = productoService.productoSelected as Producto;
     this.fromCrear = activatedRoute.snapshot.queryParamMap.get('a') == 'c';
     this.imagenCharged = JSON.parse(
       localStorage.getItem('imagenCharged') || '{}'

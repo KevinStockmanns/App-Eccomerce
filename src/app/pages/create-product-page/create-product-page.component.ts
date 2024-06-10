@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -15,12 +15,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProductoService } from '../../core/services/producto.service';
 import { NotificationService } from '../../core/services/notification.service';
-import {
-  Errors,
-  ResponseWrapper,
-} from '../../core/models/response-wrapper.model';
+import { Errors } from '../../core/models/response-wrapper.model';
 import { UtilsService } from '../../core/services/utils.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { Version } from '../../core/models/producto.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-product-page',
@@ -34,7 +33,7 @@ import { LoaderComponent } from '../../components/loader/loader.component';
   templateUrl: './create-product-page.component.html',
   styleUrl: './create-product-page.component.css',
 })
-export class CreateProductPageComponent {
+export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
   form: FormGroup;
   updatePage: boolean = false;
   iconPlus = faPlus;
@@ -42,8 +41,10 @@ export class CreateProductPageComponent {
   totalVersiones: number = 0;
   deleteMood: boolean = false;
   loading: boolean = false;
-  id = 0;
-
+  idIncrementer = 0;
+  initValue: any | null = null;
+  subscriptionVersiones: Subscription|null = null;
+  
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -54,10 +55,9 @@ export class CreateProductPageComponent {
   ) {
     this.updatePage =
       activatedRoute.snapshot.paramMap.get('action') == 'update';
-    // if(!this.updatePage){
     this.form = formBuilder.group({
       nombre: [
-        '',
+        productoService.productoSelected?.nombre || '',
         [
           Validators.required,
           Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+'),
@@ -68,61 +68,115 @@ export class CreateProductPageComponent {
       versiones: formBuilder.array([], Validators.required),
     });
 
-    this.addVersion();
-    this.totalVersiones = 1;
-    // }
+    if (this.updatePage) {
+      this.addVersion(this.productoService.productoSelected?.versiones);
+      this.form.addControl(
+        'estado',
+        this.formBuilder.control(this.productoService.productoSelected?.estado)
+      );
+      this.initValue = this.form.value;
+    } else this.addVersion();
+  }
+
+  ngAfterViewInit(): void {
+    this.subscribeToVersionesChanges();
+
+  }
+  ngOnDestroy(): void {
+    if (this.updatePage) this.productoService.setProductoSelected(null);
+    if(this.subscriptionVersiones) this.subscriptionVersiones.unsubscribe();
+  }
+
+  subscribeToVersionesChanges() {
+    const versionesArray = this.form.get('versiones') as FormArray;
+    this.subscriptionVersiones = versionesArray.valueChanges.subscribe(() => {
+      this.totalVersiones = versionesArray.value.length;
+    });
   }
 
   activateDeleteMood() {
-    if (this.totalVersiones > 1) this.deleteMood = !this.deleteMood;
+    if (this.totalVersiones > 0) this.deleteMood = !this.deleteMood;
     else if (this.deleteMood) this.deleteMood = false;
   }
   delete(i: number) {
     const versiones = this.form.get('versiones') as FormArray;
 
     if (versiones) {
-      versiones.removeAt(i);
-      this.totalVersiones = versiones.length;
-
-      console.log(i);
-
-      if (this.totalVersiones <= 1) {
-        this.deleteMood = false;
+      if (this.updatePage) {
+        let version = versiones.at(i) as FormGroup;
+        if(version.value.hasOwnProperty('accion'))
+          if(version.value.idVersion && version.value.idVersion!=0){
+            version.removeControl('accion');
+          }else{
+            versiones.removeAt(i);
+          }
+        else
+          version.addControl('accion', this.formBuilder.control('ELIMINAR'));
+        
+      } else {
+        versiones.removeAt(i);
+        if (this.totalVersiones <= 1) {
+          this.deleteMood = false;
+        }
       }
-    } else {
-      console.error('FormArray "versiones" no encontrado');
     }
   }
-  addVersion() {
-    (this.form.get('versiones') as any).push(
-      this.formBuilder.group({
-        nombre: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+'),
-            Validators.minLength(4),
-            Validators.maxLength(50),
-            this.uniqueVersion(),
+  addVersion(versiones?: Version[]) {
+    if (!versiones)
+      versiones = [
+        {
+          nombre: '',
+          descripcion: '',
+          precio: 0,
+          precioDescuento: 0,
+          stock: 0,
+          estado: false,
+          fecha: '',
+          id: 0,
+          imagen: null,
+        },
+      ];
+
+    versiones?.forEach((ver) => {
+      (this.form.get('versiones') as any).push(
+        this.formBuilder.group({
+          idVersion: [ver.id == 0 ? null : ver.id],
+          nombre: [
+            ver.nombre || '',
+            [
+              Validators.required,
+              Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+'),
+              Validators.minLength(4),
+              Validators.maxLength(50),
+              this.uniqueVersion(),
+            ],
           ],
-        ],
-        descripcion: [
-          '',
-          [
-            Validators.pattern(
-              '[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s\\-\\_\\.\\(\\)\\¿\\?\\¡\\!]+'
-            ),
-            Validators.minLength(15),
-            Validators.maxLength(2000),
+          descripcion: [
+            ver.descripcion || '',
+            [
+              Validators.pattern(
+                '[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s\\-\\_\\.\\(\\)\\¿\\?\\¡\\!]+'
+              ),
+              Validators.minLength(15),
+              Validators.maxLength(2000),
+            ],
           ],
-        ],
-        precio: [10000, [Validators.required, Validators.min(1)]],
-        precioDescuento: [null, Validators.min(0)],
-        stock: [1, Validators.min(1)],
-        estado: [false]
-      })
-    );
-    this.totalVersiones++;
+          precio: [
+            ver.precio || 10000,
+            [Validators.required, Validators.min(1)],
+          ],
+          precioDescuento: [ver.precioDescuento || null, Validators.min(0)],
+          stock: [ver.stock || 1, Validators.min(1)],
+          estado: [ver.estado || false],
+        })
+      );
+      if (ver.id == 0)
+        (
+          (this.form.get('versiones') as FormArray).at(
+            (this.form.get('versiones') as FormArray).length - 1
+          ) as FormGroup
+        ).addControl('accion', this.formBuilder.control('AGREGAR'));
+    });
   }
   uniqueVersion(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -148,13 +202,45 @@ export class CreateProductPageComponent {
 
   onSubmit() {
     this.form.markAllAsTouched();
+    this.deleteMood = false;
 
     let json = this.form.value;
-    json = this.utils.deleteObjectEmpty(json);
     if (this.form.valid) {
       this.loading = true;
       if (this.updatePage) {
+        if (JSON.stringify(this.initValue) != JSON.stringify(json)) {
+          console.log('Hubo cambio');
+          json = this.utils.getChanges(this.initValue, json, ['idVersion'], 'idVersion');
+          if (json.versiones)
+            json.versiones = this.removeIfOnlyHas(json.versiones, 'idVersion');
+          json = this.utils.deleteObjectEmpty(json);
+          // json.versiones.forEach(el=>{
+            
+          // })
+          this.productoService.updateProducto(this.productoService.productoSelected?.id as number, json).subscribe({
+            next: res=>{
+              this.loading = false;
+              console.log("Se actualizo");
+              
+            },
+            error: err=>{
+              this.loading = false;
+              if(err.error?.errors){
+                err.error.errors.forEach((el:Errors)=>{
+                  this.notiService.notificate(el.error, {error:true});
+                })
+              }else{
+                this.notiService.notificate('Ocurrio un error al actualizar el producto.', {error:true});
+              }
+            }
+          });
+        } else {
+          this.notiService.notificate('No se detectaron cambios para actualizar.', { error: true, time: 3000 });
+          this.loading = false;
+        }
+
       } else {
+        json = this.utils.deleteObjectEmpty(json);
         this.productoService.createProducto(json).subscribe({
           next: (res) => {
             console.log(res);
@@ -183,9 +269,14 @@ export class CreateProductPageComponent {
     }
   }
 
+  removeIfOnlyHas(versiones: any[], el: string) {
+    return versiones.filter((ver) => {
+      return !(Object.keys(ver).length === 1 && ver.hasOwnProperty(el));
+    });
+  }
   idUnique() {
-    this.id++;
-    return this.id;
+    this.idIncrementer++;
+    return this.idIncrementer;
   }
   toggleBtn(control: string, i?: number) {
     if (i == undefined) {
@@ -241,5 +332,9 @@ export class CreateProductPageComponent {
         ?.errors as any
     )[error];
     return verControl;
+  }
+
+  get productoId() {
+    return this.productoService.productoSelected?.id;
   }
 }

@@ -1,6 +1,6 @@
 <back-btn></back-btn>
 <main class="main content">
-    <section class="create">
+    <section class="create" [style]="'view-transition-name: producto'+ productoId+';'">
         <h1 class="title">{{updatePage ? 'Actualizar Producto' : 'Crear Producto'}}</h1>
         <div class="create-body">
             <form class="form" [formGroup]="form">
@@ -22,7 +22,12 @@
                         <p class="form-div-error">El nombre acepta letras, números y espacios en blanco.</p>
                     }
                 </div>
-                
+                <div class="form-div">
+                    <div class="form-div-toggle cursor" [class.active]="hasValue('estado')" (click)="toggleBtn('estado')">
+                        <label>Estado</label>
+                        <div class="toggle" [class.active]="hasValue('estado')"></div>
+                    </div>
+                </div>
                 
 
                 <div class="form-divs versiones" formArrayName="versiones" [class.delete]="deleteMood">
@@ -34,16 +39,16 @@
                                 <span>AGREGAR</span>
                             </div>
                         }
-                        @if (totalVersiones>1) {
+                        @if (totalVersiones>0 || deleteMood) {
                             <div class="delete-version btn btn-simple red cursor" (click)="activateDeleteMood()">
                                 <fa-icon [icon]="iconTrash"></fa-icon>
-                                <span>{{deleteMood ? 'CANCELAR' : 'ELIMINAR'}}</span>
+                                <span>{{deleteMood ? 'LISTO' : 'ELIMINAR'}}</span>
                             </div>
                         }
                     </div>
                     <div class="versiones-container">
                         @for (verFor of getVersionesForm(); track idUnique();) {
-                            <div class="version" [formArrayName]="$index">
+                            <div class="version" [formArrayName]="$index" [class.eliminar]="updatePage && hasValue('accion', $index)=='ELIMINAR'">
                                 <div class="delete-mood" [class.active]="deleteMood">
                                     <div (click)="delete($index)" class="cursor">
                                         <fa-icon [icon]="iconTrash"></fa-icon>
@@ -133,7 +138,7 @@
             @if (loading) {
                 <app-loader></app-loader>
             }@else {
-                <button class="btn btn-primary cursor" (click)="onSubmit()">CREAR</button>
+                <button class="btn btn-primary cursor" (click)="onSubmit()">{{updatePage ? 'ACTUALIZAR' : 'CREAR'}}</button>
             }
         </div>
     </section>
