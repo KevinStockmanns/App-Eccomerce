@@ -101,4 +101,47 @@ export class UtilsService {
 
     return toReturn;
   }
+
+
+  synchronizeData(toSynchronize:any, data:any){
+    for(const key in toSynchronize){
+      if(data.hasOwnProperty(key)){
+        if(Array.isArray(toSynchronize[key]) && Array.isArray(data[key])){
+          for (let i = 0; i < data.length; i++) {
+            if (i < toSynchronize[key].length) {
+              // Si hay un objeto o array en la misma posición, sincronízalo
+              toSynchronize[i] = this.synchronizeData(toSynchronize[key][i], data[key][i]);
+            } else {
+              // Si no hay elemento en toSynchronize, añade el nuevo elemento
+              toSynchronize.push(this.maintainStructure(toSynchronize[key][0], data[key][i]));
+            }
+          }
+        }else if(typeof toSynchronize[key] == 'object' && typeof data[key] == 'object'){
+          toSynchronize[key] = this.synchronizeData(toSynchronize[key], data[key]);
+        }else{
+          if(toSynchronize[key] != data[key])
+            toSynchronize[key] = data[key];
+        }
+      }
+    }
+    return toSynchronize;
+  }
+
+  private maintainStructure(template:any, element:any):any {
+    if (Array.isArray(template) && Array.isArray(element)) {
+      // Si ambos son arrays, sincroniza recursivamente
+      return element.map((item:any, index:number) => this.maintainStructure(template[0], item));
+    } else if (typeof template === 'object' && typeof element === 'object') {
+      let result:any = {};
+      for (const key in template) {
+        if (element.hasOwnProperty(key)) {
+          result[key] = this.maintainStructure(template[key], element[key]);
+        }
+      }
+      return result;
+    } else {
+      // Si no son ni arrays ni objetos, devuelve el valor del elemento
+      return element;
+    }
+  }
 }

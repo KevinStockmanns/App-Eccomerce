@@ -40,8 +40,8 @@ export class ProductoService {
   activateProduct(id:number, query?:{all:boolean}){
     return this.http.patch(`${API_URL}/producto/activar/${id}${this.utils.getQuerysForPath(query)}`, null);
   }
-  updateProducto(id:number, body:any){
-    return this.http.put(`${API_URL}/producto/${id}`, body);
+  updateProducto(id:number, body:any):Observable<ResponseWrapper<Producto>>{
+    return this.http.put<ResponseWrapper<Producto>>(`${API_URL}/producto/${id}`, body);
   }
 
 

@@ -18,8 +18,9 @@ import { NotificationService } from '../../core/services/notification.service';
 import { Errors } from '../../core/models/response-wrapper.model';
 import { UtilsService } from '../../core/services/utils.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
-import { Version } from '../../core/models/producto.model';
+import { Producto, Version } from '../../core/models/producto.model';
 import { Subscription } from 'rxjs';
+import { updateItemInCache } from '../../core/interceptor/cache.interceptor';
 
 @Component({
   selector: 'app-create-product-page',
@@ -44,6 +45,7 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
   idIncrementer = 0;
   initValue: any | null = null;
   subscriptionVersiones: Subscription|null = null;
+  producto:Producto|null = null;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -69,6 +71,7 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
     });
 
     if (this.updatePage) {
+      this.producto = productoService.productoSelected;
       this.addVersion(this.productoService.productoSelected?.versiones);
       this.form.addControl(
         'estado',
@@ -211,16 +214,24 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
         if (JSON.stringify(this.initValue) != JSON.stringify(json)) {
           console.log('Hubo cambio');
           json = this.utils.getChanges(this.initValue, json, ['idVersion'], 'idVersion');
+          json = this.utils.deleteObjectEmpty(json);
           if (json.versiones)
             json.versiones = this.removeIfOnlyHas(json.versiones, 'idVersion');
-          json = this.utils.deleteObjectEmpty(json);
-          // json.versiones.forEach(el=>{
-            
-          // })
+          json.versiones.forEach((el:any)=>{
+            if(!el.hasOwnProperty('accion'))
+              el.accion = 'ACTUALIZAR';
+          })
+          
+          
+          console.log(json);
+          
           this.productoService.updateProducto(this.productoService.productoSelected?.id as number, json).subscribe({
             next: res=>{
               this.loading = false;
-              console.log("Se actualizo");
+              updateItemInCache(res.body, 'producto');
+              console.log(res.body);
+              
+              console.log("Se actualizó");
               
             },
             error: err=>{
@@ -268,7 +279,6 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
       }
     }
   }
-
   removeIfOnlyHas(versiones: any[], el: string) {
     return versiones.filter((ver) => {
       return !(Object.keys(ver).length === 1 && ver.hasOwnProperty(el));
