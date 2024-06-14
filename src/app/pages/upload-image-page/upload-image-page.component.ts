@@ -13,11 +13,12 @@ import { IMG_URL } from '../../core/constants';
 import { NotificationService } from '../../core/services/notification.service';
 import { Errors } from '../../core/models/response-wrapper.model';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { BackBtnComponent } from '../../components/back-btn/back-btn.component';
 
 @Component({
   selector: 'app-upload-image-page',
   standalone: true,
-  imports: [HeaderComponent, FontAwesomeModule, LoaderComponent, RouterModule],
+  imports: [BackBtnComponent, FontAwesomeModule, LoaderComponent, RouterModule],
   templateUrl: './upload-image-page.component.html',
   styleUrl: './upload-image-page.component.css',
 })
@@ -141,5 +142,10 @@ export class UploadImagePageComponent {
           }
         },
       });
+  }
+
+
+  oneToUpload(){
+    return this.producto.versiones.some(v=> v.imagen ==null);
   }
 }

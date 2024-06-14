@@ -1,6 +1,6 @@
 <section class="product-card" [style]="'view-transition-name: producto'+producto?.id+';'">
     <p class="product-title">{{producto?.nombre | titlecase}}</p>
-    <p><b>Estado:</b> {{producto?.estado ? 'Público' : 'Privado'}}</p>
+    <p [class.prodNoDisp]="!producto?.estado"><b>Estado:</b> {{producto?.estado ? 'Público' : 'Privado'}}</p>
     <div class="product-versions">
         <p class="version-title">Versiones</p>
         <div class="versions-container">
@@ -11,7 +11,7 @@
                     <p><b>En Stock:</b> {{ver.stock}}</p>
                     <p><b>Precio:</b> {{ver.precio | currency}} ARS</p>
                     <p><b>Precio Reventa:</b> {{ver.precioDescuento | currency}} ARS</p>
-                    <p class="version-disp"><b>Estado:</b> {{ver.estado ? 'Público' : 'Privado'}}</p>
+                    <p class="version-disp" ><b>Estado:</b> {{ver.estado ? 'Público' : 'Privado'}}</p>
                     <p><b>Tiene imagen:</b> {{ver.imagen ? 'SI' : 'NO'}}</p>
                 </div>
             }
@@ -21,7 +21,7 @@
         @if (loading) {
             <app-loader></app-loader>
         }@else {
-            @if (producto?.estado) { <button class="btn btn-simple red cursor">DESACTIVAR PRODUCTO</button> }
+            @if (producto?.estado) { <button class="btn btn-simple red cursor" (click)="onDesactivar()">DESACTIVAR PRODUCTO</button> }
             @if(canActivate) { <button class="btn btn-simple cursor" (click)="onActivar()">ACTIVAR PRODUCTO</button> }
             <button class="btn btn-simple cursor" (click)="actualizar()" routerLink="update">ACTUALIZAR PRODUCTO</button>
         }

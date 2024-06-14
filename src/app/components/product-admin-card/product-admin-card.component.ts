@@ -64,4 +64,27 @@ export class ProductAdminCardComponent implements OnChanges{
       }
     });
   }
+  onDesactivar(){
+    this.productoService.updateProducto(this.producto?.id as number, {estado:false}).subscribe({
+      next:res=>{
+        this.loading = false;
+        if(this.producto){
+          this.producto.estado = false;
+          this.cambioProducto.emit({accion: 'eliminar', elemento: this.producto});
+        }
+          
+        reubicarItemInCache('/producto?estado=true', '/producto?estado=false', this.producto);
+      },
+      error: err=>{
+        this.loading = false;
+        if(err.error?.errors){
+          err.error.errors.forEach((el:Errors)=>{
+            this.noti.notificate(el.error, {error:true});
+          })
+        }else{
+          this.noti.notificate('Ocurrio un error al activar el producto', {error:true})
+        }
+      }
+    })
+  }
 }

@@ -138,6 +138,9 @@
             @if (loading) {
                 <app-loader></app-loader>
             }@else {
+                @if (updatePage) {
+                    <button class="btn btn-simple cursor" (click)="redirectToImages('u')">CAMBIAR IMÁGEN</button>
+                }
                 <button class="btn btn-primary cursor" (click)="onSubmit()">{{updatePage ? 'ACTUALIZAR' : 'CREAR'}}</button>
             }
         </div>

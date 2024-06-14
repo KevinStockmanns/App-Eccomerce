@@ -86,7 +86,7 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
 
   }
   ngOnDestroy(): void {
-    if (this.updatePage) this.productoService.setProductoSelected(null);
+    // if (this.updatePage) this.productoService.setProductoSelected(null);
     if(this.subscriptionVersiones) this.subscriptionVersiones.unsubscribe();
   }
 
@@ -222,17 +222,22 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
               el.accion = 'ACTUALIZAR';
           })
           
+          console.log(this.productoService.productoSelected);
           
           console.log(json);
+          
           
           this.productoService.updateProducto(this.productoService.productoSelected?.id as number, json).subscribe({
             next: res=>{
               this.loading = false;
               updateItemInCache(res.body, 'producto');
-              console.log(res.body);
-              
-              console.log("Se actualizó");
-              
+              if(this.hasOneCreation(json.versiones || [])){
+                this.productoService.setProductoSelected(res.body);
+                this.redirectToImages('u');
+              }else{
+                this.notiService.notificate('Producto actualizado con éxito.', {time:3000});
+                this.router.navigate(['/productos']);
+              }
             },
             error: err=>{
               this.loading = false;
@@ -346,5 +351,21 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
 
   get productoId() {
     return this.productoService.productoSelected?.id;
+  }
+
+
+  redirectToImages(accion:string){
+    this.router.navigate(['/productos/versiones/images'], {
+      queryParams: { a: accion },
+    });
+  }
+  private hasOneCreation(versiones:any[]):boolean{
+    for (let i = 0; i < versiones.length; i++) {
+      const element = versiones[i];
+      if(element.hasOwnProperty('accion') && element['accion']=="AGREGAR")
+        return true;
+    }
+
+    return false;
   }
 }

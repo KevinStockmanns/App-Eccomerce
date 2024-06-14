@@ -19,7 +19,8 @@ export class ProductoService {
       size?:number,
       estado?:boolean,
       sort?:string,
-      sortBy?:string
+      sortBy?:string,
+      eliminados?:boolean
     }
   ): Observable<ResponseWrapper<BodyPagination<Producto>>>{
     return this.http.get<ResponseWrapper<BodyPagination<Producto>>>(`${API_URL}/producto${this.utils.getQuerysForPath(queryParams)}`);

@@ -118,5 +118,8 @@
     height: 4rem;
 }
 .create-footer{
-    justify-content: center;
+    display: grid;
+    justify-content: stretch;
+    align-items: center;
+    gap: .3rem;
 }
