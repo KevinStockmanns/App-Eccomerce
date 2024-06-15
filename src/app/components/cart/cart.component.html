@@ -16,7 +16,7 @@
             @for (prod of cart; track prod.id; let i = $index) {
                 @for (ver of prod.versiones; track ver.id; let j = $index) {
                     <div class="cart-item">
-                        <span class="item-index">{{getIndex(i, j)}}</span>
+                        <!-- <span class="item-index">{{getIndex(i, j)}}</span> -->
                         <div class="cart-item-info">
                             <span class="cart-item-name">{{prod.nombre}}: {{ver.nombre}}</span>
                             @if(ver.descripcion){ <span class="cart-item-desc">{{ver.descripcion}}</span> }
@@ -165,7 +165,12 @@
         </article>
     </div>
     <article class="cart-footer">
-        <div class="cart-precio">Total: {{totalPrecio | currency}} ARS</div>
+        @if (canShowPrice) {
+            <div class="cart-precio">
+                <span>Total: {{totalPrecio | currency}} ARS</span>
+                <span class="cart-precio-advert">El precio es estimativo. Se pueden aplicar cambios o descuentos.</span>
+            </div>
+        }
         <div class="cart-error" [class.show]="error.length>0">
             @for (err of error; track $index) {
                 <p>{{err}}</p>

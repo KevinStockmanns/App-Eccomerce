@@ -67,16 +67,18 @@
 }
 .cart-item{
     display: grid;
-    grid-template-columns: 1rem 1fr max-content;
+    grid-template-columns: 1fr max-content;
     gap: .5rem;
     align-items: center;
 }
-.item-index{
+/* .item-index{
     color: var(--textAlphaColor);
-}
+    font-size: 1.2rem;
+} */
 .cart-item-info{
     display: flex;
     flex-direction: column;
+    font-size: 1.2rem;
 }
 .cart-item-desc{
     font-size: .8rem;
@@ -86,6 +88,7 @@
     display: flex;
     gap: .5rem;
     align-items: center;
+    font-size: 1.4rem;
 }
 .add-delete{
     display: flex;
@@ -181,16 +184,15 @@ form{
     background-color: var(--bgCardColor);
     transition: var(--transitionFast);
     transform: scaleY(0);
-    transform-origin: bottom;
+    transform-origin: top;
 }
 .cart.open .cart-footer{
     display: grid;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
     min-height: var(--headerHeight);
-    height: 100%;
-    padding: .5rem 0;
+    height: 110px;
+    padding: .5rem 1rem;
     box-shadow: 0px 0 5px 0 var(--textAlphaColor);
     transform: scaleY(1);
 }
@@ -199,8 +201,14 @@ form{
     justify-content: center;
 }
 .cart-precio{
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-weight: bold;
+}
+.cart-precio-advert{
+    font-size: 80%;
+    font-weight: normal;
 }
 .cart-error{
     display: grid;
@@ -239,7 +247,7 @@ form{
     font-size: 1.2rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
     .cart{
         width: calc(100% - 2rem);
     }

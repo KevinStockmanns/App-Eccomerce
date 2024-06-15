@@ -1,5 +1,5 @@
 <app-header></app-header>
-<main class="main">
+<main class="main" [class.paddbot]="!isLogin()">
     <section class="products-content content">
         @if(isLogin()){
             <h1 class="title">¡Hola {{usuarioService.firstName}}!</h1>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnChanges, Signal, SimpleChanges, ViewChild } from '@angular/core';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { faCartShopping, faChevronUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -18,7 +18,7 @@ import { UbicacionService } from '../../core/services/ubicacion.service';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
+export class CartComponent{
   isLogin: Signal<boolean>;
   iconCart = faCartShopping;
   iconChevron = faChevronUp;
@@ -34,6 +34,7 @@ export class CartComponent {
   @ViewChild('cartComponent') cartElement: ElementRef|undefined;
   form: FormGroup;
   privincias: Provincia[] = [];
+  canShowPrice:boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -66,7 +67,17 @@ export class CartComponent {
       );
       this.totalPrecio = el.reduce((ant, act)=> ant + act.versiones.reduce((antVer, actVer)=> antVer + (actVer.cantidad * actVer.precio), 0), 0);
     });
+
+    this.form.valueChanges.subscribe({
+      next:form=>{
+        if(this.hasValue('correo') && this.hasValue('telefono') && !this.hasOneError('correo') && !this.hasOneError('telefono'))
+          this.canShowPrice = true;
+        else
+          this.canShowPrice = false;
+      }
+    })
   }
+
 
 
   onSubmit(){
