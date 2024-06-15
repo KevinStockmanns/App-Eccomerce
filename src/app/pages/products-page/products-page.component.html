@@ -44,6 +44,9 @@
             @if (loading) {
                 <app-loader size="4rem"></app-loader>
             }
+            @if (!loading && productos?.length==0) {
+                <p class="empty">No hay productos que mostrar.</p>
+            }
         </article>
     </section>
 </main>

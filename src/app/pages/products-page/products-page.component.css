@@ -17,6 +17,9 @@
 .product-cards app-loader{
     grid-column: 1 / -1;
 }
+.empty{
+    text-align: center;
+}
 
 @media screen and (min-width: 600px) {
     .product-cards{
