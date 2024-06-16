@@ -165,7 +165,7 @@
         </article>
     </div>
     <article class="cart-footer">
-        @if (canShowPrice) {
+        @if ((!isLogin() && canShowPrice) || isLogin()) {
             <div class="cart-precio">
                 <span>Total: {{totalPrecio | currency}} ARS</span>
                 <span class="cart-precio-advert">El precio es estimativo. Se pueden aplicar cambios o descuentos.</span>

@@ -20,10 +20,10 @@ export class CartPageComponent {
 
   cartHasItem:boolean = false;
   cartEmpty: boolean = false;
-  pedidoCancelado: Pedido[]|[] = [];
-  pedidoVendido: Pedido[]|[] = [];
-  pedidoConfirmado: Pedido[]|[] = [];
-  pedidoPendiente: Pedido[]|[] = [];
+  pedidoCancelado: Pedido[] = [];
+  pedidoVendido: Pedido[] = [];
+  pedidoConfirmado: Pedido[] = [];
+  pedidoPendiente: Pedido[] = [];
   isAdmin: Signal<boolean>
   loading:boolean = false;
 
@@ -62,9 +62,9 @@ export class CartPageComponent {
   }
 
 
-  onCambioEstado(event: any){
+  onCambioEstado(event: Pedido){
     let pedidoIndex:number = this.pedidoPendiente.findIndex(el=>el.id === event.id);
-    let pedidoACambiar:Pedido;
+    let pedidoACambiar:Pedido|null = null;
     let isIn = '';
     if(pedidoIndex !== -1){
       isIn = 'PENDIENTE';
@@ -81,47 +81,77 @@ export class CartPageComponent {
           pedidoACambiar = this.pedidoVendido[pedidoIndex];
         }else{
           pedidoIndex = this.pedidoCancelado.findIndex(el=>el.id === event.id);
-          isIn = 'CANCELADO';
-          pedidoACambiar = this.pedidoCancelado[pedidoIndex];
+          if(pedidoIndex!== -1){
+            isIn = 'CANCELADO';
+            pedidoACambiar = this.pedidoCancelado[pedidoIndex];
+          }else{
+            isIn = '';
+            pedidoACambiar = null;
+          }
         }
       }
     }
 
-    if(isIn === 'PENDIENTE'){
-      this.pedidoPendiente = this.pedidoPendiente.filter(el=> el.id !== pedidoACambiar.id);
+    if(isIn === 'PENDIENTE' && pedidoACambiar){
+      this.pedidoPendiente = this.pedidoPendiente.filter(el=> el.id !== pedidoACambiar?.id);
       if(event.estado === 'CANCELADO'){
         pedidoACambiar.estado = 'CANCELADO';
-        this.pedidoCancelado.push(pedidoACambiar as never);
+        this.pedidoCancelado.push(pedidoACambiar);
       }else if (event.estado === 'VENDIDO') {
         pedidoACambiar.estado = 'VENDIDO';
-        this.pedidoVendido.push(pedidoACambiar as never);
+        this.pedidoVendido.push(pedidoACambiar);
       }else if(event.estado === 'CONFIRMADO'){
         pedidoACambiar.estado === 'CONFIRMADO';
-        this.pedidoVendido.push(pedidoACambiar as never);
+        this.pedidoVendido.push(pedidoACambiar);
       }
-    }else if(isIn === 'CANCELADO'){
-      this.pedidoCancelado = this.pedidoCancelado.filter(el=> el.id !== pedidoACambiar.id);
+    }else if(isIn === 'CANCELADO' && pedidoACambiar){
+      this.pedidoCancelado = this.pedidoCancelado.filter(el=> el.id !== pedidoACambiar?.id);
       if(event.estado === 'PENDIENTE'){
         pedidoACambiar.estado = 'PENDIENTE';
-        this.pedidoPendiente.push(pedidoACambiar as never);
+        this.pedidoPendiente.push(pedidoACambiar);
       }else if (event.estado === 'VENDIDO') {
         pedidoACambiar.estado = 'VENDIDO';
-        this.pedidoVendido.push(pedidoACambiar as never);
+        this.pedidoVendido.push(pedidoACambiar);
       }else if(event.estado === 'CONFIRMADO'){
         pedidoACambiar.estado === 'CONFIRMADO';
-        this.pedidoVendido.push(pedidoACambiar as never);
+        this.pedidoVendido.push(pedidoACambiar);
       }
-    }else if(isIn === 'CONFIRMADO'){
-      this.pedidoConfirmado = this.pedidoConfirmado.filter(el=> el.id !== pedidoACambiar.id);
+    }else if(isIn === 'CONFIRMADO' && pedidoACambiar){
+      this.pedidoConfirmado = this.pedidoConfirmado.filter(el=> el.id !== pedidoACambiar?.id);
       if(event.estado === 'PENDIENTE'){
         pedidoACambiar.estado = 'PENDIENTE';
-        this.pedidoPendiente.push(pedidoACambiar as never);
+        this.pedidoPendiente.push(pedidoACambiar);
       }else if (event.estado === 'VENDIDO') {
         pedidoACambiar.estado = 'VENDIDO';
-        this.pedidoVendido.push(pedidoACambiar as never);
+        this.pedidoVendido.push(pedidoACambiar);
       }else if(event.estado === 'CANCELADO'){
         pedidoACambiar.estado === 'CANCELADO';
-        this.pedidoCancelado.push(pedidoACambiar as never);
+        this.pedidoCancelado.push(pedidoACambiar);
+      }
+    }else if(isIn === 'VENDIDO' && pedidoACambiar){
+      this.pedidoVendido = this.pedidoVendido.filter(el=> el.id !== pedidoACambiar?.id);
+      if(event.estado === 'PENDIENTE'){
+        pedidoACambiar.estado = 'PENDIENTE';
+        this.pedidoPendiente.push(pedidoACambiar);
+      }else if (event.estado === 'CONFIRMADO') {
+        pedidoACambiar.estado = 'CONFIRMADO';
+        this.pedidoConfirmado.push(pedidoACambiar);
+      }else if(event.estado === 'CANCELADO'){
+        pedidoACambiar.estado === 'CANCELADO';
+        this.pedidoCancelado.push(pedidoACambiar);
+      }
+    }
+
+
+    if(isIn == '' && !pedidoACambiar){
+      if(event.estado=='PENDIENTE'){
+        this.pedidoPendiente.push(event);
+      }else if(event.estado=='CONFIRMADO'){
+        this.pedidoConfirmado.push(event);
+      }else if(event.estado=='VENDIDO'){
+        this.pedidoVendido.push(event);
+      }else if(event.estado=='CANCELADO'){
+        this.pedidoCancelado.push(event);
       }
     }
   }

@@ -34,8 +34,8 @@ export class CartService {
   }
 
 
-  doPedido(body: any): Observable<any>{
-    return this.http.post(`${API_URL}/pedido`, body);
+  doPedido(body: any): Observable<ResponseWrapper<Pedido>>{
+    return this.http.post<ResponseWrapper<Pedido>>(`${API_URL}/pedido`, body);
   }
    addProducto(producto: Producto, idVersion: number){
     

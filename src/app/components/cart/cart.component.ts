@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnChanges, Signal, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnChanges, Output, Signal, SimpleChanges, ViewChild } from '@angular/core';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { faCartShopping, faChevronUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NotificationService } from '../../core/services/notification.service';
 import { Provincia } from '../../core/models/ubicacion.model';
 import { UbicacionService } from '../../core/services/ubicacion.service';
+import { Pedido } from '../../core/models/pedido.model';
 
 @Component({
   selector: 'app-cart',
@@ -35,6 +36,7 @@ export class CartComponent{
   form: FormGroup;
   privincias: Provincia[] = [];
   canShowPrice:boolean = false;
+  @Output() subir: EventEmitter<Pedido> = new EventEmitter();
 
   constructor(
     private usuarioService: UsuarioService,
@@ -97,8 +99,6 @@ export class CartComponent{
         if(json[prop]=== "")
           delete json[prop];
       }
-      console.log(json);
-      
       
       let versionesJson: any[]=[];
       if(json.mensaje == '') delete json.mensaje;
@@ -113,6 +113,8 @@ export class CartComponent{
           next: res=>{
             this.notification.notificate('Pedido realizado existosamente.', {time:5000})
             this.loading = false;
+            this.subir.emit(res.body);
+            this.cartService.resetCart();
           },
           error: err=>{
             console.log(err.error.errors[0].error );

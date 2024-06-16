@@ -8,6 +8,8 @@ main{
 main > section{
     display: grid;
     gap: .5rem;
+    max-height: 400px;
+    overflow: auto;
 }
 .pedidos{
     display: grid;
