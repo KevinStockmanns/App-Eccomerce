@@ -4,6 +4,8 @@ import { ProductsPageComponent } from './pages/products-page/products-page.compo
 import { loginGuard } from './core/guards/login.guard';
 import { adminsGuard } from './core/guards/admins.guard';
 import { notLoginGuard } from './core/guards/not-login.guard';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
     {
@@ -26,12 +28,12 @@ export const routes: Routes = [
         canActivate: [loginGuard, adminsGuard]
     },{
         path: 'login',
-        loadComponent: ()=> import('./pages/login/login.component').then(el=>el.LoginComponent),
+        component: LoginComponent,
         title: "Iniciar Sesión",
         canActivate: [notLoginGuard]
     },{
         path: 'signup',
-        loadComponent: ()=> import('./pages/signup/signup.component').then(el=> el.SignupComponent),
+        component: SignupComponent,
         title: "Registrarse",
         canActivate: [notLoginGuard]
     },{
