@@ -8,6 +8,7 @@
     @if(cartHasItem && !loading){
         <section class="mis-pedidos">
             <h2>Pedido Actual</h2>
+            <p>Termina de realizar tu pedido.</p>
             <app-cart (subir)="onCambioEstado($event)"></app-cart>
             <div class="line-separator"></div>
         </section>

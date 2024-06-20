@@ -8,8 +8,10 @@ main{
 main > section{
     display: grid;
     gap: .5rem;
-    max-height: 400px;
     overflow: auto;
+}
+main > section:not(.mis-pedidos){
+    max-height: 400px;
 }
 .pedidos{
     display: grid;
