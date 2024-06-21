@@ -56,12 +56,17 @@ export const routes: Routes = [
         canActivate: [loginGuard, adminsGuard]
     },{
         path: "settings",
-        loadComponent: ()=>import('./pages/settings-page/settings-page.component').then(el=>el.SettingsPageComponent),
+        loadComponent: ()=>import('./pages/settings/settings-page/settings-page.component').then(el=>el.SettingsPageComponent),
         title: 'Ajustes',
-        canActivate: [loginGuard]
+        canActivate: [loginGuard],
+        children: [{
+            path: 'account/change-pass',
+            title: 'Cambiar Clave',
+            loadComponent: ()=> import('./pages/settings/change-pass-page/change-pass-page.component').then(el=>el.ChangePassPageComponent)
+        }]
     },{
         path: '**',
         loadComponent: ()=> import('./pages/error-page/error-page.component').then(el=> el.ErrorPageComponent),
-        title: 'Error'
+        title: 'Error',
     }
 ];

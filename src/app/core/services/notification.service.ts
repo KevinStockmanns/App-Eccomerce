@@ -25,7 +25,7 @@ export class NotificationService {
       type: 'simple',
       title: '',
       error: false,
-      time: 10000,
+      time: 5000,
       message: message
     }
 
