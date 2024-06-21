@@ -48,7 +48,8 @@ export class UserNavComponent {
       '/productos/update',
       '/productos/create',
       '/productos/versiones/images',
-      '/cart/confirm'
+      '/cart/confirm',
+      "/settings"
     ]
     
     this.hidden = hiddenIn.find(el=> url.startsWith(el)) !== undefined;

@@ -73,7 +73,7 @@ export class UsuarioService {
     if (user?.rol === 'USUARIO') {
       this.router.navigate(['/productos']);
     } else if (user?.rol === 'ADMIN' || user?.rol === 'SUPERADMIN') {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/cart']);
     } else {
       this.router.navigate(['/productos']);
     }

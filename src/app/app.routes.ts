@@ -55,6 +55,11 @@ export const routes: Routes = [
         loadComponent: ()=> import('./pages/dashboard-page/dashboard-page.component').then(el=>el.DashboardPageComponent),
         canActivate: [loginGuard, adminsGuard]
     },{
+        path: "settings",
+        loadComponent: ()=>import('./pages/settings-page/settings-page.component').then(el=>el.SettingsPageComponent),
+        title: 'Ajustes',
+        canActivate: [loginGuard]
+    },{
         path: '**',
         loadComponent: ()=> import('./pages/error-page/error-page.component').then(el=> el.ErrorPageComponent),
         title: 'Error'

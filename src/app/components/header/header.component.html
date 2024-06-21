@@ -6,8 +6,6 @@
             <a routerLink="/productos">Productos</a>
             @if(!usuarioService.isLogin()){
                 <a routerLink="/login" class="btn btn-primary">Iniciar Sesión</a>
-            }@else {
-                <button (click)="onSalir()">Salir</button>
             }
         </nav>
     </div>

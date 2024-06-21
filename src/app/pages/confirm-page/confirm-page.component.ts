@@ -69,7 +69,7 @@ export class ConfirmPageComponent {
         updateItemInCache(res.body, 'pedido');
         this.location.back()
         this.loadingResponse = false;
-        this.notification.notificate('El pedido fue actualizado con éxito', {error:false});
+        this.notification.notificate('El pedido fue confirmado con éxito', {error:false});
       },
       error: err=>{
         this.loadingResponse = false;
