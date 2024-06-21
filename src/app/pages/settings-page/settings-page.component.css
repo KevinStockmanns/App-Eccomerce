@@ -13,6 +13,11 @@
     padding: 1rem;
     font-size: 105%;
 }
+.setting{
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
 .logout{
     font-weight: bold;
     color: var(--errorColor);
