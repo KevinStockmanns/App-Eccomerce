@@ -68,6 +68,10 @@ export class UsuarioService {
     this.cartService.resetCart();
   }
 
+  changePassword(body:any){
+    return this.http.post(`${API_URL}/usuario/clave`, body);
+  }
+
   private redirectTo() {
     const user = this._usuario();
     if (user?.rol === 'USUARIO') {
