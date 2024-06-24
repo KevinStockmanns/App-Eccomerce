@@ -1,0 +1,26 @@
+<back-btn></back-btn>
+<div class="content settings-container">
+    <section class="settings-nav" [class.open]="open">
+        <div class="settings-nav-header" (click)="toggleOpen()">
+            <p class="title">Ajustes</p>
+            <div class="open-settings">
+                <fa-icon [icon]="iconChevron"></fa-icon>
+            </div>
+        </div>
+        <div class="settings-nav-body">
+            <article class="setting">
+                <p class="subtitle">General</p>
+                <div>Tema Oscuro</div>
+            </article>
+            <article class="setting">
+                <p class="subtitle">Mi Cuenta</p>
+                <div class="edit-account cursor">Editar información de perfil</div>
+                <div class="change-pass cursor" routerLink="account/change-pass" style="view-transition-name: setting-change-pass;">Cambiar Clave</div>
+                <div class="logout cursor" (click)="onLogout()">Cerrar Sesión</div>
+            </article>
+        </div>
+    </section>
+    <main class="main">
+        <router-outlet></router-outlet>
+    </main>
+</div>

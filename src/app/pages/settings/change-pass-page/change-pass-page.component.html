@@ -1,0 +1,74 @@
+<section class="change-pass" >
+    <form [formGroup]="form">
+        <h1 class="title">Cambiar Clave</h1>
+        <div class="form-div" [class.withValue]="hasValue('claveOriginal')" [class.error]="hasOneError('claveOriginal')">
+            <div class="form-div-input">
+                <input type="password" formControlName="claveOriginal">
+                <label>Clave Actual</label>
+            </div>
+            @if (hasError('claveOriginal', 'required')) {
+                <p class="form-div-error">La clave es requerida.</p>
+            }
+            @if (hasError('claveOriginal', 'pattern')) {
+                <p class="form-div-error">La clave solo acepta números, letras y caracteres especiales (-, _).</p>
+            }
+            @if (hasError('claveOriginal', 'minlength')) {
+                <p class="form-div-error">La clave debe tener al menos {{getError('claveOriginal', 'minlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('claveOriginal', 'maxlenght')) {
+                <p class="form-div-error">La clave puede tener hasta {{getError('claveOriginal', 'maxlength').requiredLength}} caracteres.</p>
+            }
+        </div>
+        <div class="form-div" [class.withValue]="hasValue('claveNueva')" [class.error]="hasOneError('claveNueva')">
+            <div class="form-div-input">
+                <input type="password" formControlName="claveNueva">
+                <label>Clave Nueva</label>
+            </div>
+            @if (hasError('claveNueva', 'required')) {
+                <p class="form-div-error">La clave es requerida.</p>
+            }
+            @if (hasError('claveNueva', 'pattern')) {
+                <p class="form-div-error">La clave solo acepta números, letras y caracteres especiales (-, _).</p>
+            }
+            @if (hasError('claveNueva', 'minlength')) {
+                <p class="form-div-error">La clave debe tener al menos {{getError('claveNueva', 'minlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('claveNueva', 'maxlength')) {
+                <p class="form-div-error">La clave puede tener hasta {{getError('claveNueva', 'maxlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('claveNueva', 'notRepeatClave')) {
+                <p class="form-div-error">La clave no debe ser igual a la original.</p>
+            }
+        </div>
+        <div class="form-div" [class.withValue]="hasValue('claveNueva2')" [class.error]="hasOneError('claveNueva2')">
+            <div class="form-div-input">
+                <input type="password" formControlName="claveNueva2">
+                <label>Repetir Clave</label>
+            </div>
+            @if (hasError('claveNueva2', 'required')) {
+                <p class="form-div-error">La clave es requerida.</p>
+            }
+            @if (hasError('claveNueva2', 'pattern')) {
+                <p class="form-div-error">La clave solo acepta números, letras y caracteres especiales (-, _).</p>
+            }
+            @if (hasError('claveNueva2', 'minlength')) {
+                <p class="form-div-error">La clave debe tener al menos {{getError('claveNueva2', 'minlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('claveNueva2', 'maxlength')) {
+                <p class="form-div-error">La clave puede tener hasta {{getError('claveNueva2', 'maxlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('claveNueva2', 'repeatClave')) {
+                <p class="form-div-error">La clave debe ser igual a la nueva.</p>
+            }
+        </div>
+
+        <div class="form-actions">
+            @if (loading) {
+                <app-loader></app-loader>
+            }@else {
+                <button class="btn btn-simple red cursor" (click)="onCancelar()">CANCELAR</button>
+                <button class="btn btn-primary cursor" (click)="onSubmit()">CAMBIAR</button>
+            }
+        </div>
+    </form>
+</section>

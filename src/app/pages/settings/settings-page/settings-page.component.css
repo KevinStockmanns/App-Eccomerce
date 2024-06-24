@@ -1,0 +1,98 @@
+.settings-container{
+    display: grid;
+    gap: 1rem;
+}
+.settings-nav{
+    padding: 1rem .5rem;
+    width: 100%;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgCardColor);
+    user-select: none;
+}
+.settings-nav-header{
+    position: relative;
+    height: 2rem;
+}
+.title{
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+    transform: translate(0%, -50%);
+    color: var(--textColor);
+    transition: var(--transitionFast);
+}
+.settings-nav.open .title{
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.open-settings{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    font-size: 1.5rem;
+    transform: translateY(-50%);
+    transition: var(--transitionFast);
+}
+.settings-nav.open .open-settings{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.settings-nav-body{
+    height: 0;
+    overflow: auto;
+    transition: var(--transitionFast);
+}
+.settings-nav.open .settings-nav-body{
+    height: calc(100vh - var(--headerHeight) - 1rem - 2rem - 2rem);
+}
+.subtitle{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.setting{
+    display: flex;
+    flex-direction: column;
+}
+.setting h2{
+    font-size: 1.2rem;
+}
+.setting > div:not(.line-separator){
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    padding: .5rem;
+}
+.logout{
+    font-weight: bold;
+    color: var(--errorColor);
+}
+.main{
+    padding: 1rem;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgCardColor);
+    min-height: calc(100vh - var(--headerHeight) - 1rem - 2rem - 2rem - 1rem);
+}
+
+@media screen and (min-width:700px) {
+    .settings-container{
+        grid-template-columns: 260px 1fr;
+    }
+    .settings-nav{
+        max-width: 260px;
+    }
+    .settings-nav-body{
+        height: calc(100vh - var(--headerHeight) - 1rem - 2rem - 2rem);
+    }
+    .title{
+       left: 50%;
+       transform: translate(-50%, -50%); 
+    }
+    .open-settings{
+        display: none;
+    }
+}

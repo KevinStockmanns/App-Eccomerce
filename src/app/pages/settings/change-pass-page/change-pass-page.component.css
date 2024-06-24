@@ -1,0 +1,37 @@
+.change-pass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+.title{
+    text-align: center;
+}
+form{
+    padding: 1.5rem 1rem 1rem;
+    width: 100%;
+    max-width: 400px;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgColor);
+}
+form input:focus ~ label,
+form .form-div.withValue label{
+    background-color: var(--bgColor) ;
+}
+.form-actions{
+    display: grid;
+    gap: .5rem;
+}
+
+@media screen and (min-width:500px) {
+    .title{
+        text-align: center;
+        justify-self: center;
+    }
+    form{
+        width: 100%;
+        align-self: center;
+        max-width: 400px;
+    }
+}
