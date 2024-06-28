@@ -50,12 +50,12 @@ export class NotificationService {
           this.timeout = this.timeout.filter(el=> el.message != message) as any;
           this.notifcationList = this.notifcationList.filter(el=> el.message !== message) as any;
           this._notifications.next(this.notifcationList);
-          console.log("DEBERIA CERRARSE");
+          // console.log("DEBERIA CERRARSE");
           
         }, defOptions.time)
       } as never)
     }
-    console.log(this.timeout);
+    // console.log(this.timeout);
     
   }
 

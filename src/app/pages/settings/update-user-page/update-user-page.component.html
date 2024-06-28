@@ -1,0 +1,90 @@
+<section class="update-user">
+    <form [formGroup]="form">
+        <h1 class="title">Actualizar Perfil</h1>
+        <div class="form-div" [class.withValue]="hasValue('nombre')" [class.error]="hasOneError('nombre')">
+            <div class="form-div-input">
+                <input type="text" formControlName="nombre">
+                <label>Nombre</label>
+            </div>
+            @if (hasError('nombre', 'required')) {
+                <p class="form-div-error">El nombre es requerido.</p>
+            }
+            @if (hasError('nombre', 'pattern')) {
+                <p class="form-div-error">El nombre solo acepta letras.</p>
+            }
+            @if (hasError('nombre', 'minlength')) {
+                <p class="form-div-error">El nombre debe tener al menos {{getError('nombre', 'minlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('nombre', 'maxlength')) {
+                <p class="form-div-error">El nombre debe tener hasta {{getError('nombre', 'maxlength').requiredLength}} caracteres.</p>
+            }
+        </div>
+
+        <div class="form-div" [class.withValue]="hasValue('apellido')" [class.error]="hasOneError('apellido')">
+            <div class="form-div-input">
+                <input type="text" formControlName="apellido">
+                <label>Apellido</label>
+            </div>
+            @if (hasError('apellido', 'required')) {
+                <p class="form-div-error">El apellido es requerido.</p>
+            }
+            @if (hasError('apellido', 'pattern')) {
+                <p class="form-div-error">El apellido solo acepta letras.</p>
+            }
+            @if (hasError('apellido', 'minlength')) {
+                <p class="form-div-error">El apellido debe tener al menos {{getError('apellido', 'minlength').requiredLength}} caracteres.</p>
+            }
+            @if (hasError('apellido', 'maxlength')) {
+                <p class="form-div-error">El apellido debe tener hasta {{getError('nombre', 'maxlength').requiredLength}} caracteres.</p>
+            }
+        </div>
+
+        <div class="form-div" [class.withValue]="hasValue('correo')" [class.error]="hasOneError('correo')">
+            <div class="form-div-input">
+                <input type="email" formControlName="correo">
+                <label>Correo</label>
+            </div>
+            @if (hasError('correo', 'required')) {
+                <p class="form-div-error">El correo es requerido.</p>
+            }
+            @if (hasError('correo', 'email')) {
+                <p class="form-div-error">El correo es inválido.</p>
+            }
+        </div>
+
+        <div class="form-div" [class.withValue]="hasValue('telefono')" [class.error]="hasOneError('telefono')">
+            <div class="form-div-input">
+                <input type="tel" formControlName="telefono">
+                <label>Telefono</label>
+            </div>
+            @if (hasError('telefono', 'required')) {
+                <p class="form-div-error">El telefono es requerido.</p>
+            }
+            @if (hasError('telefono', 'pattern')) {
+                <p class="form-div-error">El formato del telefono es +00 0000 000000.</p>
+            }
+        </div>
+
+        <div class="form-div" [class.withValue]="hasValue('fechaNacimiento')" [class.error]="hasOneError('fechaNacimiento')">
+            <div class="form-div-input">
+                <input type="date" formControlName="fechaNacimiento">
+                <label>Fecha de Nacimiento</label>
+            </div>
+            @if (hasError('fechaNacimiento', 'required')) {
+                <p class="form-div-error">La fecha de nacimiento es requerida.</p>
+            }
+            @if (hasError('fechaNacimiento', 'underage')) {
+                <p class="form-div-error">Debes tener al menos {{getError('fechaNacimiento', 'underage').requiredAge}} años.</p>
+            }
+
+            <div class="form-actions">
+                @if (!loading) {
+                    <button class="btn btn-simple red cursor" (click)="onCancelar()">CANCELAR</button>
+                    <button class="btn btn-primary cursor" (click)="onSubmit()">ACTUALIZAR</button>
+                }@else {
+                    <app-loader></app-loader>
+                }
+            </div>
+        </div>
+    </form>
+</section>

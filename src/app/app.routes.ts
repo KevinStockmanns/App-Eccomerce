@@ -60,6 +60,10 @@ export const routes: Routes = [
         title: 'Ajustes',
         canActivate: [loginGuard],
         children: [{
+            path: 'account/update',
+            title: 'Actualizar Perfil',
+            loadComponent: ()=> import('./pages/settings/update-user-page/update-user-page.component').then(el=>el.UpdateUserPageComponent)
+        },{
             path: 'account/change-pass',
             title: 'Cambiar Clave',
             loadComponent: ()=> import('./pages/settings/change-pass-page/change-pass-page.component').then(el=>el.ChangePassPageComponent)

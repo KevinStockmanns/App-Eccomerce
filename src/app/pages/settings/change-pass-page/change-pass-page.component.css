@@ -13,11 +13,6 @@ form{
     width: 100%;
     max-width: 400px;
     border-radius: var(--borderrMid);
-    background-color: var(--bgColor);
-}
-form input:focus ~ label,
-form .form-div.withValue label{
-    background-color: var(--bgColor) ;
 }
 .form-actions{
     display: grid;

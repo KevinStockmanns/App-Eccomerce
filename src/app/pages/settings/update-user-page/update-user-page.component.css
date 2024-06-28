@@ -1,0 +1,31 @@
+.update-user{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+form{
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+}
+.title{
+    justify-self: center;
+    text-align: center;
+}
+
+.form-actions{
+    display: grid;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+.form-actions > *:not(button){
+    grid-column: 1 / -1;
+}
+
+@media screen and (min-width:400px) {
+    .form-actions{
+        grid-template-columns: 1fr 1fr;
+    }
+}

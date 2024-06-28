@@ -71,6 +71,9 @@ export class UsuarioService {
   changePassword(body:any){
     return this.http.post(`${API_URL}/usuario/clave`, body);
   }
+  updateUser(idUsuario:number, body:any){
+    return this.http.put(`${API_URL}/usuario/${idUsuario}`, body);
+  }
 
   private redirectTo() {
     const user = this._usuario();
@@ -88,6 +91,17 @@ export class UsuarioService {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
+  setUsuarioSelected(user:Usuario){
+    localStorage.setItem('userSelected', JSON.stringify(user));
+  }
+
+  get usuarioSelected(): Usuario|null{
+    let userSelected = localStorage.getItem('userSelected');
+    if(!userSelected)
+      return null;
+
+    return JSON.parse(userSelected) as Usuario;
+  }
   get usuario(): Signal<Usuario | null> {
     if (!this._usuario()) {
       const userInfo = localStorage.getItem('user');
