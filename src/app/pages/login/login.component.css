@@ -12,6 +12,7 @@ main > section{
     padding: 1rem;
 }
 .login-content{
+    position: relative;
     display: grid;
     gap: .5rem;
     border-radius: 0 0 var(--borderrHigh) var(--borderrHigh);
@@ -123,6 +124,14 @@ button[type="submit"]:disabled{
     background-color: var(--mainColorBack);
 }
 
+.forget-pass{
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: var(--mainColor);
+    text-decoration: underline;
+}
+
 @media screen and (min-width: 600px) {
     main{
         display: grid;
@@ -141,6 +150,12 @@ button[type="submit"]:disabled{
     }
     .login-section{
         padding: 0;
+    }
+
+    .forget-pass{
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 /* @media screen and (min-width:800px) {

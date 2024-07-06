@@ -37,6 +37,11 @@ export const routes: Routes = [
         title: "Registrarse",
         canActivate: [notLoginGuard]
     },{
+        path: 'auth/forget-pass',
+        loadComponent: ()=> import('./pages/login/forget-password-page/forget-password-page.component').then(el=>el.ForgetPasswordPageComponent),
+        title: "Recuperar Clave",
+        canActivate: [notLoginGuard]
+    },{
         path: 'cart', 
         loadComponent: ()=> import('./pages/cart-page/cart-page.component').then(el=> el.CartPageComponent),
         title: "Pedidos",
@@ -71,6 +76,6 @@ export const routes: Routes = [
     },{
         path: '**',
         loadComponent: ()=> import('./pages/error-page/error-page.component').then(el=> el.ErrorPageComponent),
-        title: 'Error',
+        title: 'Error'
     }
 ];

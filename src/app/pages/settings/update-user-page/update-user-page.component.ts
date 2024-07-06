@@ -77,18 +77,23 @@ export class UpdateUserPageComponent {
     orginalUsuario.fechaNacimiento = this.toIsoString(new Date(this.usuario()?.fechaNacimiento as string));
     let json = this.utils.getChanges(orginalUsuario, this.form.value);
     this.form.markAllAsTouched();
+    console.log(json);
     
     if(this.form.valid){
       if(JSON.stringify(json) !== "{}"){
         this.loading = true;
         this.usuarioService.updateUser(this.usuario()?.id as number, json).subscribe({
-          next: ()=>{
+          next: (res)=>{
+            console.log(res);
+            
             this.noti.notificate('Información del perfil actualizada con éxito');
             for(const key in json){
               if(orginalUsuario.hasOwnProperty(key))
                 orginalUsuario[key] = json[key];
             }
             this.usuarioService.setUsuario(orginalUsuario as Usuario);
+            if(res)
+              this.usuarioService.setToken(res.body.token);
             this.location.back();
             
           },

@@ -71,8 +71,11 @@ export class UsuarioService {
   changePassword(body:any){
     return this.http.post(`${API_URL}/usuario/clave`, body);
   }
-  updateUser(idUsuario:number, body:any){
-    return this.http.put(`${API_URL}/usuario/${idUsuario}`, body);
+  updateUser(idUsuario:number, body:any):Observable<ResponseWrapper<Token>>{
+    return this.http.put<ResponseWrapper<Token>>(`${API_URL}/usuario/${idUsuario}`, body);
+  }
+  forgetPassword(body:any){
+    return this.http.post(`${API_URL}/usuario/forget-pass`, body);
   }
 
   private redirectTo() {
@@ -112,6 +115,10 @@ export class UsuarioService {
     return this._usuario.asReadonly();
   }
 
+  setToken(token:string){
+    localStorage.setItem('userToken', token);
+
+  }
   get token() {
     return localStorage.getItem('userToken');
   }

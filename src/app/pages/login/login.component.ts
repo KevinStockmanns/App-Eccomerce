@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { UsuarioService } from '../../core/services/usuario.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { VentajasUsuarioComponent } from '../../components/ventajas-usuario/ventajas-usuario.component';
 import { BackBtnComponent } from '../../components/back-btn/back-btn.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, VentajasUsuarioComponent, BackBtnComponent],
+  imports: [ReactiveFormsModule, VentajasUsuarioComponent, BackBtnComponent, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
