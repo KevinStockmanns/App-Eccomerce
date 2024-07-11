@@ -45,7 +45,11 @@ export const routes: Routes = [
         path: 'cart', 
         loadComponent: ()=> import('./pages/cart-page/cart-page.component').then(el=> el.CartPageComponent),
         title: "Pedidos",
-        canActivate: [loginGuard]
+        canActivate: [loginGuard],
+        children: [{
+            path: ':estado',
+            loadComponent: ()=>import('./pages/cart-page/cart-content/cart-content.component').then(el=>el.CartContentComponent)
+        }]
     },{
         path: 'cart/update',
         loadComponent: ()=> import('./pages/update-page/update-page.component').then(el=> el.UpdatePageComponent),

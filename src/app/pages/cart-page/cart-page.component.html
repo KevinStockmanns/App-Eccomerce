@@ -3,6 +3,10 @@
     <h1 class="title">{{isAdmin() ? 'Pedidos' : 'Mis Pedidos'}}</h1>
     @if(!cartEmpty){ 
         <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y comprados</p>
+        <button class="btn btn-simple cursor" routerLink="pendiente">Pendientes</button>
+        <button class="btn btn-simple cursor" routerLink="confirmado">Confirmados</button>
+        <button class="btn btn-simple cursor" routerLink="cancelado">Cancelados</button>
+        <button class="btn btn-simple cursor" routerLink="vendido">Vendidos</button>
      }
     <div class="line-separator"></div>
     @if(cartHasItem && !loading){
@@ -16,7 +20,7 @@
     @if (loading) {
         <app-loader size="3.5rem"></app-loader>
     }
-    @if(pedidoPendiente.length > 0){
+    <!-- @if(pedidoPendiente.length > 0){
         <section class="pedidos-pendientes">
             <h2>Pedidos Pendientes</h2>
             <p>Estos son los pedidos que aún no han sido confirmados{{!isAdmin() ? ' por el vendedor' : ''}} y estan en la espera de su confirmación</p>
@@ -60,7 +64,7 @@
             </div>
         </section>
         <div class="line-separator"></div>
-    }
+    } -->
 
     @if(cartEmpty && !loading){
         <p class="cart-empty">Aún no se han registrado pedidos. <a routerLink="/productos">Ir a la tienda</a></p>
