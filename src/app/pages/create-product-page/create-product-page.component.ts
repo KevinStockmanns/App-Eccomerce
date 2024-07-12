@@ -57,6 +57,9 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
   ) {
     this.updatePage =
       activatedRoute.snapshot.paramMap.get('action') == 'update';
+
+    if(!this.updatePage)
+      productoService.setProductoSelected(null);
     this.form = formBuilder.group({
       nombre: [
         productoService.productoSelected?.nombre || '',
