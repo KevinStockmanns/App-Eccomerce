@@ -1,5 +1,7 @@
 main{
     display: grid;
+    gap: .5rem;
+    display: grid;
     padding: 1rem;
 }
 .line-separator{
@@ -12,6 +14,11 @@ main > section{
 }
 main > section:not(.mis-pedidos){
     max-height: 400px;
+}
+.pedidos-buttons{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 160px);
+    gap: .5rem;
 }
 .pedidos{
     display: grid;

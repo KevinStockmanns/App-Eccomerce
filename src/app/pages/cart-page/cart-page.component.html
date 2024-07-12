@@ -2,11 +2,13 @@
 <main class="main content paddbot">
     <h1 class="title">{{isAdmin() ? 'Pedidos' : 'Mis Pedidos'}}</h1>
     <!-- @if(!cartEmpty){  -->
-        <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y comprados</p>
-        <button class="btn btn-simple cursor" routerLink="pendiente">Pendientes</button>
-        <button class="btn btn-simple cursor" routerLink="confirmado">Confirmados</button>
-        <button class="btn btn-simple cursor" routerLink="cancelado">Cancelados</button>
-        <button class="btn btn-simple cursor" routerLink="vendido">Vendidos</button>
+        <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y {{isAdmin() ? 'vendidos ' : 'comprados'}}</p>
+        <div class="pedidos-buttons">
+            <button class="btn btn-circle cursor" routerLink="pendiente" routerLinkActive="active">Pendientes</button>
+            <button class="btn btn-circle cursor" routerLink="cancelado" routerLinkActive="active">Cancelados</button>
+            <button class="btn btn-circle cursor" routerLink="confirmado" routerLinkActive="active">Confirmados</button>
+            <button class="btn btn-circle cursor" routerLink="vendido" routerLinkActive="active">{{isAdmin() ? 'Vendidos' : 'Comprados'}}</button>
+        </div>
      <!-- } -->
     <div class="line-separator"></div>
     @if(cartHasItem && !loading){
