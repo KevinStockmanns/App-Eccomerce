@@ -119,17 +119,12 @@ main.paddbot{
 }
 .btn-circle{
     background-color: transparent;
-    border: 2px solid var(--mainColor);
+    border: 2px solid var(--textColor);
     border-radius: 2rem;
 }
-.btn-circle:hover{
-    background-color: var(--mainLowAlphaColor);
-}
-.btn-circle.active{
-    background-color: var(--mainColor);
-    border-color: var(--bgCardColor);
-    color: var(--bgCardColor);
-}
+
+
+
 .content{
     padding: 0 1rem;
     width: 100%;
