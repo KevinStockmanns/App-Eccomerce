@@ -17,7 +17,7 @@ main > section:not(.mis-pedidos){
 }
 .pedidos-buttons{
     display: grid;
-    grid-template-columns: repeat(auto-fill, 160px);
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: .5rem;
 }
 .pedidos{
