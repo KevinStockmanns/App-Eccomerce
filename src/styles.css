@@ -122,6 +122,11 @@ main.paddbot{
     border: 2px solid var(--textColor);
     border-radius: 2rem;
 }
+.btn-circle.active{
+    background-color: var(--textColor);
+    border-color: var(--bgCardColor);
+    color: var(--bgCardColor);
+}
 
 
 
