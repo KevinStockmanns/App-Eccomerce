@@ -30,7 +30,7 @@ export class ForgetPasswordPageComponent {
     this.form = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern('(\\+\\d{2,4})?\\s?\\d{3,4}\\s\\d{6,8}')]],
-      fechaNacimiento: [(new Date()).toISOString().split('T')[0], [Validators.required]]
+      fechaNacimiento: [(new Date(Date.now() - (1000*60*60*24*365*18))).toISOString().split('T')[0], [Validators.required]]
     })
   }
 
