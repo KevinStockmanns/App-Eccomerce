@@ -64,22 +64,22 @@
                 </tbody>
             </table>
         </div>
-        <div class="pedido-actions" [class.hasLoader]="lodaingResponse">
-            @if(lodaingResponse){
+        <div class="pedido-actions" [class.hasLoader]="loadingResponse">
+            @if(loadingResponse){
                 <app-loader></app-loader>
             }@else {
                 @if (isAdmin()) {
                     @if (pedido?.estado != 'CANCELADO') {
                         <button class="btn btn-simple cursor red" (click)="cambioEstadoFn('CANCELADO')">CANCELAR PEDIDO</button>
                     }
-                    <button class="btn btn-simple cursor" routerLink="update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
+                    <button class="btn btn-simple cursor" routerLink="/pedido/update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
                     @if (pedido?.estado === 'PENDIENTE' || pedido?.estado === 'CANCELADO') {
-                        <button class="btn btn-primary cursor" (click)="confirmPedido()" routerLink="confirm">CONFIRMAR</button>
+                        <button class="btn btn-primary cursor" (click)="confirmPedido()" routerLink="/pedido/confirm">CONFIRMAR</button>
                     }
                 }@else {
                     @if (pedido?.estado === 'PENDIENTE') {
                         <button class="btn btn-simple cursor red" (click)="cambioEstadoFn('CANCELADO')">CANCELAR PEDIDO</button>
-                        <button class="btn btn-simple cursor" routerLink="update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
+                        <button class="btn btn-simple cursor" routerLink="/pedido/update" (click)="onUpdate()">ACTUALIZAR PEDIDO</button>
                     }
                     @if (pedido?.estado === 'CANCELADO') {
                         <button class="btn btn-simple cursor" (click)="cambioEstadoFn('PENDIENTE')">REACTIVAR PEDIDO</button>

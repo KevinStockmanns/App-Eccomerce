@@ -51,11 +51,11 @@ export const routes: Routes = [
             loadComponent: ()=>import('./pages/cart-page/cart-content/cart-content.component').then(el=>el.CartContentComponent)
         }]
     },{
-        path: 'cart/update',
+        path: 'pedido/update',
         loadComponent: ()=> import('./pages/update-page/update-page.component').then(el=> el.UpdatePageComponent),
         canActivate: [loginGuard]
     },{
-        path: 'cart/confirm',
+        path: 'pedido/confirm',
         loadComponent: ()=> import('./pages/confirm-page/confirm-page.component').then(el=>el.ConfirmPageComponent),
         title: 'Confirmar Pedido',
         canActivate: [loginGuard, adminsGuard]

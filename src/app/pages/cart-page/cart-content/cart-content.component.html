@@ -3,7 +3,7 @@
         <app-loader></app-loader>
     }@else {
         @for (pedido of pedidos; track pedido.id) {
-            <pedido-item [pedido]="pedido"></pedido-item>
+            <pedido-item [pedido]="pedido" (cambioPedido)="onCambioPedido($event)"></pedido-item>
         }@empty {
             <p>No tienes ningun pedido '{{inSite}}'</p>
         }

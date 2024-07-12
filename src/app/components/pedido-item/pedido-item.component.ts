@@ -12,6 +12,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { CartService } from '../../core/services/cart.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { RouterModule } from '@angular/router';
+import { reubicarItemInCache } from '../../core/interceptor/cache.interceptor';
 
 @Component({
   selector: 'pedido-item',
@@ -22,13 +23,13 @@ import { RouterModule } from '@angular/router';
 })
 export class PedidoItemComponent {
   @Input() pedido: Pedido|undefined;
-  @Output() cambioEstado = new EventEmitter<any>();
+  @Output() cambioPedido = new EventEmitter<Pedido>();
   @ViewChild('pedidoItem') element: ElementRef|undefined;
   iconChevron = faChevronDown;
   iconPedido = faShoppingCart;
   open:boolean = false;
   detailsOpen:boolean = false;
-  lodaingResponse:boolean = false;
+  loadingResponse:boolean = false;
   total: number = 0;
   usuario: Signal<Usuario|null>;
   isAdmin: Signal<boolean>
@@ -78,30 +79,35 @@ export class PedidoItemComponent {
     this.modal.openModal({title: title, desc: msg, motivate: motivate}).subscribe({
       next: res=> {
         if(res){
-          this.lodaingResponse = true;
+          this.loadingResponse = true;
           if(estado === 'CANCELADO'){
             this.cartService.cancelPedido(this.pedido?.id as number).subscribe({
               next: res=> {
-                this.cambioEstado.emit({id: this.pedido?.id, estado: 'CANCELADO'})
-                this.modal.notificate('Pedido cancelado exitosamente.', {error:false})
-                this.lodaingResponse = false;
+                this.loadingResponse = false;
+                reubicarItemInCache(`/pedido?estado=${this.pedido?.estado.toLowerCase()}`, `/pedido?estado=${estado.toLowerCase()}`, this.pedido);
+                if(this.pedido)
+                  this.pedido.estado = estado;
+                this.cambioPedido.emit(this.pedido);
               },
               error: err=>{
                 let msg = err.error.errors[0].error || 'Ocurrio un error al cancelar el pedido';
                 this.modal.notificate(msg, {error:true, time:0});
-                this.lodaingResponse = false;
+                this.loadingResponse = false;
               }
             })
           }else if(estado === 'PENDIENTE'){
             this.cartService.reactivarPedido(this.pedido?.id as number).subscribe({
               next: res=>{
                 this.modal.notificate('El pedido se reactivo con éxito', {});
-                this.cambioEstado.emit({id: this.pedido?.id, estado: estado});
-                this.lodaingResponse = false
+                reubicarItemInCache(`/pedido?estado=${this.pedido?.estado.toLowerCase()}`, `/pedido?estado=${estado.toLowerCase()}`, this.pedido);
+                if(this.pedido)
+                  this.pedido.estado = estado;
+                this.loadingResponse = false
+                this.cambioPedido.emit(this.pedido);
               },
               error: err=>{
                 this.modal.notificate('No se pudo reactivar el pedido', {error:true});
-                this.lodaingResponse = false;
+                this.loadingResponse = false;
               }
             });
           }

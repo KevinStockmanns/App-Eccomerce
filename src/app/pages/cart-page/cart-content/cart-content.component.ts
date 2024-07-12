@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pedido } from '../../../core/models/pedido.model';
 import { CartService } from '../../../core/services/cart.service';
@@ -14,7 +14,7 @@ import { Errors } from '../../../core/models/response-wrapper.model';
   templateUrl: './cart-content.component.html',
   styleUrl: './cart-content.component.css'
 })
-export class CartContentComponent {
+export class CartContentComponent{
 
   currentPage:number=0;
   inSite:string = '';
@@ -52,5 +52,12 @@ export class CartContentComponent {
         });
       }
     })
+  }
+
+
+  onCambioPedido(pedido:Pedido){
+    if(this.pedidos.find(el=>el.id==pedido.id)){
+      this.pedidos = this.pedidos.filter(el=>el.estado.toUpperCase() == this.inSite.toUpperCase());
+    }
   }
 }
