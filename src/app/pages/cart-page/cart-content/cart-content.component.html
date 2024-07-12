@@ -1,1 +1,11 @@
-<p>cart-content works!</p>
+<section class="cart-content">
+    @if (loading) {
+        <app-loader></app-loader>
+    }@else {
+        @for (pedido of pedidos; track pedido.id) {
+            <pedido-item [pedido]="pedido"></pedido-item>
+        }@empty {
+            <p>No tienes ningun pedido '{{inSite}}'</p>
+        }
+    }
+</section>

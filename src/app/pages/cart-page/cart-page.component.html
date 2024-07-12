@@ -1,13 +1,13 @@
 <app-header></app-header>
 <main class="main content paddbot">
     <h1 class="title">{{isAdmin() ? 'Pedidos' : 'Mis Pedidos'}}</h1>
-    @if(!cartEmpty){ 
+    <!-- @if(!cartEmpty){  -->
         <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y comprados</p>
         <button class="btn btn-simple cursor" routerLink="pendiente">Pendientes</button>
         <button class="btn btn-simple cursor" routerLink="confirmado">Confirmados</button>
         <button class="btn btn-simple cursor" routerLink="cancelado">Cancelados</button>
         <button class="btn btn-simple cursor" routerLink="vendido">Vendidos</button>
-     }
+     <!-- } -->
     <div class="line-separator"></div>
     @if(cartHasItem && !loading){
         <section class="mis-pedidos">
@@ -20,6 +20,7 @@
     @if (loading) {
         <app-loader size="3.5rem"></app-loader>
     }
+    <router-outlet></router-outlet>
     <!-- @if(pedidoPendiente.length > 0){
         <section class="pedidos-pendientes">
             <h2>Pedidos Pendientes</h2>
@@ -65,8 +66,4 @@
         </section>
         <div class="line-separator"></div>
     } -->
-
-    @if(cartEmpty && !loading){
-        <p class="cart-empty">Aún no se han registrado pedidos. <a routerLink="/productos">Ir a la tienda</a></p>
-    }
 </main>

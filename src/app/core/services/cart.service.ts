@@ -5,6 +5,7 @@ import { API_URL, IMG_URL } from '../constants';
 import { HttpClient } from '@angular/common/http';
 import { BodyPagination, ResponseWrapper } from '../models/response-wrapper.model';
 import { Pedido } from '../models/pedido.model';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CartService {
   
   private _cart: BehaviorSubject<ProductoCart[]>;
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private utils:UtilsService) {
     this._cart = new BehaviorSubject<ProductoCart[]>([]);
    }
 
@@ -110,8 +111,14 @@ export class CartService {
     return JSON.parse(localStorage.getItem('pedidoSelected') as string) as Pedido;
    }
 
-   getPedidos(): Observable<ResponseWrapper<BodyPagination<Pedido>>>{
-    return this.http.get<ResponseWrapper<BodyPagination<Pedido>>>(`${API_URL}/pedido`);
+   getPedidos(
+    query?:{
+      estado?:string,
+      page?:number,
+      size?:number
+    }
+   ): Observable<ResponseWrapper<BodyPagination<Pedido>>>{
+    return this.http.get<ResponseWrapper<BodyPagination<Pedido>>>(`${API_URL}/pedido${this.utils.getQuerysForPath(query)}`);
    }
 
    cancelPedido(idPedido: number){

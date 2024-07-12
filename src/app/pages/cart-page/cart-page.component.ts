@@ -38,27 +38,27 @@ export class CartPageComponent {
       this.cartEmpty = this.isCartEmpty();
     });
 
-    this.loading = true;
-    this.cartService.getPedidos().subscribe({
-      next: res=> {
-        this.pedidoCancelado = res.body.content.filter(el=> el.estado === 'CANCELADO');
-        this.pedidoConfirmado = res.body.content.filter(el=> el.estado === 'CONFIRMADO');
-        this.pedidoVendido = res.body.content.filter(el=> el.estado === 'VENDIDO');
-        this.pedidoPendiente = res.body.content.filter(el=> el.estado === "PENDIENTE");
-        this.cartEmpty = this.isCartEmpty();
-        this.loading = false;
-      },
-      error: err=> {
-        if(err.error.errors){
-          err.error.errors.forEach((el: any)=>{
-            notification.notificate(el.error, {error:true})
-          })
-        }else{
-          notification.notificate('No se pudo obtener los pedidos. Intentalo de nuevo más tarde.', {error:true})
-        }
-        this.loading = false;
-      }
-    })
+    // this.loading = true;
+    // this.cartService.getPedidos().subscribe({
+    //   next: res=> {
+    //     this.pedidoCancelado = res.body.content.filter(el=> el.estado === 'CANCELADO');
+    //     this.pedidoConfirmado = res.body.content.filter(el=> el.estado === 'CONFIRMADO');
+    //     this.pedidoVendido = res.body.content.filter(el=> el.estado === 'VENDIDO');
+    //     this.pedidoPendiente = res.body.content.filter(el=> el.estado === "PENDIENTE");
+    //     this.cartEmpty = this.isCartEmpty();
+    //     this.loading = false;
+    //   },
+    //   error: err=> {
+    //     if(err.error.errors){
+    //       err.error.errors.forEach((el: any)=>{
+    //         notification.notificate(el.error, {error:true})
+    //       })
+    //     }else{
+    //       notification.notificate('No se pudo obtener los pedidos. Intentalo de nuevo más tarde.', {error:true})
+    //     }
+    //     this.loading = false;
+    //   }
+    // })
   }
 
 
