@@ -6,11 +6,14 @@ import { PedidoItemComponent } from '../../../components/pedido-item/pedido-item
 import { LoaderComponent } from '../../../components/loader/loader.component';
 import { NotificationService } from '../../../core/services/notification.service';
 import { Errors } from '../../../core/models/response-wrapper.model';
+import { UsuarioService } from '../../../core/services/usuario.service';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-cart-content',
   standalone: true,
-  imports: [PedidoItemComponent, LoaderComponent],
+  imports: [PedidoItemComponent, LoaderComponent, FontAwesomeModule],
   templateUrl: './cart-content.component.html',
   styleUrl: './cart-content.component.css'
 })
@@ -20,10 +23,13 @@ export class CartContentComponent{
   inSite:string = '';
   pedidos:Pedido[]|[]=[];
   loading:boolean = false;
+  iconInfo = faExclamationCircle;
+
   constructor(
     private activatedRoute:ActivatedRoute,
     private cartService: CartService,
-    private noti: NotificationService
+    private noti: NotificationService,
+    protected usuarioService: UsuarioService
   ){  
     this.activatedRoute.paramMap.subscribe({
       next:params=>{

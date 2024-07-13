@@ -2,10 +2,29 @@
     @if (loading) {
         <app-loader></app-loader>
     }@else {
+        @if (!usuarioService.isAdmin()) {
+            @if (inSite=="pendiente") {
+                <p class="estado-info">
+                    <fa-icon [icon]="iconInfo"></fa-icon>
+                    Los pedidos pendientes son aquellos que aún no han sido aprobados por el fabricante.</p>
+            }@else if (inSite=="cancelado") {
+                <p class="estado-info">
+                    <fa-icon [icon]="iconInfo"></fa-icon>
+                    Los pedidos candelados pueden ser reactivados pero si ha pasado mucho tiempo es posible que se apliquen precios nuevos.</p>
+            }@else if (inSite == "confirmado") {
+                <p class="estado-info">
+                    <fa-icon [icon]="iconInfo"></fa-icon>
+                    Los pedidos confirmados son aquellos que el fabricante aprobó y seran realizados. Tienes hasta 24 horas para cancelarlo si lo deseas.</p>
+            }@else if (inSite=="vendido") {
+                <p class="estado-info">
+                    <fa-icon [icon]="iconInfo"></fa-icon>
+                    Los pedidos comprados no puedes modificarlos más.</p>
+            }
+        }
         @for (pedido of pedidos; track pedido.id) {
             <pedido-item [pedido]="pedido" (cambioPedido)="onCambioPedido($event)"></pedido-item>
         }@empty {
-            <p>No tienes ningun pedido '{{inSite}}'</p>
+            <p class="empty">No tienes ningun pedido '{{!usuarioService.isAdmin() && inSite=="vendido" ? 'comprado' : inSite}}'</p>
         }
     }
 </section>
