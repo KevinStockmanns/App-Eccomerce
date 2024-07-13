@@ -27,6 +27,9 @@ import { Component } from '@angular/core';
       border-radius: var(--borderrMid);
       background: var(--bgSecondColor);
     }
+    .title{
+      font-size: clamp(1.5rem, 8vw, 3rem);
+    }
   `
 })
 export class DefaultPageComponent {
