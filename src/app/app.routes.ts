@@ -6,6 +6,7 @@ import { adminsGuard } from './core/guards/admins.guard';
 import { notLoginGuard } from './core/guards/not-login.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { estadoValidoCartGuard } from './core/guards/estado-valido-cart.guard';
 
 export const routes: Routes = [
     {
@@ -48,7 +49,8 @@ export const routes: Routes = [
         canActivate: [loginGuard],
         children: [{
             path: ':estado',
-            loadComponent: ()=>import('./pages/cart-page/cart-content/cart-content.component').then(el=>el.CartContentComponent)
+            loadComponent: ()=>import('./pages/cart-page/cart-content/cart-content.component').then(el=>el.CartContentComponent),
+            canActivate: [estadoValidoCartGuard]
         }]
     },{
         path: 'pedido/update',
