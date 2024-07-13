@@ -48,6 +48,10 @@ export const routes: Routes = [
         title: "Pedidos",
         canActivate: [loginGuard],
         children: [{
+            path: '',
+            redirectTo: '/cart/pendiente',
+            pathMatch: 'full'
+        },{
             path: ':estado',
             loadComponent: ()=>import('./pages/cart-page/cart-content/cart-content.component').then(el=>el.CartContentComponent),
             canActivate: [estadoValidoCartGuard]
