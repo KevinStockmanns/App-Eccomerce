@@ -6,7 +6,7 @@ import { Producto } from '../../core/models/producto.model';
 import { CartComponent } from '../../components/cart/cart.component';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { ProductAdminCardComponent } from '../../components/product-admin-card/product-admin-card.component';
-import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NotificationService } from '../../core/services/notification.service';
 import { Errors } from '../../core/models/response-wrapper.model';
 import { faLock, faLockOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -43,7 +43,6 @@ export class ProductsPageComponent{
       if(el instanceof NavigationEnd){
         this.inProductsPage = el.url == "/productos"
       }
-      
     })
     
     this.isLogin = usuarioService.isLogin;
