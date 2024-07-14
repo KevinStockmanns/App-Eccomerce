@@ -220,10 +220,12 @@ export class CreateProductPageComponent implements OnDestroy, AfterViewInit {
           json = this.utils.deleteObjectEmpty(json);
           if (json.versiones)
             json.versiones = this.removeIfOnlyHas(json.versiones, 'idVersion');
-          json.versiones.forEach((el:any)=>{
-            if(!el.hasOwnProperty('accion'))
-              el.accion = 'ACTUALIZAR';
-          })
+          json = this.utils.deleteObjectEmpty(json);
+          if(json.versiones)
+            json.versiones.forEach((el:any)=>{
+              if(!el.hasOwnProperty('accion'))
+                el.accion = 'ACTUALIZAR';
+            })
           
           console.log(this.productoService.productoSelected);
           
