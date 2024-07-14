@@ -143,6 +143,10 @@ export class UploadImagePageComponent {
         },
       });
   }
+  onListo(){
+    this.onFinish();
+    this.router.navigate(['/productos']);
+  }
 
 
   oneToUpload(){
