@@ -6,12 +6,11 @@ import { Producto } from '../../core/models/producto.model';
 import { CartComponent } from '../../components/cart/cart.component';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { ProductAdminCardComponent } from '../../components/product-admin-card/product-admin-card.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NotificationService } from '../../core/services/notification.service';
-import { Errors, ResponseWrapper } from '../../core/models/response-wrapper.model';
-import { faLock, faLockOpen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Errors } from '../../core/models/response-wrapper.model';
+import { faLock, faLockOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
@@ -34,11 +33,19 @@ export class ProductsPageComponent{
   iconTrash = faLock;
   iconProd = faLockOpen;
   iconPlus = faPlus;
-  
+  inProductsPage:boolean = true;
 
   constructor(private productoService: ProductoService, protected usuarioService: UsuarioService,
-    private noti: NotificationService
+    private noti: NotificationService,
+    private router: Router
   ){
+    router.events.subscribe(el=>{
+      if(el instanceof NavigationEnd){
+        this.inProductsPage = el.url == "/productos"
+      }
+      
+    })
+    
     this.isLogin = usuarioService.isLogin;
     this.isAdmin = usuarioService.isAdmin;
   }

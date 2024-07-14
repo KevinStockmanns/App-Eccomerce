@@ -1,55 +1,69 @@
+@if (inProductsPage) {
 <app-header></app-header>
 <main class="main" [class.paddbot]="!isLogin()">
-    <section class="products-content content">
-        @if(isLogin()){
-            <h1 class="title">¡Hola {{usuarioService.firstName}}!</h1>
-            @if (isAdmin()) {
-                <p>Aquí estan los productos {{productosByEstado ? 'que todos los usuarios pueden ver': 'que no estan disponibles al público'}}.</p>
-                <div class="products-actions">
-                    
-                    @if (productosByEstado) {
-                        <button class="btn btn-circle cursor red" (click)="loadMoreProducts(false, true)">
-                            <fa-icon [icon]="iconTrash"></fa-icon>
-                            <span>Ver Privados</span>
-                        </button>
-                    }@else {
-                        <button class="btn btn-circle cursor" (click)="loadMoreProducts(true, true)">
-                            <fa-icon [icon]="iconProd"></fa-icon>
-                            <span>Ver Públicos</span>
-                        </button>
-                    }
-                    <a routerLink="create" class="btn btn-circle cursor" [style]="'view-transition-name: producto;'">
-                        <fa-icon [icon]="iconPlus"></fa-icon>
-                        <span>Crear Producto</span>
-                    </a>
-                </div>
-            }@else {
-                <p>Estos son los productos que tenemos disponible para ti</p>
-            }
-        }@else {
-            <h1 class="title">Lista de productos</h1>
-        }
-        <div class="line-separator"></div>
-        <article class="product-cards">
-
-            @if (isAdmin()) {
-                @for (prod of productos; track $index) {
-                    <product-admin-card (cambioProducto)="onCambioChildrenProduct($event)" [producto]="prod"></product-admin-card>
-                }
-            }@else {
-                @for (prod of productos; track $index) {
-                    <product-client-card [producto]="prod"></product-client-card>
-                }
-            }
-            @if (loading) {
-                <app-loader size="4rem"></app-loader>
-            }
-            @if (!loading && !productos) {
-                <p class="empty">No hay productos que mostrar.</p>
-            }
-        </article>
-    </section>
+  <section class="products-content content">
+    @if(isLogin()){
+    <h1 class="title">¡Hola {{ usuarioService.firstName }}!</h1>
+    @if (isAdmin()) {
+    <p>
+      Aquí estan los productos
+      {{
+        productosByEstado
+          ? "que todos los usuarios pueden ver"
+          : "que no estan disponibles al público"
+      }}.
+    </p>
+    <div class="products-actions">
+      @if (productosByEstado) {
+      <button
+        class="btn btn-circle cursor red"
+        (click)="loadMoreProducts(false, true)"
+      >
+        <fa-icon [icon]="iconTrash"></fa-icon>
+        <span>Ver Privados</span>
+      </button>
+      }@else {
+      <button
+        class="btn btn-circle cursor"
+        (click)="loadMoreProducts(true, true)"
+      >
+        <fa-icon [icon]="iconProd"></fa-icon>
+        <span>Ver Públicos</span>
+      </button>
+      }
+      <a
+        routerLink="create"
+        class="btn btn-circle cursor"
+        [style]="'view-transition-name: producto;'"
+      >
+        <fa-icon [icon]="iconPlus"></fa-icon>
+        <span>Crear Producto</span>
+      </a>
+    </div>
+    }@else {
+    <p>Estos son los productos que tenemos disponible para ti</p>
+    } }@else {
+    <h1 class="title">Lista de productos</h1>
+    }
+    <div class="line-separator"></div>
+    <article class="product-cards">
+      @if (isAdmin()) { @for (prod of productos; track $index) {
+      <product-admin-card
+        (cambioProducto)="onCambioChildrenProduct($event)"
+        [producto]="prod"
+      ></product-admin-card>
+      } }@else { @for (prod of productos; track $index) {
+      <product-client-card [producto]="prod"></product-client-card>
+      } } @if (loading) {
+      <app-loader size="4rem"></app-loader>
+      } @if (!loading && !productos) {
+      <p class="empty">No hay productos que mostrar.</p>
+      }
+    </article>
+  </section>
 </main>
 @if(!isLogin()){
-    <app-cart></app-cart>
+<app-cart></app-cart>
+} }@else {
+<router-outlet> </router-outlet>
 }

@@ -21,12 +21,13 @@ export const routes: Routes = [
     },{
         path: 'productos',
         component: ProductsPageComponent,
-        title: "Productos"
-    },{
-        path: 'productos/:action',
-        loadComponent: () => import('./pages/create-product-page/create-product-page.component').then(el=>el.CreateProductPageComponent),
-        title: 'Crear Producto',
-        canActivate: [loginGuard, adminsGuard]
+        title: "Productos",
+        children: [{
+            path: ':action',
+            loadComponent: () => import('./pages/create-product-page/create-product-page.component').then(el=>el.CreateProductPageComponent),
+            title: 'Crear Producto',
+            canActivate: [loginGuard, adminsGuard]
+        }]
     },{
         path: 'productos/versiones/images',
         loadComponent: ()=> import('./pages/upload-image-page/upload-image-page.component').then(el=>el.UploadImagePageComponent),
