@@ -3,7 +3,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { Usuario } from '../../core/models/usuario.model';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCartShopping, faChartLine, faGears, faShop, faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faChartLine, faGears, faHome, faShop, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../../core/services/cart.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class UserNavComponent {
   iconDashboard = faSliders;
   iconMetrics = faChartLine;
   iconConfig = faGears;
+  iconHome = faHome;
   totalUnidades: number = 0;
   hidden:boolean = false;
 

@@ -1,6 +1,6 @@
 <nav class="user-nav" [class.hidden]="hidden">
     <a class="nav-item cursor" routerLink="/home" routerLinkActive="active">
-        <fa-icon [icon]="iconShop"></fa-icon>
+        <fa-icon [icon]="iconHome"></fa-icon>
         <span>Inicio</span>
     </a>
     <a class="nav-item cursor" routerLink="/productos" routerLinkActive="active">
@@ -16,7 +16,7 @@
         </span>
         <span>{{usuario()?.rol == 'USUARIO' ? "Mis Pedidos" : "Pedidos"}}</span>
     </a>
-    @if(usuario()?.rol === 'SUPERADMIN' || usuario()?.rol === 'ADMIN'){
+    <!-- @if(usuario()?.rol === 'SUPERADMIN' || usuario()?.rol === 'ADMIN'){
         <a class="nav-item cursor">
             <fa-icon [icon]="iconDashboard"></fa-icon>
             <span>Tablero</span>
@@ -27,7 +27,7 @@
             <fa-icon [icon]="iconMetrics"></fa-icon>
             <span>Estadisticas</span>
         </a>
-    }
+    } -->
     <a class="nav-item cursor" routerLink="/settings">
         <fa-icon [icon]="iconConfig"></fa-icon>
         <span>Ajustes</span>
