@@ -12,6 +12,8 @@
     --textColor: #333;
     --textAlphaColor: #333b;
 
+    --gradientColor: #0a6e97, #5ca3d4, #a6d8ff;
+
     --greyColor: #787878;
     --greyAlphaColor: #78787878;
     --greyAlphaLightColor: #78787833;
@@ -138,6 +140,13 @@ main.paddbot{
 }
 .cursor, a, button{
     cursor: default;
+}
+.gradient-text{
+    background: linear-gradient(to left, var(--gradientColor));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 .hidden{
     display: none;

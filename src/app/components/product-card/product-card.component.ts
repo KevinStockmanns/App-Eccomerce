@@ -7,6 +7,8 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
+import * as Aos from 'aos';
+
 @Component({
   selector: 'product-client-card',
   standalone: true,
@@ -26,6 +28,7 @@ export class ProductClientCardComponent{
     private cartService: CartService,
     protected usuarioService: UsuarioService
   ){
+    Aos.init();
   }
 
 

@@ -1,17 +1,23 @@
 <app-header></app-header>
-<main class="main content">
-    @if(usuario()){
-        <h2>Información de usuario</h2>
-        <p>Nombre comleto: {{usuario()?.apellido + ' ' + usuario()?.nombre}}</p>
-        <p>Correo: {{usuario()?.correo}}</p>
-        <p>Telefono: {{usuario()?.telefono}}</p>
-        <p>Fecha de nacimiento: {{usuario()?.fechaNacimiento}}</p>
-        <p>Rol: {{usuario()?.rol}}</p>
-        <p>País: {{usuario()?.ubicacion?.pais}}</p>
-        <p>Provincia: {{usuario()?.ubicacion?.provincia}}</p>
-        <p>Localidad: {{usuario()?.ubicacion?.localidad}}</p>
-        <p>Barrio: {{usuario()?.ubicacion?.barrio}}</p>
-        <p>Dirección: {{usuario()?.ubicacion?.direccion}}</p>
+<main class="main">
+    @if (isLogin()) {
+        <section class="user-section content">
+            <article class="user-section-header" data-aos="fade-up">
+                <h1>Hola <span class="gradient-text">{{usuarioService.firstName}}</span></h1>
+                <p>En esta sección de inicio podras navegar y obtener ayuda sobre el uso de la aplicacion.</p>
+            </article>
+
+            <article class="user-actions">
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="150" routerLink="/productos">
+                    <fa-icon [icon]="iconChevron"></fa-icon>
+                    <span>Ver Productos</span>
+                </div>
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="300" routerLink="/cart">
+                    <fa-icon [icon]="iconChevron"></fa-icon>
+                    <span>Ver Pedidos</span>
+                </div>
+            </article>
+        </section>
     }
 
 </main>

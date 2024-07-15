@@ -1,0 +1,44 @@
+.main{
+    padding: 1rem;
+    width: 100%;
+    min-height: calc(100vh - var(--headerHeight));
+    background-image: linear-gradient(-45deg, var(--gradientColor));
+}
+.user-section{
+    display: grid;
+    gap: 1.5rem;
+}
+.user-section-header, .user-action{
+    padding: 1rem 1.5rem; 
+    border-radius: var(--borderrMid);
+    background-color: var(--bgColor);
+}
+.user-section-header{
+    display: grid;
+    gap: .5rem;
+}
+.user-section-header h1{
+    font-size: clamp(2rem, 7vw, 3rem);
+}
+.user-actions{
+    display: grid;
+    gap: .5rem;
+    padding-left: 1.5rem;
+}
+.user-action{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    font-weight: bold;
+    background-image: linear-gradient(to right, var(--gradientColor));
+    /* background-color: var(--mainColorLight); */
+    color: var(--bgCardColor);
+    transition: var(--transitionLow);
+}
+.user-action:hover{
+}
+.user-action > fa-icon{
+    font-size: 1.3rem;
+}
