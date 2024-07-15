@@ -1,1 +1,0 @@
-import{Bb as p,Z as r,fb as o,gb as a,vb as i}from"./chunk-LPK2HR6M.js";var d=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=r({type:e,selectors:[["app-error-page"]],standalone:!0,features:[p],decls:2,vars:0,template:function(n,c){n&1&&(o(0,"p"),i(1,"error-page works!"),a())}});let t=e;return t})();export{d as ErrorPageComponent};
