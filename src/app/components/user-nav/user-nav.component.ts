@@ -37,22 +37,30 @@ export class UserNavComponent {
     this.router.events.subscribe(ev=>{
       
       if(ev instanceof NavigationEnd){
-        this.controlHidden(ev.url);
+        this.hidden = this.controlHidden(ev.url);
       }
     })
   }
 
 
-  private controlHidden(url:string){
+  private controlHidden(url:string):boolean{
     const hiddenIn = [
       '/cart/update',
       '/productos/update',
       '/productos/create',
       '/productos/versiones/images',
       '/cart/confirm',
-      "/settings"
-    ]
-    
-    this.hidden = hiddenIn.find(el=> url.startsWith(el)) !== undefined;
+      "/settings/**",
+      "/home", '/'
+    ];
+
+    return hiddenIn.some((el) => {
+      if (el.endsWith("/**")) {
+        const basePath = el.split('/**')[0];
+        return url.startsWith(basePath);
+      } else {
+        return url === el;
+      }
+  });
   }
 }

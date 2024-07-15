@@ -18,11 +18,13 @@ import { RouterModule } from '@angular/router';
 export class HomeComponent implements OnInit {
   usuario: Signal<Usuario|null>;
   isLogin: Signal<boolean>;
-  iconChevron = faLink;
+  isAdmin: Signal<boolean>;
+  iconChevron = faChevronRight;
 
   constructor(protected usuarioService: UsuarioService){
     this.usuario = usuarioService.usuario;
     this.isLogin = usuarioService.isLogin;
+    this.isAdmin = usuarioService.isAdmin;
   }
 
   ngOnInit(): void {

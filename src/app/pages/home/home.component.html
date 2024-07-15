@@ -1,23 +1,40 @@
 <app-header></app-header>
 <main class="main">
-    @if (isLogin()) {
+    @if (!isLogin()) {
+        <section class="welcome">
+            <h1>Bienvenido/a</h1>
+        </section>
+    }@else {
         <section class="user-section content">
             <article class="user-section-header" data-aos="fade-up">
-                <h1>Hola <span class="gradient-text">{{usuarioService.firstName}}</span></h1>
-                <p>En esta sección de inicio podras navegar y obtener ayuda sobre el uso de la aplicacion.</p>
+                <h1>Hola <span class="gradient-text">{{usuarioService.firstName}}</span>.</h1>
+                <p>En esta sección de inicio, podrás navegar y obtener ayuda sobre el uso de la aplicación.</p>
             </article>
 
             <article class="user-actions">
+                <div class="user-action-desc" data-aos="fade-up" data-aos-delay="150">
+                    <img src="/assets/images/nav-tour.svg" alt="Imagen de navegación">
+                    <h2>Páginas que puedes visitar.</h2>
+                </div>
                 <div class="user-action cursor" data-aos="fade-up" data-aos-delay="150" routerLink="/productos">
-                    <fa-icon [icon]="iconChevron"></fa-icon>
                     <span>Ver Productos</span>
+                    <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>
                 <div class="user-action cursor" data-aos="fade-up" data-aos-delay="300" routerLink="/cart">
-                    <fa-icon [icon]="iconChevron"></fa-icon>
                     <span>Ver Pedidos</span>
+                    <fa-icon [icon]="iconChevron"></fa-icon>
+                </div>
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="450" routerLink="/settings/account/update">
+                    <span>Cambiar Información del Perfil</span>
+                    <fa-icon [icon]="iconChevron"></fa-icon>
+                </div>
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="600" routerLink="/settings">
+                    <span>Ir a Ajustes</span>
+                    <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>
             </article>
         </section>
+
     }
 
 </main>

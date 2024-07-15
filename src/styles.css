@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    --mainColor: #0b80af;
-    --mainColorBack: #67b2eb;
-    --mainAlphaColorBack: #67b2eb44;
-    --mainLowAlphaColor: #0b80af22;
-    --mainMidAlphaColor: #0b80af55;
+    --mainColor: #00A86B;
+    /* --mainColor: #AAF0D1; */
+    --mainColorBack: #34c274;
+    --secondColor: #01f59b;
+    --mainAlphaColorBack: #00A86B44;
+    --mainLowAlphaColor: #00A86B22;
+    --mainMidAlphaColor: #00A86B55;
     --bgColor: #f1f1f1;
     --bgSecondColor: #ddd;
     --bgCardColor: #fafafa; /* #e9e9e9 */
@@ -12,7 +14,8 @@
     --textColor: #333;
     --textAlphaColor: #333b;
 
-    --gradientColor: #0a6e97, #5ca3d4, #a6d8ff;
+    /* --gradientColor: #0a6e97, #5ca3d4, #AAF0D1; */
+    --gradientColor: #01925d, #21bd67, #44ffba;
 
     --greyColor: #787878;
     --greyAlphaColor: #78787878;
@@ -42,7 +45,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: var(--textAlphaColor);
     background-color: var(--bgColor);
 }
