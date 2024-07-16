@@ -142,8 +142,8 @@ main.paddbot{
 .cursor, a, button{
     cursor: default;
 }
-.gradient-text{
-    background: linear-gradient(to left, var(--gradientColor));
+.gradient-text, strong{
+    background: linear-gradient(to right, var(--gradientColor));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
