@@ -1,8 +1,27 @@
 <app-header></app-header>
 <main class="main">
     @if (!isLogin()) {
-        <section class="welcome">
+        <section class="welcome content">
             <h1>Bienvenido/a</h1>
+
+            <div class="scroll-down">
+                <fa-icon [icon]="iconChevron"></fa-icon>
+            </div>
+        </section>
+        <section class="about content">
+            <h2 data-aos="fade-down">Sobre Nosotros</h2>
+            <p data-aos="fade-down-left">
+                Bienvenido a <span class="gradient-text">[Nombre del Emprendimiento]</span>, tu lugar de confianza para productos de carpintería únicos y de alta calidad. Especializados en la creación de casitas de niños y casas para perros, también ofrecemos una variedad de otros productos como muebles pequeños y portaplantas.
+            </p>
+            <p data-aos="fade-down-right">
+                Nuestra plataforma está diseñada para facilitar tus pedidos de manera sencilla y eficiente. Explora nuestro catálogo, selecciona los productos que más te gustan y realiza tu pedido con solo unos clics. Cada solicitud es revisada por el fabricante.
+            </p>
+            <p data-aos="fade-down-left">
+                Este sitio web ha sido desarrollado por un estudiante de análisis de sistemas, combinando nuestra pasión por la carpintería con las últimas tecnologías para brindarte una experiencia de usuario excepcional.
+            </p>
+            <p data-aos="fade-down-right">
+                Agradecemos tu visita y tu interés en nuestros productos. Nos enorgullece ofrecerte soluciones personalizadas y de calidad para tus necesidades de carpintería. ¡Gracias por apoyarnos y confiar en nosotros para tus proyectos!
+            </p>
         </section>
     }@else {
         <section class="user-section content">
@@ -12,23 +31,23 @@
             </article>
 
             <article class="user-actions">
-                <div class="user-action-desc" data-aos="fade-up" data-aos-delay="150">
+                <div class="user-action-desc" data-aos="fade-up" data-aos-delay="100">
                     <img src="/assets/images/nav-tour.svg" alt="Imagen de navegación">
                     <h2>Páginas que puedes visitar.</h2>
                 </div>
-                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="150" routerLink="/productos">
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="100" routerLink="/productos">
                     <span>Ver Productos</span>
                     <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>
-                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="300" routerLink="/cart">
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="200" routerLink="/cart">
                     <span>Ver Pedidos</span>
                     <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>
-                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="450" routerLink="/settings/account/update">
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="300" routerLink="/settings/account/update">
                     <span>Cambiar Información del Perfil</span>
                     <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>
-                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="600" routerLink="/settings">
+                <div class="user-action cursor" data-aos="fade-up" data-aos-delay="400" routerLink="/settings">
                     <span>Ir a Ajustes</span>
                     <fa-icon [icon]="iconChevron"></fa-icon>
                 </div>

@@ -55,7 +55,7 @@ export class UsuarioService {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${token}` })
     }).subscribe(res => {
       this.setUsuario(res.body);
-      this.redirectTo(); 
+      this.router.navigate(['/'])
     });
   }
 
@@ -64,7 +64,7 @@ export class UsuarioService {
     localStorage.removeItem('user');
     this._isLogin.set(false);
     this._usuario.set(null); // Limpia el usuario también al hacer logout
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     this.cartService.resetCart();
   }
 
