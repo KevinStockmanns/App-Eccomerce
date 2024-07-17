@@ -22,3 +22,8 @@ export interface Ubicacion{
     barrio: string;
     direccion: string;
 }
+
+export interface Resumen{
+    pedidosPendientes:number;
+    pedidosConfirmados:number;
+}

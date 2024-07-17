@@ -47,6 +47,7 @@ function endpointCacheable(url:string, method: string): boolean{
   const endpointsCacheables = [
     '/api/v1/producto',
     '/api/v1/pedido',
+    "/api/v1/usuario/resumen",
     '/georef/api/provincias',
     '/georef/api/municipios'
   ]

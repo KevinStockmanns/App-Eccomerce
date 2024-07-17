@@ -79,7 +79,7 @@ main > section:first-child{
 }
 .user-actions{
     display: grid;
-    grid-template-columns: 3fr 5fr;
+    grid-template-columns: 1fr;
     grid-template-columns: repeat(auto-fill,1fr);
     gap: .5rem 1.5rem;
 }
@@ -92,6 +92,30 @@ main > section:first-child{
     background-color: var(--bgColor);
     border-radius: var(--borderrMid);
     padding: 1rem;
+}
+.user-action-desc.resumen{
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: .5rem;
+}
+.data .circle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 3px solid var(--mainColor);
+    font-size: 2rem;
+}
+.data p{
+    font-size: .8rem;
 }
 .user-action-desc h2{
     font-size: 1rem;
@@ -108,8 +132,15 @@ main > section:first-child{
     color: var(--bgCardColor);
     transition: var(--transitionLow);
 }
-.user-action:hover{
-}
+/* .user-action:hover{
+} */
 .user-action > fa-icon{
     font-size: 1.3rem;
+}
+
+
+@media screen and (min-width:700px){
+    .user-actions{
+        grid-template-columns: 3fr 5fr;
+    }
 }

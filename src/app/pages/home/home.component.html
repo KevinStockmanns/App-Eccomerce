@@ -17,9 +17,24 @@
             </article>
 
             <article class="user-actions">
-                <div class="user-action-desc" data-aos="fade-right" data-aos-delay="100">
-                    <img src="/assets/images/nav-tour.svg" alt="Imagen de navegación">
-                    <h2>Páginas que puedes visitar.</h2>
+                <div class="user-action-desc" [class.resumen]="resumen" data-aos="fade-right" data-aos-delay="100">
+                    @if (!isAdmin() || (!loading && !resumen)) {
+                        <img src="/assets/images/nav-tour.svg" alt="Imagen de navegación">
+                        <h2>Páginas que puedes visitar.</h2>
+                    }@else {
+                        @if (loading) {
+                            <app-loader></app-loader>
+                        }@else {
+                            <div class="data">
+                                <span class="circle">{{resumen?.pedidosPendientes}}</span>
+                                <p>Pedidos Pendientes</p>
+                            </div>
+                            <div class="data">
+                                <span class="circle">{{resumen?.pedidosConfirmados}}</span>
+                                <p>Pedidos Confirmados</p>
+                            </div>
+                        }
+                    }
                 </div>
                 <div class="user-action cursor" data-aos="fade-left" data-aos-delay="100" routerLink="/productos">
                     <span>Ver Productos</span>

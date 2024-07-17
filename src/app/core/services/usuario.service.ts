@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { API_URL } from '../constants';
 import { ResponseWrapper } from '../models/response-wrapper.model';
-import { Token, Usuario } from '../models/usuario.model';
+import { Resumen, Token, Usuario } from '../models/usuario.model';
 import { CartService } from './cart.service';
 
 @Injectable({
@@ -76,6 +76,9 @@ export class UsuarioService {
   }
   forgetPassword(body:any){
     return this.http.post(`${API_URL}/usuario/forget-pass`, body);
+  }
+  getResumen(): Observable<ResponseWrapper<Resumen>>{
+    return this.http.get<ResponseWrapper<Resumen>>(`${API_URL}/usuario/resumen`)
   }
 
   private redirectTo() {
