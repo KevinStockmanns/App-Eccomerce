@@ -17,13 +17,13 @@
             </article>
 
             <article class="user-actions">
-                <div class="user-action-desc" [class.resumen]="resumen" data-aos="fade-right" data-aos-delay="100">
+                <div class="user-action-desc" [class.loading]="loading" [class.resumen]="resumen" data-aos="fade-right" data-aos-delay="100">
                     @if (!isAdmin() || (!loading && !resumen)) {
                         <img src="/assets/images/nav-tour.svg" alt="Imagen de navegación">
                         <h2>Páginas que puedes visitar.</h2>
                     }@else {
                         @if (loading) {
-                            <app-loader></app-loader>
+                            <app-loader size="5rem"></app-loader>
                         }@else {
                             <div class="data">
                                 <span class="circle">{{resumen?.pedidosPendientes}}</span>
@@ -32,6 +32,14 @@
                             <div class="data">
                                 <span class="circle">{{resumen?.pedidosConfirmados}}</span>
                                 <p>Pedidos Confirmados</p>
+                            </div>
+                            <div class="data">
+                                <span class="circle">{{resumen?.productosStock}}</span>
+                                <p>Stock de Productos</p>
+                            </div>
+                            <div class="data">
+                                <span class="circle">{{resumen?.productosNoDisponibles}}</span>
+                                <p>Productos no Disponibles</p>
                             </div>
                         }
                     }

@@ -93,6 +93,11 @@ main > section:first-child{
     border-radius: var(--borderrMid);
     padding: 1rem;
 }
+.user-action-desc.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .user-action-desc.resumen{
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
