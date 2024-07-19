@@ -81,10 +81,54 @@
             Nuestra plataforma está diseñada para facilitar tus pedidos de manera sencilla y eficiente. Explora nuestro catálogo, <strong>selecciona los productos</strong> que más te gustan y <strong>realiza tu pedido</strong> con solo unos clics. Cada solicitud es revisada por el fabricante.
         </p>
         <p data-aos="fade-down-left">
-            Este sitio web ha sido desarrollado por un estudiante de análisis de sistemas, combinando nuestra pasión por la carpintería con las últimas tecnologías para brindarte una experiencia de usuario excepcional.
+            No solo atendemos a clientes individuales, sino también a proveedores que buscan productos de carpintería. Ofrecemos una amplia gama de opciones y precios para las compras al por mayor.
         </p>
         <p data-aos="fade-down-right">
-            Agradecemos tu visita y tu interés en <strong>nuestros productos.</strong> Nos enorgullece ofrecerte soluciones personalizadas y de calidad para tus necesidades de carpintería. ¡Gracias por apoyarnos y confiar en nosotros para tus proyectos!
+            Agradecemos tu visita y tu interés en <strong>nuestros productos.</strong> ¡Gracias por apoyarnos y confiar en nosotros para tus proyectos!
         </p>
     </section>
+
+    @if (!isLogin()) {
+        <section class="section-incentive-register content">
+            <article class="incentive-register-header" data-aos="fade-up">
+                <h2>Crear una Cuenta</h2>
+                <p>
+                    Al registrarte desbloqueas una serie de beneficios exclusivos diseñados para mejorar tu experiencia en la compra. Revisa los beneficios de tener una cuenta:
+                </p>
+            </article>
+            <article class="incentive-register-body">
+                <div class="not-register-actions" data-aos="fade-up">
+                    <h3>Sin una cuenta</h3>
+                    <div class="beneficios">
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Hacer Pedidos</span>
+                        <fa-icon [icon]="iconClose" class="close"></fa-icon>
+                        <span>Ver el precio de forma directa</span>
+                        <fa-icon [icon]="iconClose" class="close"></fa-icon>
+                        <span>Ver Pedidos Realizados</span>
+                        <fa-icon [icon]="iconClose" class="close"></fa-icon>
+                        <span>Gestionar Pedidos (Cancelarlos o Actualizarlos)</span>
+                        <fa-icon [icon]="iconClose" class="close"></fa-icon>
+                        <span>Más probabilidades de obtener un descuento</span>
+                    </div>
+                </div>
+                <div class="register-actions" data-aos="fade-up">
+                    <h3>Con una cuenta</h3>
+                    <div class="beneficios">
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Hacer Pedidos</span>
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Ver el precio de forma directa</span>
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Ver Pedidos Realizados</span>
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Gestionar Pedidos (Cancelarlos o Actualizarlos)</span>
+                        <fa-icon [icon]="iconCheck" class="check"></fa-icon>
+                        <span>Más probabilidades de obtener un descuento</span>
+                    </div>
+                </div>
+            </article>
+            <button class="btn btn-primary" routerLink="/signup" data-aos="fade-up">CREAR CUENTA</button>
+        </section>
+    }
 </main>

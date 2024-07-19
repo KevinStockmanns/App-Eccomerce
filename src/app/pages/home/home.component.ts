@@ -5,7 +5,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 
 import * as Aos from 'aos';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronRight, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faChevronRight, faClose, faLink } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader.component';
 
@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   isLogin: Signal<boolean>;
   isAdmin: Signal<boolean>;
   iconChevron = faChevronRight;
+  iconClose = faClose;
+  iconCheck = faCheck;
   loading:boolean=false;
 
   resumen:Resumen|null=null;
@@ -45,6 +47,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      Aos.init();
+    Aos.init();
   }
 }
