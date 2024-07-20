@@ -13,11 +13,11 @@ export interface Version {
     id:              number;
     nombre:          string;
     descripcion:     null|string;
-    precio:          number;
-    precioDescuento: number;
+    precio:          null|number;
+    precioDescuento: null|number;
     estado:          boolean;
     fecha:           string;
-    stock:           number;
+    stock:           null|number;
     imagen:          null|string;
 }
 

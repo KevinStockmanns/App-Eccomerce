@@ -19,7 +19,7 @@ export interface Orden {
     id:             number;
     producto:       OrdenProducto;
     cantidad:       number;
-    precioUnitario: number;
+    precioUnitario: number|null;
     conDescuento:   boolean|null;
 }
 
