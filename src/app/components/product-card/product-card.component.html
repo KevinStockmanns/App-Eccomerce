@@ -20,8 +20,6 @@
         <p class="product-description">{{versionActual?.descripcion}}</p>
         @if (isLogin) {
             <p class="product-precio">{{versionActual?.precio | currency}} ARS</p>
-        }@else {
-            <p class="product-precio" title="El precio se podrá ver si inicias sesión">$****,**</p>
         }
         <div class="card-buttons">
             <button class="btn">Ver Detalles</button>

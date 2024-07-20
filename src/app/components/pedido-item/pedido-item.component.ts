@@ -44,7 +44,7 @@ export class PedidoItemComponent {
   
   ngOnChanges(changes: SimpleChanges){
     if(changes['pedido']){
-      this.total = this.pedido?.ordenes.reduce((prev, ordAct)=> prev + (ordAct.cantidad * ordAct.precioUnitario), 0) as number;
+      this.total = this.pedido?.ordenes.reduce((prev, ordAct)=> prev + (ordAct.cantidad * (ordAct.precioUnitario||0)), 0) as number;
     }
   }
   togglePedido(){

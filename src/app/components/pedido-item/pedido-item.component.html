@@ -54,7 +54,7 @@
                             <td>{{orden.producto.nombreProducto + ' ' + orden.producto.nombreVersion | titlecase}}</td>
                             <td>{{orden.cantidad}}</td>
                             <td>{{orden.precioUnitario | currency}} ARS</td>
-                            <td>{{orden.cantidad * orden.precioUnitario | currency}} ARS</td>
+                            <td>{{orden.cantidad * (orden.precioUnitario||0) | currency}} ARS</td>
                         </tr>
                     }
                     <tr class="tr-total">

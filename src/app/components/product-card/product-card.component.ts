@@ -35,7 +35,7 @@ export class ProductClientCardComponent{
   ngOnChanges(changes: SimpleChanges) {
     if (changes['producto']) {
       if(this.producto){
-        this.producto.versiones.sort((a, b)=> b.precio - a.precio);
+        this.producto.versiones.sort((a, b)=> (b.precio||0) - (a.precio||0));
       }
       this.versionActual = this.producto?.versiones[this.iVersion];
     }
