@@ -5,6 +5,7 @@
         <p>Aquí podras ver los pedidos{{isAdmin() ? ' ' : ' que has realizado '}}incluyendo los pendientes, cancelados, confirmados y {{isAdmin() ? 'vendidos ' : 'comprados'}}</p>
         <div class="pedidos-buttons">
             <button class="btn btn-circle cursor" routerLink="pendiente" routerLinkActive="active">Pendientes</button>
+            <button class="btn btn-circle cursor" routerLink="presupuesto" routerLinkActive="active">Presupuesto</button>
             <button class="btn btn-circle cursor" routerLink="cancelado" routerLinkActive="active">Cancelados</button>
             <button class="btn btn-circle cursor" routerLink="confirmado" routerLinkActive="active">Confirmados</button>
             <button class="btn btn-circle cursor" routerLink="vendido" routerLinkActive="active">{{isAdmin() ? 'Vendidos' : 'Comprados'}}</button>

@@ -46,6 +46,7 @@ export class UserNavComponent {
   private controlHidden(url:string):boolean{
     const hiddenIn = [
       '/cart/update',
+      '/pedido/update',
       '/productos/update',
       '/productos/create',
       '/productos/versiones/images',

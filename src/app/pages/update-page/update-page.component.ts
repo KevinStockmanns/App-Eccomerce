@@ -86,7 +86,7 @@ export class UpdatePageComponent implements OnDestroy {
   }
 
   private permitedEstado(control: any){
-    if(control.value !== "PENDIENTE" && control.value !== "CONFIRMADO" && control.value !== 'CANCELADO' && control.value !== 'VENDIDO')
+    if(control.value !== "PENDIENTE" && control.value !== "CONFIRMADO" && control.value !== 'CANCELADO' && control.value !== 'VENDIDO' && control.value !== "PRESUPUESTO")
       return {permitedEstado: true};
     return null;
     

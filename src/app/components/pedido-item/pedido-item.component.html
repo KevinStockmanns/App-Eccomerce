@@ -76,6 +76,9 @@
                     @if (pedido?.estado === 'PENDIENTE' || pedido?.estado === 'CANCELADO') {
                         <button class="btn btn-primary cursor" (click)="confirmPedido()" routerLink="/pedido/confirm">CONFIRMAR</button>
                     }
+                    @if (pedido?.estado == 'PRESUPUESTO') {
+                        <button class="btn btn-primary cursor">CONFIRMAR PRESUPUESTO</button>
+                    }
                 }@else {
                     @if (pedido?.estado === 'PENDIENTE') {
                         <button class="btn btn-simple cursor red" (click)="cambioEstadoFn('CANCELADO')">CANCELAR PEDIDO</button>
