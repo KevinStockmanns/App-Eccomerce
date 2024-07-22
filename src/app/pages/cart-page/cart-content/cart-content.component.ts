@@ -38,12 +38,12 @@ export class CartContentComponent{
         this.loading = true;
         cartService.getPedidos({estado: this.inSite, page: this.currentPage}).subscribe({
           next: res=>{
-            console.log(res);
             if(this.currentPage == 0)
               this.pedidos = res.body.content;
             else
               this.pedidos = [...this.pedidos, ...res.body.content];
             this.loading = false;
+            this.currentPage++;
           },
           error: err=>{
             this.loading = false;
@@ -56,6 +56,8 @@ export class CartContentComponent{
             }
           }
         });
+
+        this.pedidos = this.pedidos.filter(el=>el.estado==this.inSite.toUpperCase());
       }
     })
   }
