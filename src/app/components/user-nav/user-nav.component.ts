@@ -48,6 +48,7 @@ export class UserNavComponent {
       '/cart/update',
       '/pedido/update',
       '/pedido/confirm',
+      '/pedido/presupuesto',
       '/productos/update',
       '/productos/create',
       '/productos/versiones/images',
