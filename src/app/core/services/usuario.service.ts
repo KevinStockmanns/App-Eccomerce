@@ -60,6 +60,7 @@ export class UsuarioService {
   }
 
   logout() {
+    this.http.patch(`${API_URL}/auth/logout`, null).subscribe();
     localStorage.removeItem('userToken');
     localStorage.removeItem('user');
     this._isLogin.set(false);
