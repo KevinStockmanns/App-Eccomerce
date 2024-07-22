@@ -123,6 +123,9 @@ export class PedidoItemComponent {
   confirmPedido(){
     this.cartService.setPedidoSelected(this.pedido as Pedido);
   }
+  onPresupuesto(){
+    this.cartService.setPedidoSelected(this.pedido as Pedido);
+  }
 
 
   stringify(object:any): string{

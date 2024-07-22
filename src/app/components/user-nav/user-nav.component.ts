@@ -47,6 +47,7 @@ export class UserNavComponent {
     const hiddenIn = [
       '/cart/update',
       '/pedido/update',
+      '/pedido/confirm',
       '/productos/update',
       '/productos/create',
       '/productos/versiones/images',

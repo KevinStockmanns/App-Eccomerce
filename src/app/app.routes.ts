@@ -71,6 +71,11 @@ export const routes: Routes = [
         title: 'Confirmar Pedido',
         canActivate: [loginGuard, adminsGuard]
     },{
+        path: 'pedido/presupuesto',
+        loadComponent: ()=> import('./pages/confirm-page/confirm-page.component').then(el=>el.ConfirmPageComponent),
+        title: 'Responder Presupuesto',
+        canActivate: [loginGuard, adminsGuard]
+    },{
         path: 'dashboard',
         loadComponent: ()=> import('./pages/dashboard-page/dashboard-page.component').then(el=>el.DashboardPageComponent),
         canActivate: [loginGuard, adminsGuard]

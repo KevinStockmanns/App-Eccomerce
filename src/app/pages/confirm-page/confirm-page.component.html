@@ -1,13 +1,17 @@
 <app-header></app-header>
 <main class="main content">
     <section class="confirm-content">
-        <h1 class="title">Confirmar Pedido</h1>
+        <h1 class="title">{{title.getTitle()}}</h1>
         <div class="confirm-header">
-            <p>El pedido con id {{pedido.id}} será confirmado con las siguientes ordenes. Aquí puede revisar el precio que tiene las ordenes y puedes realizar las siguientes acciones</p>
+            @if (inConfirmPage) {
+                <p>El pedido con id {{pedido.id}} será confirmado con las siguientes ordenes. Aquí puede revisar el precio que tiene las ordenes y puedes realizar las siguientes acciones</p>
+            }@else {
+                <p>Este pedido se realizo sin una cuenta registrada por lo que solicita el presupuesto de estas ordenes. Aquí puede revisar el precio que tiene las ordenes y puedes realizar las siguientes acciones</p>
+            }
             <ul>
-                <li>Confirmar el pedido sin cambiar los precios.</li>
-                <li>Confirmar el pedido cambiando a un precio actual (en caso de que la orden se haya realizado hace tiempo).</li>
-                <li>Confirmar el pedido aplicando precio de reventa si lo desea (el precio actual).</li>
+                <li>{{inConfirmPage ? 'Confirmar' : 'Responder'}} el pedido sin cambiar los precios.</li>
+                <li>{{inConfirmPage ? 'Confirmar' : 'Responder'}} el pedido cambiando a un precio actual (en caso de que la orden se haya realizado hace tiempo).</li>
+                <li>{{inConfirmPage ? 'Confirmar' : 'Responder'}} el pedido aplicando precio de reventa si lo desea (el precio actual).</li>
             </ul>
         </div>
         <div class="confirm-body">
@@ -44,7 +48,11 @@
         <div class="confirm-footer">
             @if (!loadingResponse) {
                 <button class="btn btn-simple red cursor" (click)="cancelar()">CANCELAR</button>
-                <button class="btn btn-simple cursor" (click)="onConfirm()">CONFIRMAR</button>
+                @if (inConfirmPage) {
+                    <button class="btn btn-simple cursor" (click)="onConfirm()">CONFIRMAR</button>
+                }@else {
+                    <button class="btn btn-simple cursor" (click)="onPresupuesto()">RESPONDER PRESUPUESTO</button>
+                }
             }@else {
                 <app-loader></app-loader>
             }

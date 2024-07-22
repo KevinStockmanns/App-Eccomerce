@@ -107,7 +107,7 @@ export function reubicarItemInCache(ubication: string, ubication2:string, item:a
       if(IndexItemInCache!==-1 && itemInCache?.response.body.content){
         itemInCache.response.body.content = itemInCache.response.body.content.filter((el:any)=>el.id !== item.id);
         cache.set(key, itemInCache);
-        console.log("Se elimino de donde estaba");
+        // console.log("Se elimino de donde estaba");
         
 
         cache.forEach((val2,key2)=>{
@@ -117,7 +117,7 @@ export function reubicarItemInCache(ubication: string, ubication2:string, item:a
             if(itemInCache2 && itemInCache2.response.body.content){
               itemInCache2.response.body.content.push(item);
               cache.set(key2, itemInCache2);
-              console.log("Se cambio donde corresponde");
+              // console.log("Se cambio donde corresponde");
               
             }
 

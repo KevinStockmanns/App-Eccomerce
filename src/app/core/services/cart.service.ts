@@ -133,6 +133,11 @@ export class CartService {
    confirmarPedido(idPedido:number, body:any): Observable<ResponseWrapper<Pedido>>{
     return this.http.patch<ResponseWrapper<Pedido>>(`${API_URL}/pedido/${idPedido}/confirmar`, body);
    }
+   responderPresupuesto(idPedido:number, body?:any):Observable<ResponseWrapper<Pedido>>{
+    console.log(body);
+    
+    return this.http.patch<ResponseWrapper<Pedido>>(`${API_URL}/pedido/${idPedido}/presupuesto`, body?body:{});
+   }
 
    private addVersionCart(version:Version): VersionCart{
     return {
