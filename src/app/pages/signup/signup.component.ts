@@ -54,7 +54,7 @@ export class SignupComponent {
         this.isAdult
       ]],
       pais: ['Argentina', [Validators.required]],
-      provincia: ['', [Validators.required]],
+      provincia: ['Misiones', [Validators.required]],
       localidad: ['', [Validators.required]],
       barrio: ['', [Validators.required]],
       direccion: ['', [Validators.required]]
@@ -101,7 +101,13 @@ export class SignupComponent {
       this.loading = true;
       let json = this.signupForm.value;
       delete json.clave2;
-      json.ubicacion = `${json.pais}/-/${json.provincia}/-/${json.localidad}/-/${json.barrio}/-/${json.direccion}`;
+      json.ubicacion = {
+        pais: json.pais,
+        provincia: json.provincia,
+        localidad: json.localidad,
+        barrio: json.barrio,
+        direccion: json.direccion,
+      };
       delete json.pais;
       delete json.provincia;
       delete json.localidad;

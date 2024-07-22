@@ -19,7 +19,6 @@ export class LoginComponent {
 
   constructor(private formBuilder:FormBuilder, private usuarioService: UsuarioService, private route: Router){
     this.error = [];
-    console.log(this.error);
     
     this.loginForm = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
