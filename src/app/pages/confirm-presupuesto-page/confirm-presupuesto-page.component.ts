@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { Pedido } from '../../core/models/pedido.model';
 import { HeaderComponent } from '../../components/header/header.component';
-import { OrdenItemComponent } from '../../components/orden-item/orden-item.component';
+import {  } from '../../components/orden-item/orden-item.component';
 import { CurrencyPipe, Location, TitleCasePipe } from '@angular/common';
-import { reubicarItemInCache, updateItemInCache } from '../../core/interceptor/cache.interceptor';
+import { reubicarItemInCache } from '../../core/interceptor/cache.interceptor';
 import { NotificationService } from '../../core/services/notification.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ActivatedRoute } from '@angular/router';
@@ -15,10 +15,10 @@ import { Errors } from '../../core/models/response-wrapper.model';
   selector: 'app-confirm-page',
   standalone: true,
   imports: [HeaderComponent, TitleCasePipe, CurrencyPipe, LoaderComponent],
-  templateUrl: './confirm-page.component.html',
-  styleUrl: './confirm-page.component.css'
+  templateUrl: './confirm-presupuesto-page.component.html',
+  styleUrl: './confirm-presupuesto-page.component.css'
 })
-export class ConfirmPageComponent {
+export class ConfirmPresupuestoPageComponent {
   pedido: Pedido;
   loadingResponse: boolean = false;
   inConfirmPage:boolean = true;

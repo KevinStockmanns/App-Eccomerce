@@ -67,12 +67,12 @@ export const routes: Routes = [
         canActivate: [loginGuard]
     },{
         path: 'pedido/confirm',
-        loadComponent: ()=> import('./pages/confirm-page/confirm-page.component').then(el=>el.ConfirmPageComponent),
+        loadComponent: ()=> import('./pages/confirm-presupuesto-page/confirm-presupuesto-page.component').then(el=>el.ConfirmPresupuestoPageComponent),
         title: 'Confirmar Pedido',
         canActivate: [loginGuard, adminsGuard]
     },{
         path: 'pedido/presupuesto',
-        loadComponent: ()=> import('./pages/confirm-page/confirm-page.component').then(el=>el.ConfirmPageComponent),
+        loadComponent: ()=> import('./pages/confirm-presupuesto-page/confirm-presupuesto-page.component').then(el=>el.ConfirmPresupuestoPageComponent),
         title: 'Responder Presupuesto',
         canActivate: [loginGuard, adminsGuard]
     },{
