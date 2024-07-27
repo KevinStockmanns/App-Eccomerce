@@ -36,7 +36,7 @@ export class CartContentComponent{
         if(this.inSite != params.get('estado'))
           this.currentPage = 0;
         this.inSite = params.get('estado') as string;
-        console.log(this.currentPage);
+        // console.log(this.currentPage);
         
 
         this.loading = true;
@@ -47,7 +47,6 @@ export class CartContentComponent{
             else
               this.pedidos = [...this.pedidos, ...res.body.content];
             this.loading = false;
-            // this.currentPage++;
             if(this.currentPage<res.body.totalPages-1)
               this.currentPage++;
           },

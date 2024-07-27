@@ -22,7 +22,7 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 })
 export class ProductsPageComponent{
   
-  productos: Producto[]|undefined;
+  productos: Producto[]=[];
   productosByEstado:boolean=false;
   loading = false;
   page = 0;
