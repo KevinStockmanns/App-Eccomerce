@@ -33,7 +33,11 @@ export class CartContentComponent{
   ){  
     this.activatedRoute.paramMap.subscribe({
       next:params=>{
+        if(this.inSite != params.get('estado'))
+          this.currentPage = 0;
         this.inSite = params.get('estado') as string;
+        console.log(this.currentPage);
+        
 
         this.loading = true;
         cartService.getPedidos({estado: this.inSite, page: this.currentPage}).subscribe({
@@ -43,7 +47,9 @@ export class CartContentComponent{
             else
               this.pedidos = [...this.pedidos, ...res.body.content];
             this.loading = false;
-            this.currentPage++;
+            // this.currentPage++;
+            if(this.currentPage<res.body.totalPages-1)
+              this.currentPage++;
           },
           error: err=>{
             this.loading = false;
