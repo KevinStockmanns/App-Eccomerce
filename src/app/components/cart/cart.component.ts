@@ -88,7 +88,13 @@ export class CartComponent{
     if(this.inFormPart){
       this.form.markAllAsTouched();
       let json = this.form.value;
-      json.ubicacion = `${json.pais}/-/${json.provincia}/-/${json.localidad}/-/${json.barrio}/-/${json.direccion}`
+      json.ubicacion = {
+        pais: json.pais,
+        provincia: json.provincia,
+        localidad: json.localidad,
+        barrio: json.barrio,
+        direccion: json.direccion
+      }
       delete json.pais;
       delete json.provincia;
       delete json.localidad;

@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - var(--headerHeight) - 2rem);
 }
 h2{
     font-size: 1.1rem;
@@ -16,6 +15,9 @@ h2{
     max-width: 500px;
     border-radius: var(--borderrHigh);
     background-color: var(--bgCardColor);
+    max-height: calc(100vh - var(--headerHeight) - 2rem);
+    /* max-height: ; */
+    overflow: auto;
 }
 .upload-header{
     display: grid;
