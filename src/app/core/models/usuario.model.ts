@@ -27,5 +27,5 @@ export interface Resumen{
     pedidosPendientes:number;
     pedidosConfirmados:number;
     productosStock:number;
-    productosNoDisponibles:number;
+    pedidoPresupuesto:number;
 }
