@@ -9,7 +9,7 @@ import { ProductAdminCardComponent } from '../../components/product-admin-card/p
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NotificationService } from '../../core/services/notification.service';
 import { Errors } from '../../core/models/response-wrapper.model';
-import { faLock, faLockOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faDollar, faLock, faLockOpen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoaderComponent } from '../../components/loader/loader.component';
 
@@ -33,6 +33,7 @@ export class ProductsPageComponent{
   iconTrash = faLock;
   iconProd = faLockOpen;
   iconPlus = faPlus;
+  iconPrice = faDollar;
   inProductsPage:boolean = true;
 
   constructor(private productoService: ProductoService, protected usuarioService: UsuarioService,

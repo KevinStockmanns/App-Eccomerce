@@ -209,6 +209,9 @@ main.paddbot{
     height: 2px;
     background-color: var(--greyAlphaLightColor);
 }
+.main-color{
+    color: var(--mainColor);
+}
 
 
 

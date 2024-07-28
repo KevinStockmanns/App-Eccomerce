@@ -98,6 +98,21 @@ export const routes: Routes = [
             loadComponent: ()=> import('./pages/settings/change-pass-page/change-pass-page.component').then(el=>el.ChangePassPageComponent)
         }]
     },{
+        path: 'precios',
+        loadComponent: ()=>import('./pages/prices/prices.component').then(el=>el.PricesComponent),
+        title: 'Lista de Precios',
+        canActivate: [loginGuard, adminsGuard],
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'select'
+            },{
+                path:'select',
+                loadComponent: ()=>import('./pages/prices/prices-select/prices-select.component').then(el=>el.PricesSelectComponent)
+            }
+        ]
+    },{
         path: '**',
         loadComponent: ()=> import('./pages/error-page/error-page.component').then(el=> el.ErrorPageComponent),
         title: 'Error'
