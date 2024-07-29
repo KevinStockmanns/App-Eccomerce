@@ -1,1 +1,5 @@
-<p>prices-selected works!</p>
+<main>
+    @for (prod of productos(); track prod.id) {
+        <price-item [producto]="undefined" [selected]="prod"></price-item>
+    }
+</main>

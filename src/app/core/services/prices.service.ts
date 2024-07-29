@@ -5,13 +5,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PricesService {
-  _productosSelected: WritableSignal<{id:number, nombre:string, precio?:number, precioDescuento?:number}[]> = signal([]);
+  private _productosSelected: WritableSignal<{id:number, nombre:string, precio?:number, precioDescuento?:number}[]> = signal([]);
 
   constructor() { }
 
 
   get productosSelected(){
     return this._productosSelected.asReadonly();
+  }
+
+  getSelection(id:number){
+    return this._productosSelected().find(el=>el.id == id);
   }
 
 

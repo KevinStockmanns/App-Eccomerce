@@ -2,43 +2,6 @@
     display: grid;
     gap: 1rem;
 }
-.producto{
-    display: grid;
-    gap: .5rem;
-}
-.version{
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    align-items: center;
-    gap: .5rem;
-    padding: 1rem;
-    border-radius: var(--borderrMid);
-    /* color: var(--bgCardColor); */
-    background-color: var(--bgCardColor);
-    transition: var(--transitionMid);
-}
-.version.selected{
-    padding: 1rem 2rem;
-    background-color: var(--mainMidAlphaColor);
-}
-.version .header{
-    grid-column: 1 / -1;
-    font-weight: bold;
-    text-align: center;
-}
-.version .body{
-    display: grid;
-    gap: inherit;
-}
-.version .body button{
-    background-color: transparent;
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: .9rem;
-    color: var(--mainColor);
-
-}
 .empty{
     font-size: 1.2rem;
     text-align: center;

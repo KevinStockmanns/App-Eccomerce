@@ -110,6 +110,10 @@ export const routes: Routes = [
             },{
                 path:'select',
                 loadComponent: ()=>import('./pages/prices/prices-select/prices-select.component').then(el=>el.PricesSelectComponent)
+            },{
+                path: 'selected',
+                loadComponent: ()=>import('./pages/prices/prices-selected/prices-selected.component').then(el=>el.PricesSelectedComponent),
+                title: 'Cambiar Precios'
             }
         ]
     },{

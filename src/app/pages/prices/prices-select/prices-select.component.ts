@@ -6,11 +6,12 @@ import { Errors } from '../../../core/models/response-wrapper.model';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { LoaderComponent } from '../../../components/loader/loader.component';
 import { PricesService } from '../../../core/services/prices.service';
+import { PriceItemComponent } from '../../../components/price-item/price-item.component';
 
 @Component({
   selector: 'app-prices-select',
   standalone: true,
-  imports: [TitleCasePipe, CurrencyPipe, LoaderComponent],
+  imports: [TitleCasePipe, CurrencyPipe, LoaderComponent, PriceItemComponent],
   templateUrl: './prices-select.component.html',
   styleUrl: './prices-select.component.css'
 })

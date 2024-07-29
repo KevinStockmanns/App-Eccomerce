@@ -3,6 +3,11 @@
     <h1 class="title">Lista de Precios</h1>
     <p>En esta sección podrás seleccionar los precios del producto que deseas modificar.</p>
     <p>Productos seleccionados: {{productosSelected().length}}</p>
+    <div class="actions">
+        @if (productosSelected().length>0) {
+            <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
+        }
+    </div>
     <div class="line-separator"></div>
     <router-outlet></router-outlet>
 </main>

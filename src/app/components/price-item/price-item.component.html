@@ -1,0 +1,31 @@
+@if (producto) {
+    <div class="producto">
+        <p class="producto-title">{{producto ? producto.nombre : selected?.nombre| titlecase}}</p>
+        <div class="versiones">
+            @for (ver of producto.versiones; track ver.id) {
+                <div class="version" [class.selected]="priceService.isInSelecteds(ver.id)" [style]="'view-transition-name: version-price-'+ver.id+';'">
+                    <div class="version-name">{{ver.nombre | titlecase}} <span class="name-desc">{{getTitleDesc(ver.id)}}</span></div>
+                    <div class="version-price">Precio Público: {{ver.precio | currency}} ARS</div>
+                    <div class="version-price">Precio Reventa: {{ver.precioDescuento | currency}} ARS</div>
+                    <div class="version-actions">
+                        <button class="btn btn-simple cursor" (click)="toggleSelection(ver.id, 0)">Precio Público</button>
+                        <button class="btn btn-simple cursor" (click)="toggleSelection(ver.id, 1)">Precio Reventa</button>
+                        <button class="btn btn-simple cursor" (click)="toggleSelection(ver.id, 2)">Seleccionar Ambos</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>  
+}
+@if(selected) {
+    <div class="version" [class.selected]="priceService.isInSelecteds(selected.id)" [style]="'view-transition-name: version-price-'+selected.id+';'">
+        <div class="version-name">{{selected.nombre | titlecase}}</div>
+        <div class="version-price">Precio Público: {{selected.precio | currency}} ARS</div>
+        <div class="version-price">Precio Reventa: {{selected.precioDescuento | currency}} ARS</div>
+        <!-- <div class="version-actions">
+            <button class="btn btn-simple cursor" (click)="toggleSelection(selected.id, 0)">Precio Público</button>
+            <button class="btn btn-simple cursor" (click)="toggleSelection(selected.id, 1)">Precio Reventa</button>
+            <button class="btn btn-simple cursor" (click)="toggleSelection(selected.id, 2)">Seleccionar Ambos</button>
+        </div> -->
+    </div>
+}

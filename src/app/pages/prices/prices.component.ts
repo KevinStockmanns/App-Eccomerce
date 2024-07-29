@@ -12,7 +12,7 @@ import { PricesService } from '../../core/services/prices.service';
 @Component({
   selector: 'app-prices',
   standalone: true,
-  imports: [LoaderComponent, BackBtnComponent, TitleCasePipe, CurrencyPipe, RouterModule],
+  imports: [BackBtnComponent, TitleCasePipe, CurrencyPipe, RouterModule],
   templateUrl: './prices.component.html',
   styleUrl: './prices.component.css'
 })

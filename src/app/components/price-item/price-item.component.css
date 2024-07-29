@@ -1,0 +1,47 @@
+.producto{
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgCardColor);
+}
+.producto-title{
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--mainColor);
+}
+.versiones{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: .5rem;
+}
+.version{
+    display: grid;
+    gap: .5rem;
+    padding: 1rem;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgColor);
+    transition: var(--transitionMid);
+}
+.version.selected{
+    padding: 1.5rem 1rem;
+    background-color: var(--mainLowAlphaColor);
+}
+.version-name{
+    text-align: center;
+    font-weight: bold;
+}
+.version-name .name-desc{
+    font-size: .8rem;
+    color: var(--mainColor);
+    font-weight: normal;
+}
+.version-actions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.version-actions .btn{
+    padding: .5rem;
+}

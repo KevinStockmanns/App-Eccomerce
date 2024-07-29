@@ -1,25 +1,6 @@
 <section class="productos">
     @for (prod of productos; track prod.id) {
-        <div class="producto">
-            @for (ver of prod.versiones; track ver.id) {
-                <article class="version" [class.selected]="isSelected(ver.id)" [style]="'view-transition-name: version-price-'+ver.id+';'">
-                    <div class="header">
-                        <span>{{prod.nombre + " " + ver.nombre | titlecase}} <span class="main-color">{{getTitleDesc(ver.id)}}</span></span>
-                    </div>
-                    <div class="body">
-                        <span>Precio Publico: {{ver.precio | currency}} ARS 
-                            <button class="cursor" (click)="toggleSelected({id: ver.id, nombre: ver.nombre, precio: ver.precio})">Seleccionar Precio</button>
-                        </span>
-                        <span>Precio Reventa: {{ver.precioDescuento | currency}} ARS
-                            <button class="cursor" (click)="toggleSelected({id: ver.id, nombre: ver.nombre, precioDescuento: ver.precioDescuento})">Seleccionar Descuento</button>
-                        </span>
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-simple cursor" (click)="toggleSelected({id: ver.id, nombre:ver.nombre, precio: ver.precio, precioDescuento: ver.precioDescuento})">Seleccionar</button>
-                    </div>
-                </article>
-            }
-        </div>
+        <price-item [producto]="prod" [selected]="undefined"></price-item>
     }
     @if (loading) {
         <app-loader size="5rem"></app-loader>
