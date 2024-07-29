@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PricesService {
-  private _productosSelected: WritableSignal<{id:number, nombre:string, precio?:number, precioDescuento?:number}[]> = signal([]);
+  private _productosSelected: WritableSignal<{id:number, nombre:string, precio?:number, precioDescuento?:number, precioNuevo?:number, precioDescuentoNuevo?:number}[]> = signal([]);
 
   constructor() { }
 
@@ -39,5 +39,19 @@ export class PricesService {
     else
       this.addSelect(data);
   }
+  clearSelection(){
+    this._productosSelected.set([]);
+  }
+  newPrecio(porcentaje:number){
+    this._productosSelected.update(list=>list.map(el=>{
+      if(el.hasOwnProperty('precio') && el.precio){
+        el.precioNuevo = el.precio + (el.precio * porcentaje / 100);
+      }
+      if(el.hasOwnProperty('precioDescuento') && el.precioDescuento){
+        el.precioDescuentoNuevo = el.precioDescuento + (el.precioDescuento * porcentaje / 100);
+      }
 
+      return el;
+    }))
+  }
 }

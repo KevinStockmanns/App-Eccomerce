@@ -24,6 +24,9 @@
     background-color: var(--bgColor);
     transition: var(--transitionMid);
 }
+.version.bgCard{
+    background-color: var(--bgCardColor);
+}
 .version.selected{
     padding: 1.5rem 1rem;
     background-color: var(--mainLowAlphaColor);
@@ -44,4 +47,22 @@
 }
 .version-actions .btn{
     padding: .5rem;
+}
+
+
+.version-price{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    font-weight: bold;
+}
+.version-price > span:first-child{
+    font-weight: normal;
+}
+.version-price .diference{
+    font-weight: normal;
+    color: var(--mainColor);
+}
+.version-price .diference.negative{
+    color: var(--errorColor);
 }

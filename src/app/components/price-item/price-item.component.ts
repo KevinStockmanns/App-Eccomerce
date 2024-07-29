@@ -2,17 +2,20 @@ import { Component, Input } from '@angular/core';
 import { Producto } from '../../core/models/producto.model';
 import { PricesService } from '../../core/services/prices.service';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'price-item',
   standalone: true,
-  imports: [TitleCasePipe, CurrencyPipe],
+  imports: [TitleCasePipe, CurrencyPipe, FontAwesomeModule],
   templateUrl: './price-item.component.html',
   styleUrl: './price-item.component.css'
 })
 export class PriceItemComponent {
   @Input() producto: Producto|undefined;
-  @Input() selected:{id:number, nombre:string, precio?:number, precioDescuento?:number}|undefined;
+  @Input() selected:{id:number, nombre:string, precio?:number, precioDescuento?:number, precioNuevo?:number, precioDescuentoNuevo?:number }|undefined;
+  iconArrow = faArrowRight;
 
   constructor(protected priceService:PricesService){
 
@@ -51,5 +54,10 @@ export class PriceItemComponent {
     }
 
     this.priceService.toggleSelect(data);
+  }
+
+
+  diference(original:number, newNumber:number){
+    return newNumber - original;
   }
 }

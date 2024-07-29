@@ -18,10 +18,38 @@
     </div>  
 }
 @if(selected) {
-    <div class="version" [class.selected]="priceService.isInSelecteds(selected.id)" [style]="'view-transition-name: version-price-'+selected.id+';'">
+    <div class="version bgCard" [style]="'view-transition-name: version-price-'+selected.id+';'">
         <div class="version-name">{{selected.nombre | titlecase}}</div>
-        <div class="version-price">Precio Público: {{selected.precio | currency}} ARS</div>
-        <div class="version-price">Precio Reventa: {{selected.precioDescuento | currency}} ARS</div>
+        @if (selected.precio) {
+            <p>Precio Público: </p>
+            <div class="version-price">
+                <span>{{selected.precio | currency}} ARS</span>
+                @if(selected.precioNuevo){
+                    <fa-icon [icon]="iconArrow"></fa-icon>
+                    <span>{{selected.precioNuevo | currency}} ARS</span>
+                    <span class="diference" [class.negative]="diference(selected.precio, selected.precioNuevo)<0">({{
+                        diference(selected.precio, selected.precioNuevo) > 0
+                            ? '+'+ (diference(selected.precio, selected.precioNuevo) | currency)
+                            : diference(selected.precio, selected.precioNuevo) | currency
+                    }})</span>
+                }
+            </div>
+        }
+        @if (selected.precioDescuento) {
+            <p>Precio Reventa: </p>
+            <div class="version-price">
+                <span>{{selected.precioDescuento | currency}} ARS</span>
+                @if(selected.precioDescuentoNuevo){
+                    <fa-icon [icon]="iconArrow"></fa-icon>
+                    <span>{{selected.precioDescuentoNuevo | currency}} ARS</span>
+                    <span class="diference" [class.negative]="diference(selected.precioDescuento, selected.precioDescuentoNuevo)<0">({{
+                        diference(selected.precioDescuento, selected.precioDescuentoNuevo) > 0
+                            ? '+'+ (diference(selected.precioDescuento, selected.precioDescuentoNuevo) | currency)
+                            : diference(selected.precioDescuento, selected.precioDescuentoNuevo) | currency
+                    }})</span>
+                }
+            </div>
+        }
         <!-- <div class="version-actions">
             <button class="btn btn-simple cursor" (click)="toggleSelection(selected.id, 0)">Precio Público</button>
             <button class="btn btn-simple cursor" (click)="toggleSelection(selected.id, 1)">Precio Reventa</button>

@@ -2,3 +2,13 @@ main{
     display: grid;
     gap: .5rem;
 }
+.actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+.calculate{
+    padding: 1rem;
+    border-radius: var(--borderrMid);
+    background-color: var(--bgCardColor);
+}

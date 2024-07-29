@@ -1,11 +1,31 @@
 <back-btn></back-btn>
-<main class="main content">
+<main class="main content paddbot">
     <h1 class="title">Lista de Precios</h1>
-    <p>En esta sección podrás seleccionar los precios del producto que deseas modificar.</p>
+    @if (inPage=='select') {
+        <p>En esta sección podrás seleccionar los precios del producto que deseas modificar.</p>
+    } @else {
+        <p>Aquí podrás ver los productos seleccionados</p>
+    }
     <p>Productos seleccionados: {{productosSelected().length}}</p>
+    @if (inPage=='selected') {
+        <div class="calculate">
+            <div class="form-div withValue">
+                <div class="form-div-input">
+                    <input type="number" [formControl]="porcentaje">
+                    <label>Porcentaje</label>
+                </div>
+            </div>
+        </div>
+    }
     <div class="actions">
-        @if (productosSelected().length>0) {
+        @if (productosSelected().length>0 && inPage == 'select') {
             <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
+        }
+        @if (productosSelected().length>0) {
+            <button class="btn btn-circle red cursor" (click)="clearSelection()">Eliminar Selección</button>
+        }
+        @if (inPage=='selected') {
+            <button class="btn btn-circle cursor">Realizar Cambios</button>
         }
     </div>
     <div class="line-separator"></div>
