@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Producto } from '../../core/models/producto.model';
+import { Producto, Version } from '../../core/models/producto.model';
 import { PricesService } from '../../core/services/prices.service';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -37,20 +37,20 @@ export class PriceItemComponent {
     return message;
   }
 
-  toggleSelection(idVersion:number, precio:number){
+  toggleSelection(version:Version, precio:number){
     let data: {id:number, nombre:string, precio?:number, precioDescuento?:number} = {
-      id: idVersion,
-      nombre: this.producto?.nombre +' '+this.producto?.versiones.find(el=>el.id==idVersion)?.nombre
+      id: version.id,
+      nombre: this.producto?.nombre +' '+this.producto?.versiones.find(el=>el.id==version.id)?.nombre
     }
     if(precio==0){
-      data.precio = this.producto?.versiones.find(el=>el.id)?.precio as number;
+      data.precio = version.precio as number;
     }
     if(precio==1){
-      data.precioDescuento = this.producto?.versiones.find(el=>el.id)?.precioDescuento as number;
+      data.precioDescuento = version.precioDescuento as number;
     }
     if(precio==2){
-      data.precio = this.producto?.versiones.find(el=>el.id)?.precio as number;
-      data.precioDescuento = this.producto?.versiones.find(el=>el.id)?.precioDescuento as number;
+      data.precio = version.precio as number;
+      data.precioDescuento = version.precioDescuento as number;
     }
 
     this.priceService.toggleSelect(data);
@@ -59,5 +59,18 @@ export class PriceItemComponent {
 
   diference(original:number, newNumber:number){
     return newNumber - original;
+  }
+
+
+  getRound(value:number|undefined, factor:number):number[]{
+    if(!value)
+      return [];
+    if(value%factor==0)
+      return[];
+    
+    let lower = Math.floor(value/factor) *factor;
+    let upper = Math.ceil(value/factor) * factor;
+
+    return [lower, upper];
   }
 }

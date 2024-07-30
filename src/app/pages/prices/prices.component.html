@@ -18,11 +18,11 @@
         </div>
     }
     <div class="actions">
-        @if (productosSelected().length>0 && inPage == 'select') {
-            <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
-        }
         @if (productosSelected().length>0) {
             <button class="btn btn-circle red cursor" (click)="clearSelection()">Eliminar Selección</button>
+        }
+        @if (productosSelected().length>0 && inPage == 'select') {
+            <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
         }
         @if (inPage=='selected') {
             <button class="btn btn-circle cursor">Realizar Cambios</button>
