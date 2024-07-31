@@ -19,15 +19,13 @@ export class BackBtnComponent {
   constructor(private location: Location){}
 
   back(){
-    console.log(this.location);
-    
     this.location.back();
   }
 
   expandAnimation(e: MouseEvent){
     const el: HTMLElement = this.element?.nativeElement as HTMLElement;
-    console.log(e.target);
-    console.log(e);
+    // console.log(e.target);
+    // console.log(e);
     
     
   }

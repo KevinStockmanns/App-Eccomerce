@@ -43,11 +43,22 @@
                     <p>Otras Opciones:</p>
                     <div class="generated">
                         @for (n of getRound(selected.precioNuevo, 10); track $index) {
-                            <span class="option cursor">{{n|currency}}</span>
+                            <span class="option cursor" (click)="selectRound(selected.id, n, false)">{{n|currency}}</span>
                         }
                         @for (n of getRound(selected.precioNuevo, 100); track $index) {
-                            <span class="option cursor">{{n|currency}}</span>
+                            <span class="option cursor" (click)="selectRound(selected.id, n, false)">{{n|currency}}</span>
                         }
+                    </div>
+                    <div class="custom">
+                        <div class="form-div withValue">
+                            <div class="form-div-input">
+                                <input type="number" #input>
+                                <label>Valor Personalizado</label>
+                            </div>
+                        </div>
+                        <span class="icon-share cursor" (click)="selectCustom(input, selected.id, false)">
+                            <fa-icon [icon]="iconSend"></fa-icon>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -71,13 +82,25 @@
                     }
                 </div>
                 <div class="other-options">
+                    <p>Otras Opciones:</p>
                     <div class="generated">
                         @for (n of getRound(selected.precioDescuentoNuevo, 10); track $index) {
-                            <span class="option cursor">{{n|currency}}</span>
+                            <span class="option cursor" (click)="selectRound(selected.id, n, true)">{{n|currency}}</span>
                         }
                         @for (n of getRound(selected.precioDescuentoNuevo, 100); track $index) {
-                            <span class="option cursor">{{n|currency}}</span>
+                            <span class="option cursor" (click)="selectRound(selected.id, n, true)">{{n|currency}}</span>
                         }
+                    </div>
+                    <div class="custom">
+                        <div class="form-div withValue">
+                            <div class="form-div-input">
+                                <input type="number" #input>
+                                <label>Valor Personalizado</label>
+                            </div>
+                        </div>
+                        <span class="icon-share cursor" (click)="selectCustom(input, selected.id, true)">
+                            <fa-icon [icon]="iconSend"></fa-icon>
+                        </span>
                     </div>
                 </div>
             </div>

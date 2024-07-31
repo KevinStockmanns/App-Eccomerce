@@ -92,7 +92,7 @@
 }
 .other-options{
     display: grid;
-    gap: .5rem;
+    gap: 1rem;
 }
 .other-options .generated{
     display: flex;
@@ -106,7 +106,16 @@
     font-size: .9rem;
     user-select: none;
 }
-
+.other-options .custom{
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 1rem;
+    align-items: center;
+}
+.other-options .custom .icon-share{
+    font-size: 1.2rem;
+    color: var(--mainColor);
+}
 @media screen and (min-width:450px) {
     .price-content{
         flex-direction: row;

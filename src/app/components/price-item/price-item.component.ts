@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Producto, Version } from '../../core/models/producto.model';
 import { PricesService } from '../../core/services/prices.service';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -16,6 +16,7 @@ export class PriceItemComponent {
   @Input() producto: Producto|undefined;
   @Input() selected:{id:number, nombre:string, precio?:number, precioDescuento?:number, precioNuevo?:number, precioDescuentoNuevo?:number }|undefined;
   iconArrow = faArrowRight;
+  iconSend = faPaperPlane;
 
   constructor(protected priceService:PricesService){
 
@@ -67,10 +68,16 @@ export class PriceItemComponent {
       return [];
     if(value%factor==0)
       return[];
-    
+
     let lower = Math.floor(value/factor) *factor;
     let upper = Math.ceil(value/factor) * factor;
 
     return [lower, upper];
+  }
+  selectRound(id:number, value:number, descuento:boolean){
+    this.priceService.changeNewPrecio(id, value, descuento);
+  }
+  selectCustom(event:any, id:number, descuento:boolean){
+    this.priceService.changeNewPrecio(id, event.value, descuento);
   }
 }

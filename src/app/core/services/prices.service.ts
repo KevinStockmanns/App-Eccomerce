@@ -54,4 +54,15 @@ export class PricesService {
       return el;
     }))
   }
+  changeNewPrecio(id:number, value:number, descuento:boolean){
+    this._productosSelected.update(list=>list.map(el=>{
+      if(el.id == id){
+        if(descuento)
+          el.precioDescuentoNuevo = value;
+        else
+          el.precioNuevo = value;
+      }
+      return el;
+    }))
+  }
 }

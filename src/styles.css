@@ -68,7 +68,7 @@ img{
 input, textarea{
     font-size: inherit;
 }
-main.paddbot{
+.paddbot{
     padding-bottom: 80px !important;
 }
 
