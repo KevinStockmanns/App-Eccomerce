@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PricesService } from '../../../core/services/prices.service';
 import { PriceItemComponent } from '../../../components/price-item/price-item.component';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-prices-selected',
@@ -12,7 +13,8 @@ import { PriceItemComponent } from '../../../components/price-item/price-item.co
 export class PricesSelectedComponent {
   productos;
 
-  constructor(private priceService: PricesService){
+  constructor(private priceService: PricesService
+  ){
     this.productos = priceService.productosSelected;
   }
 }

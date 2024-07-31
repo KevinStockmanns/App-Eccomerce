@@ -18,15 +18,19 @@
         </div>
     }
     <div class="actions">
-        @if (productosSelected().length>0) {
-            <button class="btn btn-circle red cursor" (click)="clearSelection()">Eliminar Selección</button>
-        }
-        @if (productosSelected().length>0 && inPage != 'selected') {
-            <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
-        }
-        @if (inPage=='selected') {
-            <button class="btn btn-circle cursor">Realizar Cambios</button>
-        }
+       @if (loading) {
+            <app-loader size="2rem"></app-loader>
+       }@else{
+            @if (productosSelected().length>0) {
+                <button class="btn btn-circle red cursor" (click)="clearSelection()">Eliminar Selección</button>
+            }
+            @if (productosSelected().length>0 && inPage != 'selected') {
+                <button class="btn btn-circle cursor" routerLink="/precios/selected">Cambiar Precio</button>
+            }
+            @if (inPage=='selected') {
+                <button class="btn btn-circle cursor" (click)="onSubmit()">Realizar Cambios</button>
+            }   
+       }
     </div>
     <div class="line-separator"></div>
     <router-outlet></router-outlet>

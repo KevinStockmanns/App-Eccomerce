@@ -127,3 +127,25 @@ export function reubicarItemInCache(ubication: string, ubication2:string, item:a
     }
   })
 }
+
+
+export function getCacheItems(url:string){
+  let data = new Map<string, {response:any, timestamp:number}>();
+  cache.forEach((value,key)=>{
+    if(url[0]=="/"){
+      if(key.includes(url))
+        data.set(key, value);
+    }else{
+      if(key.includes(`/${url}`))
+        data.set(key, value);
+    }   
+  })
+  
+  return data.size > 0 ? data: null;
+}
+
+export function setCacheItems(data: Map<string, {response:any, timestamp:number}>|null){
+  data?.forEach((val, key)=>{
+    cache.set(key, val);
+  })
+}

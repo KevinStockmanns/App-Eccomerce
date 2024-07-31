@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { API_URL } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 export class PricesService {
   private _productosSelected: WritableSignal<{id:number, nombre:string, precio?:number, precioDescuento?:number, precioNuevo?:number, precioDescuentoNuevo?:number}[]> = signal([]);
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
 
   get productosSelected(){
@@ -64,5 +68,18 @@ export class PricesService {
       }
       return el;
     }))
+  }
+
+
+  commitPrices(){
+    let body: any = this._productosSelected().map((el:any) => {
+      return {
+          id: el.id,
+          precio: el.precioNuevo,
+          precioDescuento: el.precioDescuentoNuevo
+      };
+    });
+    
+    return this.http.patch(`${API_URL}/producto/precio`, {versiones: body});
   }
 }
